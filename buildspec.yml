@@ -1,0 +1,39 @@
+version: 0.2
+
+
+env:
+  variables:
+    key: "value"
+    key: "value"
+  parameter-store:
+    key: "value"
+    key: "value"
+            
+branches:
+  - master
+phases:
+  install:
+    run-as: sudo 
+    commands:
+      - echo Entered the install phase...
+      - wget https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
+      - apt install ./hugo* -y 
+    finally:
+      - echo This always runs even if the update or install commands fails
+      - hugo version
+  build:
+    run-as: sudo 
+    commands:
+      - echo Build phase started...
+      - rm -rf public
+      - hugo 
+      - aws s3 sync public/ s3://esaleatorio.com --delete
+      - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
+    finally:
+      - echo This always runs even if the update or install commands fails
+  post_build:
+    run-as: sudo 
+    commands:
+      - echo Entered the post_build phase..
+      - echo Build completed on `date`
+
