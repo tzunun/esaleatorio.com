@@ -4,8 +4,8 @@ phases:
     commands:
       - pip install awscli 
       - wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
-      - sudo dpkg -I hugo*.deb
-      - sudo apt-get -f install -y 
+      - sudo dpkg -i ./hugo*.deb
+    finally:
       - hugo version
 
   build:
@@ -16,9 +16,10 @@ phases:
   
   post_build:
     commands:
-       - echo Build phase started...
-       - .local/bin/aws aws s3 sync public/ s3://esaleatorio.com --delete
-       - ./local/bin/aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
-       - echo Entered the post_build phase..
-       - echo Build completed on `date`
+      - echo Build phase started...
+      - .local/bin/aws aws s3 sync public/ s3://esaleatorio.com --delete --acel public-read
+      - ./local/bin/aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
+    finally:
+      - echo Entered the post_build phase..
+      - echo Build completed on `date`
   
