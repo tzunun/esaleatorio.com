@@ -1,13 +1,19 @@
 version: 0.2
 
-
+env:
+  AWS_ACCESS_KEY_ID : AKIAXK4JBAB6PGSGXVG7
+  AWS_SECRET_ACCESS_kEY: 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
 phases:
   install:
+    branches:
+      only:
+        - master
     run-as:  
     commands:
       - echo Entered the install phase...
       - wget github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
       - apt-get install ./hugo* -y 
+      - pip install --user awscli
     finally:
       - echo This always runs even if the update or install commands fails
       - hugo version
@@ -17,7 +23,7 @@ phases:
       - echo Build phase started...
       - rm -rf public
       - hugo 
-      - aws s3 sync public/ s3://esaleatorio.com --delete
+      - aws s3 sync public/ s3://esaleatorio.com --acl public-read --delete
       - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
     finally:
       - echo This always runs even if the update or install commands fails
