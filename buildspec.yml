@@ -12,13 +12,16 @@ phases:
     commands:
       - echo Entered the build phase ...
       - rm -rf public
+      - pwd
+      - cd esaleatorio.com/aleatorio/
       - hugo
   
   post_build:
     commands:
+      - cd .. 
       - echo Build phase started...
-      - .local/bin/aws aws s3 sync public/ s3://esaleatorio.com --delete --acel public-read
-      - ./local/bin/aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
+      - aws aws s3 sync public/ s3://esaleatorio.com --delete --acel public-read
+      - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
     finally:
       - echo Entered the post_build phase..
       - echo Build completed on `date`
