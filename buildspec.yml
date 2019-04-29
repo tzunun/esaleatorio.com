@@ -2,8 +2,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - sudo apt-get install python3-dev -y 
-      - sudo apt-get install awscli -y 
+      - pip install awscli 
       - wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
       - sudo dpkg -I hugo*.deb -y 
       - sudo apt-get -f install -y 
