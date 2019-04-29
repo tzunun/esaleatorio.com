@@ -1,12 +1,13 @@
 version: 0.2
 phases:
   install:
-    - echo Entered the install phase...
-    - apt install python3 -y 
-    - python3-pip install --user awscli
-    - wget github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
-    - sudo apt-get install ./hugo* -y 
-    - hugo version
+    commands:
+      - echo Entered the install phase...
+      - apt install python3 -y 
+      - python3-pip install --user awscli
+      - wget github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
+      - sudo apt-get install ./hugo* -y 
+      - hugo version
 
   build:
     commands:
