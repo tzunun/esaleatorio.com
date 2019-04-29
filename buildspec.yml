@@ -5,7 +5,6 @@ phases:
     branches:
       only:
         - master
-    run-as: sudo -i
     commands:
       - echo Entered the install phase...
       - pip install --user awscli
@@ -15,7 +14,6 @@ phases:
       - echo This always runs even if the update or install commands fails
       - hugo version
   build:
-    run-as: sudo -i
     commands:
       - echo Build phase started...
       - rm -rf public
@@ -25,7 +23,6 @@ phases:
     finally:
       - echo This always runs even if the update or install commands fails
   post_build:
-    run-as: 
     commands:
       - echo Entered the post_build phase..
       - echo Build completed on `date`
