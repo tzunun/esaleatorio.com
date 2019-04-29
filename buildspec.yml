@@ -8,9 +8,9 @@ install:
   - hugo version
 before-script:
   - rm -rf public
-  - hugo
 
 script:
+   - hugo
    - echo Build phase started...
    - aws s3 sync public/ s3://esaleatorio.com --acl public-read --delete
    - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
