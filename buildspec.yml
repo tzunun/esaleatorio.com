@@ -1,29 +1,20 @@
 version: 0.2
 
-phases:
-  install:
-    branches:
-      only:
-        - master
-    commands:
-      - echo Entered the install phase...
-      - pip install --user awscli
-      - wget github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
-      - apt-get install ./hugo* -y 
-    finally:
-      - echo This always runs even if the update or install commands fails
-      - hugo version
-  build:
-    commands:
-      - echo Build phase started...
-      - rm -rf public
-      - hugo 
-      - aws s3 sync public/ s3://esaleatorio.com --acl public-read --delete
-      - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
-    finally:
-      - echo This always runs even if the update or install commands fails
-  post_build:
-    commands:
-      - echo Entered the post_build phase..
-      - echo Build completed on `date`
+install:
+  - echo Entered the install phase...
+ # - pip install --user awscli
+  - wget github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
+  - apt-get install ./hugo* -y 
+  - hugo version
+before-script:
+  - rm -rf public
+  - hugo
 
+script:
+   - echo Build phase started...
+   - aws s3 sync public/ s3://esaleatorio.com --acl public-read --delete
+   - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
+   - echo Entered the post_build phase..
+   - echo Build completed on `date`
+branches:
+  - master
