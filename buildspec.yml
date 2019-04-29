@@ -3,8 +3,7 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - sudo apt install python3 -y
-      - python3-pip install awscli --upgrade --user 
+      - pip install awscli --upgrade --user 
       - awscli --version
       - wget github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
       - sudo apt-get install ./hugo* -y 
