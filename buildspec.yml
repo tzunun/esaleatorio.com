@@ -1,8 +1,10 @@
 version: 0.2
-
+env:
+  AWS_ACCESS_KEY_ID : AKIAXK4JBAB6PGSGXVG7
+  AWS_SECRET_ACCESS_KEY : 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
 install:
   - echo Entered the install phase...
- # - pip install --user awscli
+  - pip install --user awscli
   - wget github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
   - sudo apt-get install ./hugo* -y 
   - hugo version
