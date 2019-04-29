@@ -20,7 +20,7 @@ phases:
     commands:
       - cd .. 
       - echo Build phase started...
-      - aws aws s3 sync public/ s3://esaleatorio.com --delete --acl public-read
+      - aws s3 sync public/ s3://esaleatorio.com --delete --acl public-read
       - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
     finally:
       - echo Entered the post_build phase..
