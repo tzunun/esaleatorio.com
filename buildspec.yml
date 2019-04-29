@@ -2,9 +2,12 @@ version: 0.2
 phases:
   install:
     commands:
+      - sudo apt-get update
+      - sudo apt-get upgrade -y 
       - pip install awscli 
-      - wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
-      - sudo apt-get install ./hugo*.deb -y 
+      - go get -v github .com/spf13/hugo
+      #- wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
+      #- sudo dpkg -i hugo*.deb
     finally:
       - hugo version
 
@@ -12,10 +15,10 @@ phases:
     commands:
       - echo Entered the build phase ...
       - cd aleatorio/
+      - ls 
       - rm -rf public/
       - pwd
       - hugo
-
   
   post_build:
     commands:
@@ -25,6 +28,7 @@ phases:
       - ls
       - pwd 
       - aws s3 sync . s3://esaleatorio.com --delete 
+      - aws configure set preview.cloudfront true
       - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
     finally:
       - echo Entered the post_build phase..
