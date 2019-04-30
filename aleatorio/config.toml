@@ -1,7 +1,7 @@
-baseURL = "https://esaleatorio.com/"
+baseURL = "https://www.esaleatorio.com/"
 title = "Publicaciones de interes para H4x0r5"                                                                
 baseurl = "/"
-languageCode = "es-us"
+languageCode = "en-us"
 theme = "terminal"
 paginate = 5
  
