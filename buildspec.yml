@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - sudo apt-get install git git-lfs
+      - sudo apt-get install git git-lfs -y
       - pip install awscli 
       - pip install pygments 
       - sudo apt install git git-lfs -y 
