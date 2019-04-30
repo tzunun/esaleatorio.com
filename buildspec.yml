@@ -5,9 +5,8 @@ phases:
       - sudo apt-get update
       - sudo apt-get upgrade -y 
       - pip install awscli 
-      - go get -v github .com/spf13/hugo
-      #- wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
-      #- sudo dpkg -i hugo*.deb
+      - wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
+      - sudo dpkg -i hugo*.deb
     finally:
       - hugo version
 
