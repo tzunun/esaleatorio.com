@@ -2,10 +2,9 @@ version: 0.2
 phases:
   install:
     commands:
-      - sudo apt-get install git git-lfs -y
       - pip install awscli 
       - pip install pygments 
-      - sudo apt install git git-lfs -y 
+      - sudo apt-get install git -y
 
       - wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
       - sudo dpkg -i hugo*.deb
