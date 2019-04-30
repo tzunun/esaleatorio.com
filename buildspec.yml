@@ -2,9 +2,12 @@ version: 0.2
 phases:
   install:
     commands:
+      - sudo apt-get update
+      - sudo apt-get upgrade -y 
+      - sudo apt-get install golang -y 
       - pip install awscli 
       - pip install pygments 
-      - wget "https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb"
+      - wget "https://github.com/gohugoio/hugo/releases/download/v0.34/hugo_0.34_Linux-64bit.deb"
       - sudo dpkg -i hugo*.deb
     finally:
       - hugo version
@@ -16,7 +19,7 @@ phases:
       - ls 
       - rm -rf public/
       - pwd
-      - hugo
+      - hugo -v
   
   post_build:
     commands:
