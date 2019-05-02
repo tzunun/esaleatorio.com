@@ -4,19 +4,15 @@ phases:
     commands:
       - sudo apt-get update
       - sudo apt-get upgrade -y 
-      - pip install awscli 
-      - pip install Pygments 
-      - wget "https://github.com/gohugoio/hugo/releases/download/v0.21/hugo_0.21_Linux-64bit.deb"
-      - sudo dpkg -i hugo*.deb
+      - sudo apt-get install python3-dev python3-pip
+      - pip3 install awscli 
     finally:
-      - hugo version
 
   build:
     commands:
       - echo Entered the build phase ...
       - ls 
       - pwd
-      - hugo -v -t terminal
   
   post_build:
     commands:
