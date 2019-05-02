@@ -17,7 +17,7 @@ phases:
       - ls 
       - rm -rf public/
       - pwd
-      - hugo -v
+      - hugo -v -t terminal
   
   post_build:
     commands:
