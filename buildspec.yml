@@ -4,8 +4,9 @@ phases:
     commands:
       - sudo apt-get update
       - sudo apt-get upgrade -y 
-      - pip install awscli 
-      - pip install pygments 
+      - sudo apt-get install python3-dev python3-pip -y
+      - pip3 install awscli 
+      - pip3 install pygments 
       - wget "https://github.com/gohugoio/hugo/releases/download/v0.55.5/hugo_0.55.5_Linux-64bit.deb"
       - sudo dpkg -i hugo*.deb
     finally:
