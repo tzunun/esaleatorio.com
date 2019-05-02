@@ -1,0 +1,36 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - sudo apt-get update
+      - sudo apt-get upgrade -y 
+      - sudo apt-get install golang -y 
+      - pip install awscli 
+      - pip install pygments 
+      - wget "https://github.com/gohugoio/hugo/releases/download/v0.34/hugo_0.34_Linux-64bit.deb"
+      - sudo dpkg -i hugo*.deb
+    finally:
+      - hugo version
+
+  build:
+    commands:
+      - echo Entered the build phase ...
+      - cd aleatorio/
+      - ls 
+      - rm -rf public/
+      - pwd
+      - hugo -v
+  
+  post_build:
+    commands:
+      - ls
+      - echo Build phase started...
+      - cd public/
+      - ls
+      - pwd 
+      - aws s3 sync . s3://esaleatorio.com --delete 
+      - aws configure set preview.cloudfront true
+      - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
+    finally:
+      - echo Entered the post_build phase..
+      - echo Build completed on `date`
