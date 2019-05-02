@@ -1,3 +1,45 @@
-baseURL = "http://example.org/"
+baseURL = "https://www.esaleatorio.com/"
+title = "Publicaciones de interes para H4x0r5"                                                                
+baseurl = "/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+theme = "terminal"
+paginate = 5
+ 
+[params]
+  # dir name of your blog content (default is `content/posts`)
+  contentTypeName = "publicaciones"
+  # ["orange", "blue", "red", "green", "pink"]
+  themeColor = "green"
+  # if you set this to 0, only submenu trigger will be visible
+  showMenuItems = 2
+  # set theme to full screen width
+  fullWidthTheme = true
+  # center theme with default width
+  centerTheme = true
+  # set a custom favicon (default is a `themeColor` square)
+  # favicon = "favicon.ico"
+ 
+[languages]
+  [languages.en]
+    title = "esaleatorio.com"
+    subtitle = "De interes para algunos h4x0r5"
+    keywords = ""
+    copyright = ""
+    menuMore = "Ver mas"
+    readMore = "Leer mas"
+    readOtherPosts = "Otras publicaciones"
+ 
+    [languages.en.params.logo]
+      logoText = "es aleatorio"
+      logoHomeLink = "/"
+ 
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "Acerca de Nosotros"
+        url = "/about"
+      [[languages.en.menu.main]]
+        identifier = "showcase"
+        name = "Showcase"
+        url = "/showcase"
+
