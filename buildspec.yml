@@ -6,7 +6,6 @@ phases:
       - sudo apt-get upgrade -y 
       - pip install awscli 
       - pip install Pygments 
-      - sudo apt-get install golang -y 
       - wget "https://github.com/gohugoio/hugo/releases/download/v0.21/hugo_0.21_Linux-64bit.deb"
       - sudo dpkg -i hugo*.deb
     finally:
@@ -21,11 +20,10 @@ phases:
   
   post_build:
     commands:
-      - ls
       - echo Build phase started...
       - ls
       - pwd 
-      - aws s3 sync public/ s3://esaleatorio.com  --delete --acl public-read --recursive 
+      - aws s3 sync public/ s3://esaleatorio.com  --delete --acl public-read 
       - aws configure set preview.cloudfront true
       - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
     finally:
