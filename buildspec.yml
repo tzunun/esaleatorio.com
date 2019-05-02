@@ -16,7 +16,7 @@ phases:
       - echo Entered the build phase ...
       - ls 
       - pwd
-      - hugo -v -t minimal
+      - hugo -v -t terminal
   
   post_build:
     commands:
