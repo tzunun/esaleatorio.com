@@ -28,7 +28,7 @@ phases:
       - cd public/
       - ls
       - pwd 
-      - aws s3 sync . s3://esaleatorio.com --delete 
+      - aws s3 sync . s3://esaleatorio.com  --acl public-read --delete
       - aws configure set preview.cloudfront true
       - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
     finally:
