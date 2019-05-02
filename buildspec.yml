@@ -19,7 +19,7 @@ phases:
       - ls 
       - rm -rf public/
       - pwd
-      - hugo -v -t terminal
+      - hugo -v -t minimal
   
   post_build:
     commands:
