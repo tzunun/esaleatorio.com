@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on esaleatorio.com</title>
-    <link>/posts/</link>
+    <link>www.esaleatorio.com/posts/</link>
     <description>Recent content in Posts on esaleatorio.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 02 May 2019 15:57:56 -0500</lastBuildDate>
     
-	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="www.esaleatorio.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Two</title>
-      <link>/posts/two/</link>
+      <link>www.esaleatorio.com/posts/two/</link>
       <pubDate>Thu, 02 May 2019 15:57:56 -0500</pubDate>
       
-      <guid>/posts/two/</guid>
+      <guid>www.esaleatorio.com/posts/two/</guid>
       <description>We know that this works, It is time to check if this theme works on the build with AWS old Ubuntu 14.04 image</description>
     </item>
     
     <item>
       <title>One</title>
-      <link>/posts/one/</link>
+      <link>www.esaleatorio.com/posts/one/</link>
       <pubDate>Thu, 02 May 2019 15:53:20 -0500</pubDate>
       
-      <guid>/posts/one/</guid>
+      <guid>www.esaleatorio.com/posts/one/</guid>
       <description>This is one I am adding information to this</description>
     </item>
     
     <item>
       <title>Test3</title>
-      <link>/posts/test3/</link>
+      <link>www.esaleatorio.com/posts/test3/</link>
       <pubDate>Thu, 02 May 2019 13:38:00 -0500</pubDate>
       
-      <guid>/posts/test3/</guid>
+      <guid>www.esaleatorio.com/posts/test3/</guid>
       <description>This will be it!! Success or keep working.</description>
     </item>
     

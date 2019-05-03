@@ -3,38 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/posts/two/</loc>
+    <loc>www.esaleatorio.com/posts/two/</loc>
     <lastmod>2019-05-02T15:57:56-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/one/</loc>
+    <loc>www.esaleatorio.com/posts/one/</loc>
     <lastmod>2019-05-02T15:53:20-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/test3/</loc>
+    <loc>www.esaleatorio.com/posts/test3/</loc>
     <lastmod>2019-05-02T13:38:00-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>www.esaleatorio.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/posts/</loc>
+    <loc>www.esaleatorio.com/posts/</loc>
     <lastmod>2019-05-02T15:57:56-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>www.esaleatorio.com/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/</loc>
+    <loc>www.esaleatorio.com/</loc>
     <lastmod>2019-05-02T15:57:56-05:00</lastmod>
     <priority>0</priority>
   </url>
