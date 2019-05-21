@@ -137,5 +137,5 @@ if __name__ == "__main__":
 # It's possible to crete both the english and the spanish version of the page, purpose unkown double effort
 # Translation must include the original hyperlink in order to give the option to findout
 
-
+# Test in AWS
 #The latest_story_id has to be saved to a text file containing only the id and nothing else
