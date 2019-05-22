@@ -17,7 +17,7 @@ phases:
       - hugo version
       - rm -rf public
       - ls 
-      - hugo 
+      - hugo -v
       - ls 
       - pwd
   
