@@ -6,5 +6,5 @@ draft: false
 
 # We know that this works,
 
-It is time to check if this theme works on the build with AWS old Ubuntu 14.04 image
+It is time to check if this theme works on the build with AWS old Ubuntu 14.04 image.  The Ubuntu image was recently updated this month of May 2019 to 18.04LTS
 
