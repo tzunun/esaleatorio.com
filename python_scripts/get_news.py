@@ -5,7 +5,7 @@ from datetime import datetime
 from readability import Document
 
 script_location = os.path.dirname(os.path.abspath(__file__)) 
-posts_location = 'noticia/content/posts/'
+posts_location = 'content/posts/'
 maxitem_url = 'https://hacker-news.firebaseio.com/v0/maxitem.json'
 
 
