@@ -1,4 +1,4 @@
-title = "Publicaciones de interes para H4x0r5"                                                                
+title = "Publicaciones de interes para Hackers"                                                                
 baseurl = "/"
 languageCode = "en-us"
 theme = "terminal"
@@ -21,7 +21,7 @@ paginate = 5
 [languages]
   [languages.en]
     title = "esaleatorio.com"
-    subtitle = "De interes para algunos h4x0r5"
+    subtitle = "De interes para algunos Hackers"
     keywords = ""
     copyright = ""
     menuMore = "Ver mas"

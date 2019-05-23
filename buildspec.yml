@@ -19,7 +19,7 @@ phases:
       - hugo version
       - git rm --cache themes/terminal
       - rm -rf themes/terminal/
-      - git submodule add https://github.com/panr/hugo-theme-terminal.git themes/terminal
+      - git submodule add --force https://github.com/panr/hugo-theme-terminal.git themes/terminal
       - git submodule update --init --recursive
       - rm -rf public
       - ls 
