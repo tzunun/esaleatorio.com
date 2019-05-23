@@ -76,7 +76,7 @@ def create_post(story_id, story_title, story_url, story_markdown_content):
     file_name = ''.join(['post-', story_id, '.md'])
     current_directory = os.path.dirname('hn')
     new_post = os.path.join(current_directory, posts_location, file_name)
-    post_header = ''.join(['---\ntitle: ',  story_title, ' \ndate: ', str(today), ' \ndraft: false \n---\n\n'])
+    post_header = ''.join(['---\ntitle: ', '\"', story_title, '\"', ' \ndate: ', str(today), ' \ndraft: false \n---\n\n'])
     print('\n', post_header, '\n')
     post_content = ''.join([post_header, 'Story source:', '\n\n', story_url, '\n\n\n', story_markdown_content]) 
 
@@ -139,3 +139,5 @@ if __name__ == "__main__":
 
 # Test in AWS
 #The latest_story_id has to be saved to a text file containing only the id and nothing else
+# IT seems that the issue is the : in the title, this can be avoided by looking at the title line and escaping the special characters or just using
+# "" to wrap the title and be done with it
