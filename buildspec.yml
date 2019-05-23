@@ -8,6 +8,8 @@ phases:
       - apt install python3-dev python3-pip -y 
       - pip3 install Pygments --user
       - pip3 install awscli --user
+      - apt install git
+      - apt install git-lfs
       - apt install hugo -y 
     finally:
 
@@ -15,6 +17,10 @@ phases:
     commands:
       - echo Entered the build phase ...
       - hugo version
+      - git rm --cache themes/terminal
+      - rm -rf themes/terminal/
+      - git submodule add https://github.com/panr/hugo-theme-terminal.git themes/terminal
+      - git submodule update --init --recursive
       - rm -rf public
       - ls 
       - hugo -t terminal -v
