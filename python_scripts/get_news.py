@@ -134,7 +134,12 @@ if __name__ == "__main__":
 # Files will be saved in a folder format
 # /year/month/day/ or it could be /year/day as in nasa /year/day 0-366 format.
 # The page content has to be used to get the text translated,
-# It's possible to crete both the english and the spanish version of the page, purpose unkown double effort
+# It's possible to crete both the english and the spanish version of the
+# page, purpose unkown double effort, if given proper formatting most
+# people in Latin America who read news from websites in English get
+# translation automatically by google.  Possible option is to get stories
+# translated to look at what the algorithm misses and implement some time
+# of improvement based entity recognition?
 # Translation must include the original hyperlink in order to give the option to findout
 
 # Test in AWS
