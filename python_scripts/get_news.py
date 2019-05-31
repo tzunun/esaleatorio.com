@@ -139,5 +139,3 @@ if __name__ == "__main__":
 
 # Test in AWS
 #The latest_story_id has to be saved to a text file containing only the id and nothing else
-# IT seems that the issue is the : in the title, this can be avoided by looking at the title line and escaping the special characters or just using
-# "" to wrap the title and be done with it
