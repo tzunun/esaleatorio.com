@@ -14,7 +14,8 @@ The site esaleatorio.com is live.
 
 **S3**:  Storage bucket to host the static site
 
-**Lightsail**:  VPS running Ubuntu 18.04LTS.  Running PostgreSQL to store the text data and running a cron job that runs the scripts to get the new stories and store them in the DB
+**Lightsail**:  VPS running Ubuntu 18.04LTS. PostgreSQL to store the text data.  Server will be running a cron job to start the scripts wich will get the new stories and store them in the PostgreSQL db. Server will push changes to the site repo.
+
 **CodeCommit**:  Git repository (set up ssh-key authentication, somehow ed25519 keys are not supported)
 
 **CodeBuild**:  Build the website, upload the pages to the S3 bucket, and make the CloudFront dispose of the old files.
