@@ -1,9 +1,9 @@
 # Es Aleatorio (esaleatorio.com)
-esaleatorio.com is a website build using primarilly AWS technologies.  At its proper implementation.  It obtains news from the site news.ycombinator.com (Hacker News) removes all the clutter from them and using AWS Machine Learning translate the text to Spanish.  Renders mostly text and builds a website that still has the important information from the submitted news.  A link is also provided to the original url of the story in case the script doesn't parse the text correctly.
+esaleatorio.com is a website build using primarilly AWS technologies.  At its proper implementation.  It obtains news from the site news.ycombinator.com (Hacker News) removes all the clutter from them. Renders mostly text and builds a website that still has the important information from the submitted news.  A link is also provided to the original url of the story in case the script doesn't parse the text correctly.
 
 The result is a text mostly site that renders fast and efficiently regardeless of the device being used to view it. 
 
-The site esaleatorio.com and the subdomain forum.esaleatorio.com are live.
+The site esaleatorio.com is live.
 
 ## List of AWS used in this site
 **Route53**: DNS and domain registration.  Hosted zone used to properly point domain and subdomains.
@@ -14,8 +14,7 @@ The site esaleatorio.com and the subdomain forum.esaleatorio.com are live.
 
 **S3**:  Storage bucket to host the static site
 
-**Lightsail**:  VPS running Ubuntu 18.04LTS.  A docker image runs discourse in order to provide the ability to comment the stories.  Discourse is available in the subdomain forum.esaleatorio.com
-
+**Lightsail**:  VPS running Ubuntu 18.04LTS.  Running PostgreSQL to store the text data and running a cron job that runs the scripts to get the new stories and store them in the DB
 **CodeCommit**:  Git repository (set up ssh-key authentication, somehow ed25519 keys are not supported)
 
 **CodeBuild**:  Build the website, upload the pages to the S3 bucket, and make the CloudFront dispose of the old files.
@@ -23,9 +22,9 @@ The site esaleatorio.com and the subdomain forum.esaleatorio.com are live.
 **IAM**: To manage roles an permissions in the whole process.
 
 ## Still in the future
-**Lightsail**: Second VPS to keep the site updated by running a script to gather the new stories and push them to CodeCommit.  It could possibly contain a PostgreSQL database to store the text from the stories and the translations to Spanish in order to collect data for phase 2 of this project which is NLP to test certain conjecture I have on how to improve Machine Learning assisted language translation (English - Spanish)
+**Lightsail**: Apache Superset linked to the text DB. 
 
-**AWS Machine Learning**:  To translate the stories from English to Spanish.
+**AWS Machine Learning**:  This is possibly going to be NLP related.
 
 **CodeDeploy**:  To automate the deploy process.
 
@@ -33,8 +32,6 @@ The site esaleatorio.com and the subdomain forum.esaleatorio.com are live.
 **Hugo**: To generate the static site.
 
 Theme: Terminal
-
-**Discourse**: To enable comments on the stories.
 
 # Installation
 I used the default Anaconda distribution of Python3. These instructions work as they are in Ubuntu and most other Linux distributions. Windows users would have to select the Anaconda command option from the Windows menu, otherwise it is unlikely to work properly from the command prompt or PowerShell.
