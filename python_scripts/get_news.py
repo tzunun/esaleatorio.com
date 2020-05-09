@@ -4,10 +4,9 @@ import html2text
 from datetime import datetime
 from readability import Document
 
-script_location = os.path.dirname(os.path.abspath(__file__)) 
-posts_location = 'content/posts/'
+script_directory = os.path.dirname(os.path.abspath(__file__)) 
+posts_directory = 'content/posts/'
 maxitem_url = 'https://hacker-news.firebaseio.com/v0/maxitem.json'
-
 
 class Story: 
 
@@ -26,7 +25,6 @@ class Story:
     
     def story_content(self): 
         response = requests.get(self.story_url, timeout=20) 
-        print('Checking for content')
         try: 
             if response.ok: 
                 self.content = Document(response.content).summary() 
@@ -40,7 +38,6 @@ class Story:
         html_to_markdown = html2text.HTML2Text() 
         html_to_markdown.ignore_links = False 
         self.markdown = html_to_markdown.handle(self.content) 
-        print(self.markdown)
     
 
 def new_items_url(items):
@@ -55,65 +52,51 @@ def check_url(url):
         response = requests.get(url, timeout=20)
         if response.ok and isinstance((response.json()), dict):
             if response.json()['type'] == 'story' and response.json()['url']:
-                print('The url leads to a story')
                 return response.json()
             else:
                 return 'empty'
     except:
         pass  # This is intentional I don't want to keep track of failed urls
 
-    
-# Call imported translate.py to use API to translate the wepage.
-def translate_page(page_text):
-        """ The story will be translated to Spanish, using AWS. """
-
 def create_post(story_id, story_title, story_url, story_markdown_content):
-    """ Create translated (Spanish) version of the story. """
-
-    print('Creating post!')
-
     today = datetime.today().strftime('%Y-%m-%d')
     file_name = ''.join(['post-', story_id, '.md'])
-    current_directory = os.path.dirname('hn')
-    new_post = os.path.join(current_directory, posts_location, file_name)
+    new_post = os.path.join(posts_directory, file_name)
     post_header = ''.join(['---\ntitle: ', '\"', story_title, '\"', ' \ndate: ', str(today), ' \ndraft: false \n---\n\n'])
-    print('\n', post_header, '\n')
     post_content = ''.join([post_header, 'Story source:', '\n\n', story_url, '\n\n\n', story_markdown_content]) 
 
     with open(new_post, 'w') as file:
         file.write(post_content)
 
-def get_latest_post_id():
-    file = os.path.join(script_location, 'latest_post_id')
-    last_id = open(file, 'r')
-    if last_id.mode == 'r':
-        post_id = last_id.read()
-    last_id.close()
-    return post_id.strip()
+def get_latest_post_id(file):
+    with open(file, 'r') as f:
+        return int(f.read())
 
+# save the new latest_post
 def save_latest_post_id(post_id):
     with open('latest_post_id', 'w') as file:
         file.write(post_id)
-    print(post_id, 'Latest id, saved to file!') 
         
 
 if __name__ == "__main__":
     item_list = []
     post_count = 0
     stories_urls_list = []
+    file = '/home/antonio/Repos/esaleatorio.com/python_scripts/latest_post_id'
 
     # Best stories url, in HN items are stories
-    maxitems = requests.get(maxitem_url, timeout=20)                                                                 
-    maxitem = maxitems.json()
-    latest_post_id = int(get_latest_post_id())
-    new_items = maxitem - latest_post_id
-    for i in range(new_items):
-        latest_post_id += 1
-        item_list.append(latest_post_id)
+    maxitem = requests.get(maxitem_url, timeout=20).json()
+    latest_post_id = get_latest_post_id(file)
+    new_items = maxitem - 200
+
+    for i in range(new_items, maxitem):
+        new_items += 1
+        item_list.append(new_items)
     
     # If url are stories then 
     items_urls_list = new_items_url(item_list)
 
+    post_count = 0
     for item in items_urls_list:
         response = check_url(item)
         if isinstance(response, dict):
@@ -122,8 +105,10 @@ if __name__ == "__main__":
             new_post.title = response['title']
             new_post.story_url = response['url']
             new_post.story_content()
-            if new_post.content != None:
+            if post_count <=10 and new_post.content != None:
+                print(post_count)
                 create_post(new_post.id, new_post.title, new_post.story_url, new_post.markdown)
+                post_count += 1
         else:
             pass
 
@@ -131,11 +116,6 @@ if __name__ == "__main__":
 # check if the  the link from hn showw that the story is not dead. or that the score is greater than 50
 # When creating an object, the call is being redundant because it uses the same hn_url twice, once to check for story and twice to get the additional info. 
 # This should not be done.
-# Files will be saved in a folder format
-# /year/month/day/ or it could be /year/day as in nasa /year/day 0-366 format.
-# The page content has to be used to get the text translated,
-# It's possible to crete both the english and the spanish version of the
-# page, purpose unkown double effort, if given proper formatting most
 # people in Latin America who read news from websites in English get
 # translation automatically by google.  Possible option is to get stories
 # translated to look at what the algorithm misses and implement some time
