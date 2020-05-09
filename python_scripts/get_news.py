@@ -112,6 +112,11 @@ if __name__ == "__main__":
         else:
             pass
 
+        if post_count > 10:
+            save_latest_post_id(item)
+            break
+    
+
 # TODO        
 # check if the  the link from hn showw that the story is not dead. or that the score is greater than 50
 # When creating an object, the call is being redundant because it uses the same hn_url twice, once to check for story and twice to get the additional info. 

@@ -12,9 +12,7 @@ The site esaleatorio.com is live.
 
 **Certificate Manager**:  To obtain an SSl certificate, for the site and possibly subdomains.
 
-**S3**:  Storage bucket to host the static site
-
-**Lightsail**:  VPS running Ubuntu 18.04LTS. PostgreSQL to store the text data.  Server will be running a cron job to start the scripts wich will get the new stories and store them in the PostgreSQL db. Server will push changes to the site repo.
+**S3**:  Storage bucket to host the static site.
 
 **CodeCommit**:  Git repository (set up ssh-key authentication, somehow ed25519 keys are not supported)
 
@@ -23,9 +21,8 @@ The site esaleatorio.com is live.
 **IAM**: To manage roles an permissions in the whole process.
 
 ## Still in the future
-**Lightsail**: Apache Superset linked to the text DB. 
-
-**AWS Machine Learning**:  This is possibly going to be NLP related.
+**AWS Lambda** 
+Cron Job to build the site automatically and push the changes.
 
 **CodeDeploy**:  To automate the deploy process.
 
@@ -35,7 +32,8 @@ The site esaleatorio.com is live.
 Theme: Terminal
 
 # Installation
-I used the default Anaconda distribution of Python3. These instructions work as they are in Ubuntu and most other Linux distributions. Windows users would have to select the Anaconda command option from the Windows menu, otherwise it is unlikely to work properly from the command prompt or PowerShell.
+I used the default Anaconda distribution of Python3. These instructions work as they are in Ubuntu and most other Linux distributions. 
+Windows users would have to select the Anaconda command option from the Windows menu, otherwise it is unlikely to work properly from the command prompt or PowerShell.
 
 The following libraries are needed and in order to install them make sure the appropriate python environment is active and run the following commands:
 ```shell
