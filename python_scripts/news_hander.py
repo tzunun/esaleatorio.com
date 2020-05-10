@@ -11,7 +11,7 @@ if __name__ == "__main__":
     item_list = []
     stories_urls_list = []
     new_items = maxitem - 200
-    post_count = 1
+    post_count = 0
 
     for i in range(new_items, maxitem):
         new_items += 1
@@ -21,20 +21,23 @@ if __name__ == "__main__":
     items_urls_list = get_news.new_items_url(item_list)
 
     for item in items_urls_list:
+
+        if post_count >= 2:
+            get_news.save_latest_post_id(new_post.id)
+            break
+
         response = get_news.check_url(item)
+
         if isinstance(response, dict):
             new_post = get_news.Story(item)
             new_post.id = str(response['id'])
             new_post.title = response['title']
             new_post.story_url = response['url']
             new_post.story_content()
-            if post_count <= 2 and new_post.content != None:
-                print(post_count)
+            if new_post.content != None:
                 get_news.create_post(new_post.id, new_post.title, new_post.story_url, new_post.markdown)
                 post_count += 1
-            elif post_count >=2:
-                get_news.save_latest_post_id(new_post.id)
-                break
+                print(post_count)
         else:
             pass
 
