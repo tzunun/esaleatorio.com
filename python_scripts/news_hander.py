@@ -23,7 +23,7 @@ if __name__ == "__main__":
     for item in items_urls_list:
 
         if post_count >= 2:
-            get_news.save_latest_post_id(new_post.id)
+            get_news.save_latest_post_id(latest_post_id)
             break
 
         response = get_news.check_url(item)
@@ -37,21 +37,7 @@ if __name__ == "__main__":
             if new_post.content != None:
                 get_news.create_post(new_post.id, new_post.title, new_post.story_url, new_post.markdown)
                 post_count += 1
+                latest_post_id = new_post.id
                 print(post_count)
         else:
             pass
-
-    
-
-# TODO        
-# check if the  the link from hn showw that the story is not dead. or that the score is greater than 50
-# When creating an object, the call is being redundant because it uses the same hn_url twice, once to check for story and twice to get the additional info. 
-# This should not be done.
-# people in Latin America who read news from websites in English get
-# translation automatically by google.  Possible option is to get stories
-# translated to look at what the algorithm misses and implement some time
-# of improvement based entity recognition?
-# Translation must include the original hyperlink in order to give the option to findout
-
-# Test in AWS
-#The latest_story_id has to be saved to a text file containing only the id and nothing else

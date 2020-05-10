@@ -36,7 +36,7 @@ class Story:
     
     def story_markdown(self): 
         ''' Will return the story's text in markdown format ''' 
-        print('Creating markdown ...') 
+        #print('Creating markdown ...') 
         html_to_markdown = html2text.HTML2Text() 
         html_to_markdown.ignore_links = False 
         self.markdown = html_to_markdown.handle(self.content) 
