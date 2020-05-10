@@ -8,7 +8,7 @@ script_directory = os.path.dirname(os.path.abspath(__file__))
 posts_directory = 'content/posts/'
 maxitem_url = 'https://hacker-news.firebaseio.com/v0/maxitem.json'
 maxitem = requests.get(maxitem_url, timeout=20).json()
-latest_post_file = './latest_post_id'
+latest_post_file = 'python_scripts/latest_post_id'
 
 class Story: 
 
@@ -76,5 +76,5 @@ def get_latest_post_id(file):
 
 # save the new latest_post
 def save_latest_post_id(post_id):
-    with open('latest_post_id', 'w') as file:
+    with open(latest_post_file, 'w') as file:
         file.write(post_id)
