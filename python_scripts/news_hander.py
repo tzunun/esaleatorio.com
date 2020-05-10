@@ -1,19 +1,17 @@
 import get_news
 
-script_directory = get_news.script_directory
-posts_directory = get_news.posts_directory
-maxitem_url = get_news.maxitem_url
-maxitem = get_news.maxitem
-
 if __name__ == "__main__":
-    item_list = []
-    post_count = 0
-    stories_urls_list = []
-    file = 'latest_post_id'
 
-    # Best stories url, in HN items are stories
-    latest_post_id = get_news.get_latest_post_id(file)
+    script_directory = get_news.script_directory
+    posts_directory = get_news.posts_directory
+    maxitem_url = get_news.maxitem_url
+    maxitem = get_news.maxitem
+    latest_post_file = get_news.latest_post_file
+    latest_post_id = get_news.get_latest_post_id(latest_post_file)
+    item_list = []
+    stories_urls_list = []
     new_items = maxitem - 200
+    post_count = 0
 
     for i in range(new_items, maxitem):
         new_items += 1

@@ -21,6 +21,8 @@ The site esaleatorio.com is live.
 **IAM**: To manage roles an permissions in the whole process.
 
 ## Still in the future
+**AWS CloudWatch Event**
+Cron Job
 **AWS Lambda** 
 Cron Job to build the site automatically and push the changes.
 
