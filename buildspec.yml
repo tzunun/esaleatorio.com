@@ -5,7 +5,8 @@ phases:
     # The update and upgrade lines are commented out because the build currently takes 9 minutes
     #  - apt update
     #  - apt upgrade -y 
-      - apt install python3-dev python3-pip -y 
+      - uname -a 
+      - apt install python3 python3-pip -y 
       - pip3 install Pygments --user
       - pip3 install awscli --user
       - apt install git
