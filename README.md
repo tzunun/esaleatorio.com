@@ -1,4 +1,4 @@
-test!!!!
+test
 # Es Aleatorio (esaleatorio.com)
 esaleatorio.com is a website build using primarilly AWS technologies.  At its proper implementation.  It obtains news from the site news.ycombinator.com (Hacker News) removes all the clutter from them. Renders mostly text and builds a website that still has the important information from the submitted news.  A link is also provided to the original url of the story in case the script doesn't parse the text correctly.
 
