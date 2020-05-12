@@ -12,9 +12,9 @@ paginate = 5
   # if you set this to 0, only submenu trigger will be visible
   showMenuItems = 2
   # set theme to full screen width
-  fullWidthTheme = true
+  fullWidthTheme = false
   # center theme with default width
-  centerTheme = true
+  centerTheme = false
   # set a custom favicon (default is a `themeColor` square)
   # favicon = "favicon.ico"
  
