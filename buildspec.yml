@@ -14,10 +14,11 @@ phases:
     commands:
       - echo Entered the build phase ...
       - hugo version
+      - git clone https://github.com/panr/hugo-theme-terminal.git themes/terminal
+      - ls -lah terminal
       - rm -rf public
       - ls 
       - hugo -t terminal -v
-      - ls -lah terminal
       - pwd
   
   post_build:
