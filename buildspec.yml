@@ -17,16 +17,11 @@ phases:
       - git rm -r --cache themes/terminal
       - rm -rf themes
       - git clone https://github.com/panr/hugo-theme-terminal.git themes/terminal
-      - ls themes
       - hugo
-      - ls 
-      - pwd
   
   post_build:
     commands:
       - echo Build phase started...
-      - ls
-      - pwd 
       - aws s3 sync public/ s3://esaleatorio.com  --delete --acl public-read 
       - aws configure set preview.cloudfront true
       - aws cloudfront create-invalidation --distribution-id E29K42285AKVEE --paths '/*'
