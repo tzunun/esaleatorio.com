@@ -13,6 +13,8 @@ phases:
       - echo Entered the build phase ...
       - hugo version
       - rm -rf public
+      - git submodule add https://github.com/panr/hugo-theme-terminal.git themes/terminal
+      - git submodule update --init --recursive
       - ls 
       - hugo -t terminal -v
       - ls 
