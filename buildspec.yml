@@ -14,11 +14,13 @@ phases:
     commands:
       - echo Entered the build phase ...
       - hugo version
-      - git clone https://github.com/panr/hugo-theme-terminal.git themes/terminal
-      - ls -lah terminal
+      - git rm --cache themes/terminal
+      - rm -rf themes/terminal/
+      - git submodule add --recursive -f https://github.com/panr/hugo-theme-terminal.git themes/terminal
       - rm -rf public
       - ls 
       - hugo -t terminal -v
+      - ls 
       - pwd
   
   post_build:
