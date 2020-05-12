@@ -1,6 +1,14 @@
 import get_news
+import os
+import glob
 
 if __name__ == "__main__":
+
+    #Delete the posts/post*.MD files
+    files = glob.glob('content/posts/post*.md', recursive=True)
+    for file in files:
+        os.remove(file)
+
 
     script_directory = get_news.script_directory
     posts_directory = get_news.posts_directory
