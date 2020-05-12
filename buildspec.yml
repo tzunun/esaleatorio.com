@@ -15,10 +15,9 @@ phases:
       - rm -rf public
       - git rm -r --cache themes/terminal
       - rm -rf themes
-      - git submodule add https://github.com/panr/hugo-theme-terminal.git themes/terminal
-      - git submodule update --init --recursive
-      - ls 
-      - hugo -t terminal -v
+      - git clone https://github.com/panr/hugo-theme-terminal.git themes/terminal
+      - ls themes
+      - hugo server -t terminal
       - ls 
       - pwd
   
