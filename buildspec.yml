@@ -4,19 +4,15 @@ phases:
     commands:
     # The update and upgrade lines are commented out because the build currently takes 9 minutes
       - apt-get update && apt-get upgrade -y 
-      - apt-get install python3-dev python3-pip -y 
+      - apt-get install python3-dev python3-pip git git-lfs hugo -y 
       - pip3 install Pygments --user
       - pip3 install awscli --user
-      - apt-get install git git-lfs hugo -y 
     finally:
 
   build:
     commands:
       - echo Entered the build phase ...
       - hugo version
-      - git rm --cache themes/terminal
-      - rm -rf themes/terminal/
-      - git submodule add -f https://github.com/panr/hugo-theme-terminal.git themes/terminal
       - rm -rf public
       - ls 
       - hugo -t terminal -v
