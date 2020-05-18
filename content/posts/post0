@@ -1,103 +1,408 @@
 ---
-title: "Show HN: Spacemacs like action menu in VSCode" 
+title: "Strava Cuts Off Leaderboard for Free Users, Reduces 3rd Party Apps for All" 
 date: 2020-05-18 
 draft: false 
 ---
 
 Story source:
 
-https://marketplace.visualstudio.com/items?itemName=stevenguh.spacecode
+https://www.dcrainmaker.com/2020/05/strava-cuts-off-leaderboard-for-free-users-reduces-3rd-party-apps-for-all-and-more.html
 
 
-# Spacecode (Preview)
+[![DSC_5068]()![DSC_5068](https://media.dcrainmaker.com/images/2020/05/DSC_5068_thumb.jpg)](https://media.dcrainmaker.com/images/2020/05/DSC_5068.jpg)
 
-![Space Code
-Icon](https://github.com/stevenguh/spacecode/raw/master/images/icon.png)
+After roughly five months of appeasing users with [new
+feature](https://www.dcrainmaker.com/2020/03/strava-rolls-out-significant-new-
+routes-feature.html) [after new](https://www.dcrainmaker.com/2020/03/strava-
+brings-back-chronological-ordering-adds-athlete-favoriting.html)
+[feature](https://www.dcrainmaker.com/2020/05/garmin-launches-strava-komoot-
+route-sync-works-on-devices-a-decade-old.html) [after
+new](https://www.dcrainmaker.com/2020/04/sports-tech-tidbits-fitbit-
+charge-4-strava-adds-weather-zwift-clubs-suuntos-trainingpeaks-metrics-coros-
+new-features-and-more.html)
+[feature](https://www.dcrainmaker.com/2020/02/strava-launches-native-apple-
+watch-workout-sync-heres-how-it-works.html), the other shoe has finally
+dropped. Today, Strava sold its segmented soul. At least, if you believe
+Strava Segments are the soul of what makes Strava, well, Strava.
 
-This extension is inspired by spacemacs and aiming to provide similar
-experience in VSCode. An action menu trigger by space key is implemented to
-reduce memorization of shortcuts. You can change the editor group, change the
-file language, and check git status without leaving your keyboard. This
-provides speed to shortcut while minimizing typing comparing to fuzzy search
-in the command palette or shortcut memorizing.
+The company announced three substantial negative changes to the platform
+effective immediately, which will have huge ramifications for the nearly 50
+million users, as well as the 44,000 registered 3rd party apps. They are
+summarized as follows:
 
-## Features
+ **– Non-paying users will no longer see the full leaderboard:** They’ll only
+see the top 10 times (all + Top 10 women), you won’t see your friends anymore  
+**– Strava is removing the leaderboard from all 3rd party apps:** If you’re
+using one of the 44,000 3rd party apps out there to do anything with Segments,
+this likely just broke it. Only devices like those from
+Garmin/Wahoo/Hammerhead/etc that have Strava Live Segments can display that
+for paying members.  
+**– Non-paying users will no longer get the web route builder** : If you want
+to build routes, you’ll need to use another platform.
 
-  * Spacemacs like action menu to reduce memorization of shortcuts
-  * All menu items are customizable
-  * The the menu key is customizable
+In addition to those substantial ones, there’s also one lesser removal:
 
-![Space
-actions](https://github.com/stevenguh/spacecode/raw/master/images/feature.gif)
+ **– Non-paying users will not longer get ‘matched runs’ feature:** This will
+[automatically compare runs](https://support.strava.com/hc/en-
+us/articles/216918597-Matched-Runs) on the same route from a pace/speed
+standpoint. A new matched rides feature is introduced today, which is only
+available to paying users.
 
-## Requirements
+One might mistakenly believe this change is only impacting non-paying users.
+**But that’s far from true**. This change is impacting anyone who uses the
+platform with 3rd party apps to do any amount of analysis of Segments. And
+even beyond that, it’s lessening the value of Segments for everyone. Strava is
+in effect saying: Segments don’t really matter to our business anymore,
+getting people to pay for them does.
 
-  * [VSCode Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) (required for default space key)
-  * [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) (required for default bindings)
-  * [edmagit](https://marketplace.visualstudio.com/items?itemName=kahole.magit) and its Vim bindings (required for default bindings)
+And here’s the worst part: They aren’t necessarily wrong on that specific
+issue. In a conference call last week, Strava was point-blank clear that if
+they don’t get more subscribers and become profitable, there’s a pretty good
+chance there won’t be a Strava in a year.
 
-## Customization
+Is some of that posturing? Probably.
 
-> The following instructions might change during preview
+But is the undercurrent of it true? Most likely. You can only run an
+unprofitable business so long when people [stop giving you
+money](https://www.crunchbase.com/organization/strava#section-lists-featuring-
+this-company).
 
-#### I don't use VSCode Vim
+Still, my take is that this is less about Strava’s goals of being profitable,
+and more about the way they’re going about it. Instead of adding value and new
+features to the platform and convincing people to convert, they’re pulling the
+rug out from both free and paid users alike. They’re using the stick, instead
+of the carrot. And historically speaking – that doesn’t improve customer
+satisfaction.
 
-Since the default key binding adding by this extensions will only tigger when
-Vim extension is active, you can just add a new binding in the your own
-`keybindings.json`. The following json is an example to bind `alt+space` to
-the action menu.
+Finally, it should be noted that while Strava is slashing and burning today,
+they did roll out a few new (positive) changes for premium users. First of,
+you got a new desktop (web) route builder which better integrates Strava
+Segments and terrain filters (e.g. gravel vs not, more elevation option,
+etc…), and you also got some redesigned elements of the mobile app around
+training load tracking. Some of it is new functionality, a lot of it is mostly
+cleaned up user interface design. Those will show up in iOS/Android app
+version v150 starting today, but may take up to 48 hours for everyone to see.
+The restrictions will appear immediately. On a normal day I might have covered
+that more in-depth, but today is not a normal day.
 
-    
-    
-    {
-      "key": "alt+space",
-      "command": "spacecode.space",
-      "when": "editorTextFocus"
-    },
-    
+### Leaderboard Changes:
 
-#### I use Vim, but I just don't like the `space` key
+This first change only impacts non-paying users. By the way, while we’re at
+it, as of today Strava is ditching the ‘Summit’ moniker it [created two
+summers ago](https://www.dcrainmaker.com/2018/08/strava-renames-premium-to-
+summit-changes-pricing-model.html). Now, you’re simply a ‘subscriber’ or not.
+Meaning, you’re either paying or not. If you’re not paying, Strava wants you
+to pay – and they’re even giving you a 60-day trial to test things out. Mind
+you, you’ll have to provide a credit card first, and if you forget to cancel
+in mid-July you’ll become one of those paying subscribers.
 
-You will have to remove the key binding added by this extension and replace
-that with your own. The following json is example to bind `alt+space` to the
-action menu.
+In any case, as of today, non-paying users will no longer see the full
+leaderboard. The ‘leaderboard’ is basically what is shown when you look up a
+Strava segment. It manifests itself in a few different ways, including mini-
+leaderboards and full leaderboards. For example, here’s a mini-leaderboard.
+You can see not only the top 10, but my self and my stats on it.
 
-    
-    
-    {
-      "command": "-spacecode.space",
-      "key": "space",
-      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode =~ /^Normal|Visual|VisualBlock|VisualLine$/"
-    },
-    {
-      "command": "spacecode.space",
-      "key": "alt+space",
-      "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode =~ /^Normal|Visual|VisualBlock|VisualLine$/"
-    },
-    
-    
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-49.png)](https://media.dcrainmaker.com/images/2020/05/image-49.png)
 
-To customize the menu, copy the default `spacecode.bindings` value in
-`package.json` in this repo and put the updated `spacecode.bindings` config in
-your own `setting.json`.
+However, when I view the full leaderboard, I get additional key information –
+notably the ‘People I’m following’ and ‘My Clubs’, as well as ‘My results’ and
+‘This Year’. Plus age groups and weight classes too. If you’re a non-paying
+member, you’ll get none of this going forward (you previously didn’t get
+ages/weights unless a subscriber).
 
-> The actions are subject to change before `1.0.0`. If you find something you
-> think it should bind to a particular key, or you want some particular
-> function, please open an issue as a feature request.
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-50.png)](https://media.dcrainmaker.com/images/2020/05/image-50.png)
 
-## Release Notes
+In this context, if I was a non-paying member, I wouldn’t be able to see that
+I’m faster than GPLAMA here. It simply wouldn’t show up anymore, as if it
+didn’t exist. And frankly, I can’t have that.
 
-See
-[CHANGELOG.md](https://github.com/stevenguh/spacecode/blob/master/CHANGELOG.md)
+Same goes for my group membership in the Slowtwitch.com ‘Club’, that too would
+go away, here on a different segment:
 
-## Contribution
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-51.png)](https://media.dcrainmaker.com/images/2020/05/image-51.png)
 
-All feature requests and help are welcome. Please open an issue to track.
+Free users can still create segments, as well as use the segment explorer to
+look at/search for segments. They can also see the KOM/QOM (due to being
+allowed to see the Top 10/10 Top 10 Female), as well as they can see their own
+PR’s.
 
-## Credits
+To be very specific, here’s what non-paying users will see going forward:
 
-Thanks @kahole for his implementation of quick pick menu in edamagit.
+ **Free users:**  
+• Top 10 all-time and top 10 women Results in Leaderboard  
+• New Segment Creation is allowed  
+• Segment Detail screen is allowed (just not leaderboard details)  
+• Segment Explore / Search is allowed  
+• Flagging Segments is allowed  
+• Activity achievements is shown on a ride (KOM’s, CR’s, PR’s)
 
-Icons made by [Icongeek26](https://www.flaticon.com/authors/icongeek26) from
-[www.flaticon.com](https://github.com/stevenguh/spacecode/blob/master/www.flaticon.com)
+ **Paying Subscribers only:**  
+• All segment leaderboards (including following/clubs/this year/age
+groups/weight classes)  
+• Analyze segment efforts  
+• Compare your results  
+• Analyze your efforts
+
+So, here’s (on the mobile app), what a non-paying members should see starting
+today, and what happens if they try and do anything:
+
+[![clip_image002]()![clip_image002](https://media.dcrainmaker.com/images/2020/05/clip_image002_thumb.png)](https://media.dcrainmaker.com/images/2020/05/clip_image002.png)
+[![clip_image002\[4\]]()![clip_image002\[4\]](https://media.dcrainmaker.com/images/2020/05/clip_image0024_thumb.png)](https://media.dcrainmaker.com/images/2020/05/clip_image0024.png)
+
+Now – obviously, if you don’t care about segments, then you probably won’t
+care about this.
+
+I think though this lessens the value of Strava Segments for everyone, because
+it makes it far less interesting/valuable to non-paying users. They won’t care
+what their friends do, because they can’t see what their friends do. And if a
+tree falls in the forest…who cares? In other words, your friends that aren’t
+subscribers won’t bother competing with you on Segments anymore, because they
+can’t see the results of it.
+
+And of course – this perhaps gets to the core of Strava’s realization: They’re
+far less a network about segment KOM’s than they are now a social fitness
+network. As much as Strava has resisted that aura being applied to them in the
+past, that’s what they are today. And it’s probably not untrue. I personally
+don’t care much about segments in my day to day riding (and certainly not
+running). I use Strava for essentially three things:
+
+A) Finding/Building routes  
+B) Posting my [activities and photo for others to
+see](https://www.strava.com/athletes/dcrainmaker)  
+C) Looking at what my real-life friends have posted recently
+
+And that’s it.
+
+Segments don’t appreciably enter into my day to day usage of Strava (unless
+I’m beating Lama on a segment when he doesn’t realize it, obviously). Of
+course, we’re all different. If you’re out there hunting segments with Strava
+Live Segments [or Xert](https://www.dcrainmaker.com/2018/08/xert-rolls-out-
+segment-hunter-connect-iq-app-doesnt-require-strava-premium-summit.html),
+awesome, more power to you. It’s clear that Strava wants you to have a
+subscription though, otherwise Segments are mostly useless.
+
+### 3rd Party App Access:
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-52.png)](https://media.dcrainmaker.com/images/2020/05/image-52.png)
+
+Out of all the things they’re doing here, this is one of the most irritating
+ones. Mainly, because of how they’re doing it. Effective today at the exact
+same time this post publishes, Strava will break some [portion of those 44,000
+apps](https://www.strava.com/apps). The same app developers that have
+furthered Strava’s business and reach, Strava has decided to give zero notice
+to.
+
+Of course, Strava counters they did notify a handful of ”larger developers”
+ahead of time. But most didn’t get notice. For those, Strava says:
+
+> “We realize these API changes could be especially challenging for some
+> developers, so they’ll be non-breaking for 30 days, returning empty data
+> during that time so they can make necessary adjustments. After June 18th,
+> those endpoints will either omit the data or return an error message.”
+
+Which is hilariously crass.
+
+Here, let me translate what they’re saying for you into plain English:
+
+> “We realize that this is probably gonna break some (ok, most) apps. So
+> instead of giving you time to fix your apps, we’re just gonna do it anyways
+> and instead give you empty data that confuses your end users and app design,
+> so this way it appears your app is broken – not Strava’s. Good deal?
+
+I’m not aware of any reputable software development platform that gives zero
+notice to their development customers before breaking their apps. The
+appropriate course of action here would have been to give their 3rd party
+developer partners at least a month to update their apps to deal with this
+significant change. Most companies give many many months for upcoming
+deprecated features.
+
+Plus – if the tables had been turned, and it was Amazon AWS (Strava’s hosting
+provider), and they simply sent them a note one morning and said: “Don’t
+worry, we’re just sending you empty data from your databases effective
+immediately.” – I’m guessing Strava wouldn’t feel the same way.
+
+Look – I get why Strava needs to deprecate this feature. If they let 3rd party
+developers access it, then people could just go to 3rd party apps to get the
+leaderboards which are only available to paying members. But I’m not clear why
+they had to burn the house down to do it today at 10AM Pacific Time. If they
+didn’t breaks apps for 30 days, would that have really been such a big deal?
+
+Strava likely still would have converted those users that cared about in-app
+access, without breaking their partner ecosystem. An ecosystem that at every
+turn is wary of Strava’s apparent habit of killing of apps that get too close,
+or too useful to users.
+
+But even in the larger apps, there are features that will go away. Take for
+example VeloViewer, within this [Zwift Insider leaderboard
+section](https://veloviewer.com/zwift-insider). You’ll the segment placings
+(and times for non-paying users) – so in effect for non-paying users, it
+becomes more of a check-list of to-do’s, than a leaderboard of standings.
+
+But wait – why is Veloviewer different? Well, apparently a small number of
+apps retain leaderboards, but only to show to Strava subscribers. [Veloviewer
+has detailed the nuances
+here](https://blog.veloviewer.com/strava_subscriber_vs_non-subscriber-
+veloviewer_differences/), which still involve less features now for non-paying
+Strava users.
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-53.png)](https://media.dcrainmaker.com/images/2020/05/image-53.png)
+
+Some aspects of VeloViewer that include leaderboards won’t change though. For
+example, the ‘Leaderboard’ tab on a given segment won’t change, because it is
+actually just an embed from Strava’s public site which shows the overall
+leaderboard + Top 10 women.
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-54.png)](https://media.dcrainmaker.com/images/2020/05/image-54.png)
+
+That’s still permitted, but isn’t done programmatically anymore. They’re just
+using the ‘Embed on Blog’ feature to get that to display:
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-55.png)](https://media.dcrainmaker.com/images/2020/05/image-55.png)
+
+I asked Strava exactly what was changing developer-wise, and they noted the
+following specific items from the API:
+
+ **Segment Leaderboard data is not available anymore**  
+• /api/v3/segments/:id/leaderboard
+
+ **  
+Segment Effort data is available for subscribers (but not non-paying users)**  
+• /api/v3/segments/:id  
+• /api/v3/segments/:id/streams  
+• /api/v3/segment_efforts [Updated]  
+• /api/v3/segment_efforts/:id/streams  
+• /api/v3/segments/explore  
+• /api/v3/athletes/:id/segments/starred  
+• /api/v3/activities  
+• /api/v3/activities/:id  
+• /api/v3/activities/:id/streams
+
+So basically, that first single line item above simply says “kill off segment
+result data”. Here’s what that API call did before today. Even if you’re not a
+developer, you can see (in yellow), what’s being killed off. To be clear,
+everything below is killed. But the yellow parts make it clear that they’re
+doing this so you can’t get the other premium leaderboard features via apps.
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-56.png)](https://media.dcrainmaker.com/images/2020/05/image-56.png)
+
+Meanwhile, the other ones that are allowed for paying members means that apps
+can still get individual efforts for the given authenticated athlete, but not
+athletes beyond that. So basically, as a paying member of Strava, I could
+still use VeloViewer to track my specific pedaling on that Segment (with
+things like cadence/heart rate/etc…), but not my rank (unless I ranked in the
+Top 10 – which pulls via DetailedSegmentEffort – ”kom_rank”).
+
+Look, API changes and deprecations are a normal part of hosting a web
+platform. What’s not normal is how Strava is handling this. That’s the part
+they need to be called out for.
+
+### Route Builder Changes:
+
+As part of the May 18th changes, Route Builder got a complete overhaul.
+They’ve added in new map styles, added sport type filters, show segments
+directly on the Route Builder, and also have a new surface type and increased
+elevation features.
+
+ **But, if you’re not a paying member, you’ll never see it.**
+
+As of today, non-paying members lose access to the Route Builder entirely. Up
+until this point, any member could use the Route Builder for free. Going
+forward, non-paying members can no longer create routes within Strava, except
+as to copy an existing route from someone else (or your own ride). Existing
+routes you have in your account remain.
+
+Here’s the two route builders side by side. At left is the new one. At right
+is the older one:
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-57.png)](https://media.dcrainmaker.com/images/2020/05/image-57.png)
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-58.png)](https://media.dcrainmaker.com/images/2020/05/image-58.png)
+
+The main change here aside from all the user interface elements and map
+styling, is the addition of surface type preference – similar to what was
+added to mobile a month or two ago:
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-59.png)](https://media.dcrainmaker.com/images/2020/05/image-59.png)
+
+And along the bottom you’ll see a breakout of the surface type, just as you do
+on mobile now:
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-60.png)](https://media.dcrainmaker.com/images/2020/05/image-60.png)
+
+You can also now toggle segments within the map builder directly:
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-61.png)](https://media.dcrainmaker.com/images/2020/05/image-61.png)
+
+Previously you could ‘minimize elevation’, but now you can also ‘maximize
+elevation’, in case you have a soft spot for hills:
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-62.png)](https://media.dcrainmaker.com/images/2020/05/image-62.png)
+
+And they’ve incorporated the dark map them from the heat maps into the Route
+Builder, which is toggleable on the side. The other three map types, as well
+as heatmaps, were already viewable in the Route Builder.
+
+[![image]()![image](https://media.dcrainmaker.com/images/2020/05/image_thumb-63.png)](https://media.dcrainmaker.com/images/2020/05/image-63.png)
+
+Look, the new changes are nice. Nothing earth shattering, though a nice clean-
+up.
+
+The only problem? Likely less than 5% of Strava’s 50 million users will ever
+see them. Why? They’re not paying members.
+
+### Wrap-Up:
+
+![]()![](https://media.dcrainmaker.com/images/2020/03/DSC_3243_thumb.jpg)
+
+I’m sure Strava will think this post is overly negative, not highlighting
+enough of the new changes introduced today. And perhaps that’s the case – but
+I honestly don’t think those new feature adds are that big a deal. The Route
+Builder does have some minor nice new additions, but the training updates seem
+mostly to be more UI tweaks and filtering options than anything major. There’s
+some value to be had there, sure, but not as much value as is being lost today
+(for all users).
+
+And look, I get it, Strava needs to find a way to make money. Every company
+should – that’s why they’re a company and not a non-profit. As part of a
+letter going out to all users today from their founders, they outline that
+part well, saying:
+
+> “This means that, starting today, a few of our free features that are
+> especially complex and expensive to maintain, like segment leaderboards,
+> will become subscription features. And from now on, more of our new feature
+> development will be for subscribers – we’ll invest the most in the athletes
+> who have invested in us. We’ve also made subscription more straightforward
+> by removing packs and the brand of Summit. You can now use Strava for free
+> or subscribe, simple.
+>
+> This focus on subscription ensures that Strava can serve athletes decades
+> from now, and in an up-front way that honors the support of the athletes we
+> serve today. We plan to take what we earn from these changes and reinvest
+> straight back into building more and better features – not devising ways to
+> fill up your feed with ads or sell your personal information. We simply want
+> to make a product so good that you’re happy to pay for it.”
+
+But I I think there’s still tons of value being left on the table that they
+can focus on in terms of new features to bring to people that would drive
+paying member adoption, rather than pulling features away that have been there
+a decade or so.
+
+For example – why can’t clubs/teams create shared Strava routes that
+automatically sync into the team members accounts based on upcoming rides on a
+team calendar? Or, the ability for clubs to have a group routes page that
+includes a list of all popular routes that you could easily sync to your
+device. That would be a huge driver towards membership.
+
+Or why can’t Strava Beacon then automatically integrate across teams/clubs so
+that people know where everyone is on a group ride? Or perhaps [leveraging
+vehicle density/speed data integration already being gathered, into route
+builder I floated this weekend](https://www.dcrainmaker.com/2020/05/varia-
+radar-maps-connect-app.html). Or…or…or. There are countless ideas that people
+can come up with that would drive subscription revenue. All of which could be
+Summit paid-only features.
+
+I’m just not convinced gutting Segments and routes for non-paying members is
+the right direction there. Nor is poorly communicating to your development
+community. But maybe I’m wrong.
+
+With that – thanks for reading.
 

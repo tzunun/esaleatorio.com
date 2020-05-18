@@ -1,72 +1,78 @@
 ---
-title: "iOS app from Flutter’s showcase page might not use Flutter at all" 
+title: "Branded QR codes might be coming to iOS 14" 
 date: 2020-05-18 
 draft: false 
 ---
 
 Story source:
 
-https://medium.com/@acedened/ios-app-from-flutters-showcase-page-might-not-use-flutter-at-all-23488ff82407
+https://www.macrumors.com/2020/05/18/ios-14-leak-apple-qr-codes/
 
 
-# iOS app from Flutter’s showcase page might not use Flutter at all
+A leaked version of [the iOS 14
+update](https://www.macrumors.com/roundup/ios-14/) has been circulating for a
+few months, giving us an idea of what Apple is [working
+on](https://www.macrumors.com/2020/03/09/apple-ios-14-fitness-app-guided-
+workouts/) behind the scenes for the new update.
 
-I’ve been reading another Flutter-praising article that mentioned an
-application supposedly written in this framework. According to the author of
-the article, the application was indistinguishable from a native iOS app using
-Apple-provided controls from UIKit. I found it hard to believe because every
-Flutter app I’ve used had serious UI/UX issues compared to most native apps.
-So I decided to give it a try.
+Details about
 
-The application actually felt like a true native app (mostly) but it turned
-out, this wasn’t the merit of the Flutter, **because the app might not use
-Flutter at all**.
+[iOS 14](https://www.macrumors.com/roundup/ios-14/)
 
-# The app
+have been
 
-The application in question is
-[Realtor.com](https://apps.apple.com/US/app/id336698281?mt=8). You can guess
-it’s used for searching apartments. But most importantly, it’s the first
-application you see when you open [the Flutter showcase
-page](https://flutter.dev/showcase), so it has to be written in Flutter,
-right? I don’t know about it’s Android version, and I don’t want to, so let’s
-just take a look at the iOS one.
+[trickling out](https://www.macrumors.com/roundup/ios-14/)
 
-# Inspection methods
+, and today, Josh Constine (formerly of
 
-My primary iPhone is jailbroken, so I have 2 reliable ways to check how any
-iOS app is written and which frameworks it uses: **view hierarchy inspection**
-and **bundle inspection**.
+_TechCrunch_
 
-## View hierarchy
+) has shared leaked Apple QR codes, details about Apple's work on an AR app,
+and sounds for the upcoming Apple Tags in his
 
-The primary characteristic of any Flutter application is that they don’t use
-native OS controls unless you bridge them by yourself; because Flutter draws
-everything on its own and just mimics native controls of the OS. For example,
-in the image below you can see the view hierarchy of 2 apps.
+[Moving Product newsletter](https://constine.substack.com/p/leaked-pics-from-
+apples-ar-app-gobi)
 
-The left one is native: it uses a lot of default iOS controls (the ones with
-“UI” prefix) and some of the custom ones. But the most important thing here is
-that you can see the entire hierarchy.
+.
 
-On the other hand, the Flutter app’s hierarchy is almost flat. There are a few
-native controls that are required for any iOS applications, and also there’s a
-bridged web view. The whole application’s UI is contained inside
-FlutterViewController, and you can’t see what’s inside of it at all, because
-it’s just a canvas.
+Apple appears to be implementing a new QR code format that uses colored cones,
+with the files found in the "Gobi" AR app that Apple has been working on.
+Constine says QR codes open up [Mac
+Pro](https://www.macrumors.com/roundup/mac-pro/) and [Apple
+Watch](https://www.macrumors.com/roundup/apple-watch/) websites, the Star
+Wars: Rogue One movie in iTunes, and the Starbucks Card sign-up.
 
-## Bundle
+![](https://images.macrumors.com/t/PfAx3gvtaimnmcJZYf28Fx7Fc9w=/800x0/article-
+new/2020/05/appleQRcodes.jpg)  
+The code also featured references to a Gobi comparison shopping feature that
+could be in the AR app, and, in line with previous rumors about a [possible
+Starbucks partnership](https://www.macrumors.com/2020/03/10/ios-14-augmented-
+reality-app-gobi/), there were references to Starbucks discounts at specific
+locations, which suggests the Gobi app could offer promotions or content
+experiences based on location.
 
-Application bundle is just a folder with an executable file and a bunch of
-stuff that application needs, like code signature, resources, description
-file, and most importantly — it’s dependencies. The easy way to check if the
-application uses Flutter is just to check if it has Flutter as a dependency —
-that’s it.
+A video shared by Constine also features sounds and vibrations that will be
+used in the [Find My](https://www.macrumors.com/guide/find-my/) app to help
+people locate their lost devices. As described by Constine:
 
-# Let’s check
+> You'll hear encouraging sounds when you face the right direction so the lost
+> gadget is "Ahead" of you, when you're "Nearby", or come within "Arms Reach",
+> while discouraging tones hint that you're headed off course.
 
-Let’s start our inspection with the view hierarchy. The Realtor has 5 tabs,
-and as you can see below, the hierarchy of every tab looks exactly like a
-native app’s hierarchy. Moreover, **none of the tabs have
-FlutterViewController inside them at all**.
+Many other leaked features have been found in ‌iOS 14‌, such as hints of a
+[new fitness app](https://www.macrumors.com/2020/03/09/apple-ios-14-fitness-
+app-guided-workouts/), new features for
+[Messages](https://www.macrumors.com/guide/messages/) like [mentions and
+retractions](https://www.macrumors.com/2020/03/09/imessage-mentions-
+retractions-more/), new [Apple Pencil
+features](https://www.macrumors.com/2020/03/09/ios-14-ocr-apple-pencil-text-
+conversion/), [Home screen
+updates](https://www.macrumors.com/2020/04/04/ios-14-home-screen-widgets-
+wallpaper/), ‌Find My‌ changes for
+[AirTags](https://www.macrumors.com/guide/airtags/), the [CarKey
+API](https://www.macrumors.com/2020/02/19/carkey-feature-digital-keys-
+messages-app/) that will allow an
+[iPhone](https://www.macrumors.com/guide/iphone/) to be used in lieu of a
+CarKey, and tons more, with full details [available in our iOS 14
+roundup](https://www.macrumors.com/roundup/ios-14/).
 

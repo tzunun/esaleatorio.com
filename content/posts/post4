@@ -1,125 +1,54 @@
 ---
-title: "Liveness Probes in k8s Are Dangerous" 
+title: "LogicMonitor, ThousandEyes, and Solarwinds Are Expanding" 
 date: 2020-05-18 
 draft: false 
 ---
 
 Story source:
 
-https://srcco.de/posts/kubernetes-liveness-probes-are-dangerous.html
+http://tunemon.com/logicmonitor-thousandeyes-and-solarwinds-are-expanding/
 
 
-My colleague Sandor recently tweeted about common mistakes he sees, including
-wrong Readiness/Liveness Probe usage:
+Today I have a few small but interesting updates with a common theme;
+expansion
 
-A blanket statement of "don't use Liveness Probes" is not helpful, so let's
-look at what Readiness and Liveness Probe are for. _NOTE: most of the
-following text was initially put together for Zalando's internal developer
-documentation._
+First off, we have **LogicMonitor**. Who announced on May 14 that they had
+established a partnership with Blue Turtle Technologies who is one of South
+Africa’s biggest IT managed services providers.
 
-## Readiness and Liveness Probes
+I would imagine this will be a win for both companies as LogicMonitor will be
+able to establish a stronger footprint in the South African market and Blue
+Turtle will have a solid hybrid infrastructure monitoring tool to offer its
+customers along side its existing infrastructure services.
 
-Kubernetes provides two essential features called [Liveness Probes and
-Readiness Probes](https://kubernetes.io/docs/tasks/configure-pod-
-container/configure-liveness-readiness-probes/). Essentially,
-Liveness/Readiness Probes will periodically perform an action (e.g. make an
-HTTP request, open a TCP connection, or run a command in your container) to
-confirm that your application is working as intended.
+Second is **ThousandEyes** , a digital experience monitoring company who
+announced on May 18 that they would be putting an increased focus on the
+Australian market and have hired three new senior management, one being
+technical and two being sales roles.
 
-Kubernetes uses **Readiness Probes** to know when a container is ready to
-start accepting traffic. A Pod is considered ready when all of its containers
-are ready. One use of this signal is to control which Pods are used as
-backends for Kubernetes Services (and esp. Ingress).
+According to their newsroom, the three new hires have a strong background in
+digital experience monitoring and have previously worked at companies such as
+Compuware, Dynatrace, and OPNET.
 
-Kubernetes uses **Liveness Probes** to know when to restart a container. For
-example, Liveness Probes could catch a deadlock, where an application is
-running, but unable to make progress. Restarting a container in such a state
-can help to make the application more available despite bugs, but restarting
-can also lead to cascading failures (see below).
+Third, is **Solarwinds** who announced on May 18 that they are partnering with
+M.Tech in order to increase the distribution and usage of their IT Operations
+Management and Monitoring software in the Chinese market.
 
-If you attempt to deploy a change to your application that fails the
-Liveness/Readiness Probe, the rolling deploy will hang as it waits for all of
-your Pods to become Ready.
+I have never heard of M.Tech before but according to their website they were
+established in 2002 and primarily service the Chinese and Southeast Asian
+markets. This could be a really good strategic move for Solarwinds if they can
+leverage the existing relationships M.Tech has with their customer base and
+integrate their monitoring and ITOM products.
 
-### Example
+3 different companies all with a common theme. They say that if you are not
+growing you are dying and I think all these of these companies (and their
+stakeholders) would agree with that statement.
 
-Example Readiness Probe checking the `/health` path via HTTP with default
-settings (interval: 10 seconds, timeout: 1 second, success threshold: 1,
-failure threshold: 3):
+Thanks for reading. If you enjoyed the article and want more original
+monitoring specific content please give us a follow on
+[Twitter](https://twitter.com/TuneMonDotCom),
+[LinkedIn](https://www.linkedin.com/company/tunemon), or
+[Youtube](https://www.youtube.com/channel/UCAKW7E9vFe6P57ZaV4EOtjw?view_as=subscriber).
 
-    
-    
-    # part of a larger deployment/stack definition
-    podTemplate:
-      spec:
-        containers:
-        - name: my-container
-          # ...
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-    
-
-### DOs
-
-  * for microservices providing an HTTP endpoint (REST service etc), **always define a Readiness Probe** which checks that your application (Pod) is ready to receive traffic
-  * make sure that your Readiness Probe **covers the readiness of the actual webserver port**
-    * when using an "admin" or "management" port (e.g. 9090) for your `readinessProbe`, make sure that the endpoint only returns OK if the main HTTP port (e.g. 8080) is ready to accept traffic 
-    * having a different port for the Readiness Probe also can lead to thread pool congestion problems on the main port which are not reflected in the health check (i.e. main server thread pool is full, but health check still answers OK)
-  * make sure that your **Readiness Probe includes database initialization/migration**
-    * the simplest way to achieve this is to start the HTTP server listening only after the initialization finished (e.g. [Flyway](https://flywaydb.org/) DB migration etc), i.e. instead of changing the health check status, just don't start the web server until the DB migration is complete 
-  * use `httpGet` for Readiness Probes to a well-known health check endpoint (e.g. /health)
-  * **understand the default behavior** (interval: 10s, timeout: 1s, `successThreshold`: 1, `failureThreshold`: 3) of probes
-    * the default values mean that a Pod will become not-ready after ~30s (3 failing health checks)
-  * do use a different "admin" or "management" port if your tech stack (e.g. Java/Spring) allows this to separate management health and metrics from normal traffic 
-  * you can use the Readiness Probe for prewarming/cache loading if needed and return 503 status code until the app container is "warm" 
-
-### DON'Ts
-
-  * **do not depend on external dependencies** (like data stores) for your Readiness/Liveness checks as this might lead to cascading failures
-    * e.g. a stateful REST service with 10 pods which depends on a single Postgres database: when your probe depends on a working DB connection, all 10 pods will be "down" if the database/network has a hiccup --- this usually makes the impact worse than it should
-    * note that the default behavior of Spring Data is checking the DB connection 
-    * "external" in this context can also mean other Pods of the same application, i.e. your probe should ideally not depend on the state of other Pods in the same cluster to prevent cascading failures
-      * Your mileage may vary for apps with distributed state (e.g. in-memory caching across Pods)
-  * **do not use a Liveness Probe** for your Pods unless you understand the consequences and why you need a Liveness Probe
-    * Liveness Probe can help recover "stuck" containers, but as you are fully owning your application, things like "stuck" processes and deadlocks should not be expected --- a better alternative is to crash on purpose to recover to a known-good state
-    * a failing Liveness Probe will lead to container restarts, thus potentially making the impact of load-related errors worse: container restart will lead to downtime (at least your app's startup time, e.g. 30s+), thus causing more errors and giving other containers more traffic load, leading to more failing containers, and so on
-    * Liveness Probes in combination with an external dependency are the worst situation leading to cascading failures: a single DB hiccup will restart all your containers!
-  * if you use Liveness Probe, **don’t set the same specification for Liveness and Readiness Probe**
-    * you can use a Liveness Probe with the same health check, but a higher `failureThreshold` (e.g. mark as not-ready after 3 attempts and fail Liveness Probe after 10 attempts)
-  * **do not use "exec" probes** as there are known problems with them resulting in zombie processes 
-
-### Summary
-
-  * use Readiness Probes for your web app to decide when the Pod should receive traffic
-  * use Liveness Probes only when you have a use case for them
-  * incorrect use of Readiness/Liveness Probes can lead to reduced availability and cascading failures
-
-[![../galleries/twitter-sszuecs-99-do-not-need-
-livenessprobe.png](../galleries/twitter-sszuecs-99-do-not-need-
-livenessprobe.png)](https://twitter.com/sszuecs/status/1175655221382529025)
-
-### UPDATE 2019-09-29 #1
-
-[On init containers for DB
-migrations](https://twitter.com/BarrWill1/status/1178144162526453760): added a
-footnote.
-
-[EJ reminded me](https://twitter.com/ejc3/status/1178077779293683713) about
-PDBs: one problem of Liveness Probes is the missing coordination across a
-fleet of Pods: Kubernetes has [Pod Disruption Budgets
-(PDB)](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) to
-limit the number of concurrent disruptions that an application can experience,
-but PDBs are not respected by probes. Ideally we could tell K8s "restart one
-pod if its probe fails, but don't restart all of them to not make it worse".
-
-[Bryan put it
-nicely](https://twitter.com/bboreham/status/1178083887991398400): "Use a
-liveness probe when you know for sure the **best possible thing to do is to
-kill your app**." and don't sprinkle them like pixie dust:
-
-[![../galleries/twitter-bboreham-liveness-probes.png](../galleries/twitter-
-bboreham-liveness-
-probes.png)](https://twitter.com/bboreham/status/1178207929540972544)
+-Dylan
 

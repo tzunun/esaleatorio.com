@@ -1,146 +1,31 @@
 ---
-title: "A Review of the Racket Programming Language" 
+title: "Elements of Green: time-lapse pixel art (2013)" 
 date: 2020-05-18 
 draft: false 
 ---
 
 Story source:
 
-https://sagegerard.com/racket-review.html
+https://www.youtube.com/watch?v=sQQWMeQOZM8
 
 
-If you replace “Racket” with “veganism” or “crossfit” when listening to me
-talk about Racket, I sound the same.
-
-I'll spare you that, because I'm not here to sell you Racket. I'm here to tell
-you what I like and what isn't in the brochure, in that order. I used Racket
-to create [22 packages](https://pkgd.racket-
-lang.org/pkgn/search?q=&tags=author%3Asage%40sagegerard.com) at the time of
-this writing, and [I played a small role in Racket's re-licensing effort from
-the LGPL to MIT/Apache 2.0](https://blog.racket-lang.org/2019/11/completing-
-racket-s-relicensing-effort.html).
-
-## What is Racket?
-
-Racket is a kind of Scheme. It does a lot of things right:
-
-  * The documentation is thorough and precise. Any gaps are in topics that most people don't worry about.
-  * The number type system is elegant and logical.
-  * You can express control flow constructs that other languages can't.
-  * You can write hygienic macros with many helpers.
-  * Available libraries cover networking, slideshows, relative time arithmetic, video production, MIDIs, GUIs, foreign functions, and post-graduate research topics.
-  * The Racket community is full of smart people that patiently answered ~90% of my questions.
-
-None of these perks are unique to Racket. What makes Racket different is its
-work in _language-oriented programming_ (LOP), which argues that the language
-you use to express yourself is a component that you can swap out like anything
-else. The moment “vanilla” Racket code feels awkward is the moment you can
-redefine the syntax itself.
-
-This is valuable because it decouples syntax from tooling. Lets say you switch
-from Rust to Python. That means switching from `cargo` to `pipenv`, and from
-one set of libraries to another. Racket lets you switch languages while
-keeping the same package manager, the same documentation builder, the same
-test runner, and the same libraries. You can hop from a markup language to a
-logic language, a strongly-typed language, a shell language, or a
-configuration language at reduced cost. Writing your own language to add to
-the mix is relatively easy because many language design tools are available in
-Racket.
-
-## Sounds like you had a great honeymoon. How's the marriage?
-
-I won't whine about my free beer. Take the time I invested in Racket as a form
-of gratitude when I talk about what I wish was different.
-
-All of the challenges I face pertain to Racket's tools. By “tools” I mean any
-relevant `raco` commands, the module resolver, the file system conventions,
-and any subsystem that impacts how you write code _despite_ having your own
-syntax for everything. I exclude DrRacket because I haven't used it enough to
-earn an opinion.
-
-Racket bills itself as a “batteries included” language. _Your_ batteries
-probably aren't, so be sure to do a search on the [default package
-catalog](https://pkgs.racket-lang.org) before using Racket for the first time.
-The packages for some missing features exist under the conditions of [The Lisp
-Curse](http://www.winestockwebdesign.com/Essays/Lisp_Curse.html), so 60% of my
-time using Racket goes towards writing what only I need. That can make me part
-of the problem.
-
-You can fetch missing batteries from other ecosystems, but it doesn't look
-like pre/post-install programs are easy to make. The `portaudio` package
-[ships and loads prebuilt shared object
-files](https://github.com/jbclements/portaudio/tree/master/portaudio/lib/i386-linux/3m),
-as opposed to compiling them from a verified source on installation. Frog, a
-popular static site generator written in Racket, [asks people to install
-Python and Pygments if they want syntax highlighting](https://docs.racket-
-lang.org/frog/Quick_start.html?q=frog#%28part._.Installing_.Frog%29).
-
-Installing pure-Racket packages is a dice roll because you cannot pin
-versions, and there are no lock files. Library authors also compete over file
-names in their source code. If I put a file in a certain directory in my
-project, then _you_ can't put a file of the same name in a possibly different
-directory in _your_ project. If you do, our [users won't be able to install
-both of our packages](https://docs.racket-
-lang.org/pkg/Package_Concepts.html?q=conflicts#%28part._concept~3aconflicts%29)
-without pulling levers. [Here are two published packages that conflict with
-each other on the default catalog](https://pkgd.racket-
-lang.org/pkgn/search?q=tweedle), just because they both have a file called
-`hill/king.rkt`:
-
-![](24a6aa4c.png)
-
- _Your file system is literally part of a published interface, and all of
-those interfaces are mixed together_. Someone can (un)intentionally break
-_your code_ somewhere, and you have to make sure that every package you write
-uses communally-unique file paths. But if you can't move a file without
-breaking your interface, how do you handle someone who publishes a conflicting
-package and refuses to change it? Solutions exist, but none of them are
-obvious.
-
-You compete with your own code in the same way, so [backwards-incompatible
-releases are harder to plan](polyglot3-package-nightmare.html).
-
-If an engineer came to me and proposed that we use Racket in user- or ops-
-facing systems, the package manager would be the sole reason behind my
-emphatic and immediate “no.”
-
-![](a657ebad.png)
-
-Racket packages are part of a larger issue: Racket flip-flops on the subject
-of your creative freedom. Some conventions are necessary for collaboration and
-growth, but you cannot override them when it makes sense. This is partly due
-to the core team's commitment to backwards-compatibility, but I also believe
-that some people in high places care a little too much about how others work.
-
-Six years ago, someone asked if they could shut off the contract system. After
-a “no”, [PLT founder Matthias Felleisen said](https://lists.racket-
-lang.org/users/archive/2014-June/062798.html) “we don't provide a standard
-language (meant to make developers happy and its creators famous and
-wealthy).” Fair enough, but there are now standard tools in Racket that are
-more opinionated than the language. If I wanted to get bossed around by tools,
-I'd use JavaScript.
-
-## So... Should I learn Racket?
-
-I'd say yes. Like other Lisps, Racket makes you a better programmer. You can
-take what you learn and apply it to Lisps and Schemes elsewhere, even if you
-don't end up sticking with Racket.
-
-Racket decouples surface syntax from the ecosystem's tools, opening new
-avenues for programming. However, some of the tools impose themselves on you
-regardless of your syntax. In my mind, Racket's biggest flaw is how it
-selectively pressures you to work a certain way when you'd rather focus on
-your project. I think that the community has unresolved tension on this
-subject.
-
-My advice would be to think about how you want to work with others, and see if
-the tools enable that. If your working habits are compatible with the core
-devs', you'll have a great time. If you want to do your own thing, then expect
-to do extra work to support both your users' need for stablity and a
-developer's need for creative freedom. I don't think that Racket does a good
-job of balancing the two, even though all of the pieces are there.
-
-I'm unsure if the benefits of writing custom languages will cover the cost of
-dealing with the tools. For that, time will tell. If you use Racket and end up
-wanting to write your own tools, then I hope you appreciate the irony in that.
+"Elements of Green" by Prowler (Klas Benjaminsson).  
+  
+Made for the graphics compo at Datastorm 2013 (placed 1:st), and for the demo
+"15 years of fame". Sorry it had to be a party-version for the compo - but
+time beat me big time this year! You can download the final version here:  
+www.antialias.se/prowler_lib/elements_of_green.png  
+Greetings to everyone at the party!  
+The idea was to visualize the 3 elements of the forest and make them blend
+into the woods seamlessly. The picture didn't really turn out the way I hoped
+and the composition went off balance, but it was fun to make it anyways.  
+  
+Big thanks to Abyssal Plains (Maurizio Giambrone) for letting me use his
+amazing tune "Orange River", featured in the album "Hemispherical Sky".  
+  
+Visit my page on facebook: www.facebook.com/pages/Prowler/87652107930  
+Bitfellas portfolio: artcity.bitfellas.org/index.php?a=artist&id=762  
+Amiga Graphics Archive: amiga.lychesis.net/scene.html  
+Pixel artwork (source files): www.antialias.se  
+Listen to Abyssal Plains: abyssalplains.bandcamp.com
 
