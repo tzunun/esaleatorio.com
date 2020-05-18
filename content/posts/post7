@@ -1,0 +1,123 @@
+---
+title: "Discrete Mathematics in the Real World" 
+date: 2020-05-18 
+draft: false 
+---
+
+Story source:
+
+http://www.mathily.org/dm-rw.html
+
+
+### Discrete Mathematics in the Real World
+
+It's often said that mathematics is useful in solving a very wide variety of
+practical problems. {MathILy, MathILy-Er} focus on discrete mathematics,
+which, broadly conceived, underpins about half of pure mathematics and of
+operations research as well as all of computer science. As time goes on, more
+and more mathematics that is done, both in academia and in industry, is
+discrete. But what are the actual applications people talk about when they say
+discrete mathematics can be applied? What problems are being solved? This
+webpage attempts to address those questions. There are short descriptions,
+with links to longer explanations, of examples of discrete mathematics as
+applied to our everyday lives and as used in important and interesting
+research and corporate applications.
+
+##### Everyday applications of discrete mathematics
+
+Encryption and decryption are part of **cryptography** , which is part of
+discrete mathematics. For example, [secure internet
+shopping](https://ima.org.uk/779/internet-shopping-stopping-the-scammers/)
+uses public-key cryptography.
+
+**Area codes** : How do we know when we [need more area
+codes](http://www.ajc.com/news/more-404-678-area-codes-given-
+atlanta/9SH1szLvrf3e6S7H2aiPZP/) to cover the phone numbers in a region? This
+is a basic combinatorics problem.
+
+Designing **password criteria** is a counting problem: Is the space of
+passwords chosen large enough that a hacker can't break into accounts just by
+trying all the possibilities? How long do passwords need to be in order to
+resist such attacks? ([find out here](https://www.grc.com/haystack.htm)!)
+
+**Apportionment** : In the U.S., the legislative branch of the government has
+a House of Representatives with 435 members. The process of deciding how many
+of these members should be allocated to each state is called
+[apportionment](http://www.ams.org/samplings/feature-column/fcarc-apportion1),
+and there is a lot of discrete mathematics involved---both in creating and
+implementing [various apportionment
+methods](http://www.ams.org/publicoutreach/feature-column/fcarc-apportionii1).
+
+**Computer graphics** (such as in video games) use linear algebra in order to
+transform (move, scale, change perspective) objects. That's true for both
+applications like [game
+development](https://gamedevelopment.tutsplus.com/tutorials/lets-
+build-a-3d-graphics-engine-linear-transformations--gamedev-7716), and for
+[operating systems](http://metalbyexample.com/linear-algebra/).
+
+**Compact discs** store a lot of data, which is encoded using [ a modified
+Reed-Solomon
+code](https://web.archive.org/web/20180917213045/https://www.usna.edu/Users/math/wdj/_files/documents/reed-
+sol.htm) (a binary code, and thus discrete math) to automatically correct
+transmission errors.
+
+**Digital image processing** uses discrete mathematics to [merge
+images](http://blog.kleinproject.org/?p=588) or apply filters.
+
+**Food Webs** : A food web describes the ways in which a set of species eat
+(and don't eat) each other. They can be
+[studied](https://proopnarine.wordpress.com/2010/02/11/graphs-and-food-webs/)
+[using](https://proopnarine.wordpress.com/2010/02/20/random-graphs-and-food-
+webs/) [graph](https://proopnarine.wordpress.com/2010/02/23/food-webs-as-
+networks/) [theory](http://www.pnas.org/content/99/20/12917.full).
+
+##### Research and corporate applications that use discrete mathematics
+
+Determining voting districts, a process known as **redistricting** , is rife
+with problems and influenced by politics. Many researchers in various fields
+work on methods for fair redistricting, and [some use lots of discrete
+math](https://mggg.org/work.html).
+
+Network flows, a part of discrete math, can be used to help **protect
+endangered species from the threat of global warming** (see [the abstract for
+this paper](http://onlinelibrary.wiley.com/doi/10.1890/07-0507.1/full)).
+
+**Robot arms** are a type of
+[linkage](http://www.ams.org/publicoutreach/feature-column/fcarc-links1), the
+study of which is part of discrete geometry.
+
+Voting theory (see earlier on this page) can be used to decide how to
+prioritize among **biodiversity conservation** sites (see [the abstract for
+this
+paper](http://www.sciencedirect.com/science/article/pii/S0006320710002144)).
+
+**Determining how best to add streets to congested areas of cities** [uses
+graph theory](http://www.ams.org/publicoutreach/feature-column/fc-2018-12)
+(and in fact an area of graph theory taught in one of the MathILy branch
+classes!).
+
+**Matching medical-school graduates to hospital residencies** is solved using
+an algorithm that is provably optimal. Here are
+[two](http://www.ams.org/publicoutreach/feature-column/fcarc-school-choice)
+[articles](http://www.ams.org/publicoutreach/feature-column/fc-2015-03) that
+describe the discrete mathematics involved and what happens when this is
+extended to the problem of matching middle-school students to high schools.
+
+**Measuring the evolutionary distance between genomes** can be done using
+permutations, as described [here](http://www.ams.org/publicoutreach/feature-
+column/fc-2017-03).
+
+The spread of infectious disease is affected by personal contacts and by
+behaviors influenced by information. One **[model of
+epidemics](https://sinews.siam.org/Details-Page/network-theory-links-
+behavioral-information-flow-with-contained-epidemic-outbreaks)** uses graph
+theory by encoding personal contacts and behaviors as layers in a large
+network.
+
+**Design of radar and sonar systems** uses graph theory via [Golomb
+rulers](http://www.ams.org/publicoutreach/feature-column/fc-2012-01).
+
+* * *
+
+* * *
+

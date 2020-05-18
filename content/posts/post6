@@ -1,0 +1,72 @@
+---
+title: "iOS app from Flutter’s showcase page might not use Flutter at all" 
+date: 2020-05-18 
+draft: false 
+---
+
+Story source:
+
+https://medium.com/@acedened/ios-app-from-flutters-showcase-page-might-not-use-flutter-at-all-23488ff82407
+
+
+# iOS app from Flutter’s showcase page might not use Flutter at all
+
+I’ve been reading another Flutter-praising article that mentioned an
+application supposedly written in this framework. According to the author of
+the article, the application was indistinguishable from a native iOS app using
+Apple-provided controls from UIKit. I found it hard to believe because every
+Flutter app I’ve used had serious UI/UX issues compared to most native apps.
+So I decided to give it a try.
+
+The application actually felt like a true native app (mostly) but it turned
+out, this wasn’t the merit of the Flutter, **because the app might not use
+Flutter at all**.
+
+# The app
+
+The application in question is
+[Realtor.com](https://apps.apple.com/US/app/id336698281?mt=8). You can guess
+it’s used for searching apartments. But most importantly, it’s the first
+application you see when you open [the Flutter showcase
+page](https://flutter.dev/showcase), so it has to be written in Flutter,
+right? I don’t know about it’s Android version, and I don’t want to, so let’s
+just take a look at the iOS one.
+
+# Inspection methods
+
+My primary iPhone is jailbroken, so I have 2 reliable ways to check how any
+iOS app is written and which frameworks it uses: **view hierarchy inspection**
+and **bundle inspection**.
+
+## View hierarchy
+
+The primary characteristic of any Flutter application is that they don’t use
+native OS controls unless you bridge them by yourself; because Flutter draws
+everything on its own and just mimics native controls of the OS. For example,
+in the image below you can see the view hierarchy of 2 apps.
+
+The left one is native: it uses a lot of default iOS controls (the ones with
+“UI” prefix) and some of the custom ones. But the most important thing here is
+that you can see the entire hierarchy.
+
+On the other hand, the Flutter app’s hierarchy is almost flat. There are a few
+native controls that are required for any iOS applications, and also there’s a
+bridged web view. The whole application’s UI is contained inside
+FlutterViewController, and you can’t see what’s inside of it at all, because
+it’s just a canvas.
+
+## Bundle
+
+Application bundle is just a folder with an executable file and a bunch of
+stuff that application needs, like code signature, resources, description
+file, and most importantly — it’s dependencies. The easy way to check if the
+application uses Flutter is just to check if it has Flutter as a dependency —
+that’s it.
+
+# Let’s check
+
+Let’s start our inspection with the view hierarchy. The Realtor has 5 tabs,
+and as you can see below, the hierarchy of every tab looks exactly like a
+native app’s hierarchy. Moreover, **none of the tabs have
+FlutterViewController inside them at all**.
+

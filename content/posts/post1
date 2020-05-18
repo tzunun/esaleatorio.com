@@ -1,0 +1,102 @@
+---
+title: "iOS and iPadOS 13.5 GM Released" 
+date: 2020-05-18 
+draft: false 
+---
+
+Story source:
+
+https://www.macrumors.com/2020/05/18/apple-release-ios-13-5-golden-master/
+
+
+Apple today seeded golden master versions of upcoming iOS and
+[iPadOS](https://www.macrumors.com/roundup/ipados/) 13.5 updates to
+developers, one week after [seeding the fourth
+betas](https://www.macrumors.com/2020/05/06/apple-seeds-ios-13-5-beta-4-to-
+developers/) and over a month after [releasing iOS and iPadOS
+13.4](https://www.macrumors.com/2020/03/24/apple-releases-ios-13-4/) with
+[iCloud](https://www.macrumors.com/guide/icloud/) Folder Sharing,
+[iPad](https://www.macrumors.com/roundup/ipad/) trackpad support, and more. GM
+versions denote the final versions of the software that will be released to
+the public.
+
+![](https://images.macrumors.com/t/fcG4J-904WRtvd7BJuAsX5neEDE=/800x0/article-
+new/2020/05/exposurelogginginterfaceapp.jpg)  
+iOS and ‌‌‌iPadOS‌‌‌ 13.5 can be downloaded from the Apple Developer center or
+over the air after the proper developer profile has been installed.
+
+iOS and ‌iPadOS‌ 13.5 introduce [the exposure notification
+API](https://www.macrumors.com/2020/04/29/apple-exposure-notification-api-
+groundwork-ios/) designed by Apple and Google, which is designed to allow
+public health authorities to create COVID-19 contact tracing apps that are
+meant to slow the spread of the virus.
+
+The API Apple has introduced is for health-related apps, but there is [an
+Exposure Logging toggle in the Settings app](https://www.macrumors.com/how-
+to/opt-out-covid-19-exposure-notifications/) that is designed to allow users
+to opt out of participating in COVID-19 exposure notifications if a COVID-19
+app is installed.
+
+Along with laying the ground work for the exposure notification API and
+accompanying apps, iOS 13.5 makes it easier to unlock an
+[iPhone](https://www.macrumors.com/guide/iphone/) with a passcode when wearing
+a mask, as many people are wearing face coverings at the current time.
+
+![](https://images.macrumors.com/images-
+new/1x1.trans.gif)![](https://images.macrumors.com/t/bO9idnGJOYTWW1_4IYETfT2jTnY=/800x0/article-
+new/2020/05/FaceID-Masked-Green-Dark.jpg)  
+With the update, the passcode interface pops up more quickly when an ‌iPhone‌
+detects that a mask is obscuring the face after a user swipes upward, so it's
+quicker to get into an ‌iPhone‌ using a passcode than before.
+
+There's a tweak to Group
+[FaceTime](https://www.macrumors.com/guide/facetime/), with Apple introducing
+a new toggle to disable the feature that automatically enlarges the tile of
+the person who is speaking. By default, Group ‌FaceTime‌ has a dynamic view
+with a tile for each person, and the person speaking has a larger tile while
+other tiles fade into the background.
+
+![](https://images.macrumors.com/images-
+new/1x1.trans.gif)![](https://images.macrumors.com/t/kDru9RjkR1Gd_aqP8F1pOSk-51s=/800x0/article-
+new/2020/04/facetimeautomaticprominence.jpg)  
+An "Automatic Prominence" section in the ‌FaceTime‌ portion of the Settings
+app allows this to be disabled, displaying all of the people using ‌FaceTime‌
+in a grid with equal-sized windows regardless of who is talking. A tile can be
+enlarged with a tap.
+
+Apple in iOS 13.5 is adding a new feature for [sharing Medical ID
+information](https://www.macrumors.com/2020/05/06/ios-13-5-medical-id-
+emergency-calls/) automatically with emergency dispatchers when placing
+emergency call. There's a toggle to enable this function, along with an option
+to share Medical ID info on the Lock screen when an ‌iPhone‌ is locked.
+
+![](https://images.macrumors.com/images-
+new/1x1.trans.gif)![](https://images.macrumors.com/t/vNUIwL_6WiLRZ3P8p1SIQZJc8FY=/800x0/article-
+new/2020/05/medicalid1.jpg)  
+Earlier betas introduced a new [Apple
+Music](https://www.macrumors.com/guide/apple-music/) feature that allows
+‌Apple Music‌ songs to be shared on Instagram Stories. Tapping the Share
+button on a song in ‌Apple Music‌ creates a story with a song title, album
+name, and animated background, but at this time there is no way to get to
+‌Apple Music‌ from the shared information.
+
+![](https://images.macrumors.com/images-
+new/1x1.trans.gif)![](https://images.macrumors.com/t/SaQvCii_pK2RqAuSFDsI7Ly6Xm0=/800x0/article-
+new/2020/03/applemusicshareinstagram.jpg)  
+iOS 13.5 also patches two [security
+vulnerabilities](https://www.macrumors.com/2020/04/22/ios-13-4-5-patches-mail-
+app-vulnerabilities/) that affect the Mail app on the ‌iPhone‌ and the ‌iPad‌.
+One vulnerability allowed an attacker to remotely infect an iOS device by
+sending emails that consume a significant amount of memory, while another
+allowed remote code executions.
+
+The update fixes a bug that could cause the ‌iPhone‌ to crash when a [specific
+text string](https://www.macrumors.com/2020/04/23/ios-character-bug-device-
+crashes/) in the Sindhi language is shared. It may also address an [issue with
+Personal Hotspot](https://www.macrumors.com/2020/03/21/apple-acknowledges-
+personal-hotspot-issues/) that prevents it from working for some people and it
+could also fix a [VPN-related
+vulnerability](https://www.macrumors.com/2020/03/26/ios-vpn-encryption-
+vulnerability/), both of which are bugs that Apple has promised to address in
+upcoming iOS updates.
+
