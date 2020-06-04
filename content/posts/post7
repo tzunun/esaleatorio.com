@@ -1,146 +1,65 @@
 ---
-title: "The WordPress Merging Problem" 
-date: 2020-05-18 
+title: "ZoomInfo surges 100% on its first day of trading" 
+date: 2020-06-04 
 draft: false 
 ---
 
 Story source:
 
-https://underjord.io/the-wordpress-merging-problem.html
+https://markets.businessinsider.com/news/stocks/zoominfo-stock-price-first-day-trading-nasdaq-ipo-tech-market-2020-6-1029282428
 
 
-# The WordPress merging problem
+![Nasdaq Stock
+Exchange](https://images.markets.businessinsider.com/image/5ed7ae0d3ad86177a5227ea3-2400/gettyimages-1216067098.jpg)Noam
+Galai/Getty Images
 
-2020-05-18
+  * **ZoomInfo Technologies priced its initial public offering at $21 Thursday, above its expected range.Â**
+  * **Shares of ZoomInfo popped when it started trading Thursday, and surged as much as 100% at intraday highs.Â**
+  * **It's the latest big-tech IPO of the year, showing signs of recovery in the market.Â**
+  * **[Read more on Business Insider](https://www.businessinsider.com/?utm_source=markets&utm_medium=ingest).**
 
-WordPress is approximately the most popular CMS out there. I've worked with it
-plenty over the years, off and on, as clients, employers and others have
-needed websites.
+* * *
 
-After a while every WordPress site has ended up feeling slightly sticky, icky
-and annoying to deal with in the longer run. So I don't really recommend it
-these days. It remains a popular choice. Because people don't ask me first
-which is probably reasonable.
+Shares of ZoomInfo Technologies, ticker ZI, surged as much as 100% at intraday
+highs in their first-ever day of trading Thursday.Â
 
-**Note: This website does not run on WordPress. But it is only edited by me so
-none of this post is relevant there.**
+Earlier in the day, the business-intelligence company priced its initial
+public offering at $21 per share, already higher than its expected range of
+$19 to $20 per share.
 
-I honestly don't have a good option for you right now if you want a good CMS.
-If you have an option for me, let me know at
-[lars@underjord.io](mailto:lars@underjord.io). Be warned that I'd rather not
-use something based on Node.js or PHP as a matter of preference. And the use-
-case I want a CMS for is to have something I can hand to non-technical people
-that need to manage a website and for some reason or other will not just pay
-for something like Squarespace (not sponsored, they're fine in my experience).
-From talking to people about things like Netlify CMS they don't quite scratch
-that non-technical user itch. Would love to hear more about that though.
+The stock popped even more when it started trading Thursday, opening at $40
+per share and surging to a high of $42 per share - more than double its IPO
+price - before paring some gains later in the day.Â
 
-I wrote more extensively about this in my newsletter and its not what I want
-to cover here. To the point! I recently encountered what seems to be a mostly
-intractable problem for anyone attempting to run WordPress as a software
-development project and a serious piece of infrastructure rather than a quick-
-and-dirty, deploy-and-close-your-eyes CMS install.
+ZoomInfo expected to raise as much as $890 million in the IPO on 44.5 million
+shares, [according to a regulatory
+filing](https://www.sec.gov/Archives/edgar/data/1794515/000162828020008791/zoominfos-1a4.htm).
+It's the latest big-tech listing of 2020, showing signs of recovery in the IPO
+market slammed by the coronavirus pandemic. On Wednesday, Warner Music Group,
+[so far the largest US IPO of the
+year](https://markets.businessinsider.com/news/stocks/warner-music-stock-
+price-first-day-trading-largest-ipo-
+group-2020-6-1029278221?utm_source=markets&utm_medium=ingest), gained as much
+as 20% in its first day of trading.Â
 
-So you want your developers to be working on the pre-release behind-the-scenes
-themeing of a new campaign page. There is the page itself, maybe some custom
-blocks, maybe som asset files that should be uploaded, some theme changes.
-This all happens on your development environment. Because you don't want to
-experiment with your theme in production. Fair enough. You might even track
-code changes with git.
+_**Read more:** ['I'm buying the property with 100% of other people's money':
+Here's the creative real-estate-investing strategy Josiah Smelser used to
+complete almost $4 million in deals over the last 12
+months](https://www.businessinsider.com/real-estate-investing-strategy-
+creative-funding-approach-josiah-
+smelser-2020-6?utm_source=markets&utm_medium=ingest)_
 
-Meanwhile, in production, your webmasters or other editor types are busy
-authoring, editing, fixing and managing the site. They move a block. They
-touch up some page text. They post new content. All of this work is critical.
-It is the actual purpose of the site's very existence.
+The company joins [two others with similar - and potentially confusing -
+names](https://markets.businessinsider.com/news/stocks/zoominfo-stock-
+exchange-nasdaq-debut-risks-new-confusion-zoom-
+video-2020-6-1029277574?utm_source=markets&utm_medium=ingest)Â listed on the
+public market. [Zoom Video,](https://markets.businessinsider.com/stocks/zm-
+stock?utm_source=markets&utm_medium=ingest?utm_source=markets&utm_medium=ingest)
+ticker ZM, has surged during the coronavirus pandemic as it became a top mode
+of communication amid sweeping lockdowns and people working from home.
 
-Your web developers or designers are done. They call you and say "hey! server-
-guy, we're ready, deploy our stuff please :)" and you might think to yourself
-"I would have scripted this to be a single-step or even automatic". That was
-my thinking. I tried to script it.
-
-WordPress stores pretty much everything in the database. It is common practice
-when moving a WP site from development to production to run a global find and
-replace on the database to correct all references to specific domain names.
-Because the database is full of denormalized data that might reference the
-domain, URLs and much more.
-
-So now you have two databases that are out of step and there are changes you
-want to use from both. Git does not solve this, even if you dump it to a file.
-
-For one thing all "content types" have their content items stored in a table
-called wp_posts where they all get a numeric auto-incremented ID. This ID
-sequence will be out of whack between your environments. Supposedly the
-import/export content feature should solve this but it skips some data and I
-could not make it work overall.
-
-The least risky and most reliable way of "deploying" changes I've found is to
-copy the code over to production and then repeat all database-related changes
-manually. Which means, you better keep a list. If you've worked with
-automation, testing, devops, any of it. This is madness.
-
-I put some research into this because I couldn't believe this issue wasn't
-somehow resolved. There must be a good practice. There are huge sites using
-this CMS. How do they do it? No clue. Maybe they restrict devs to specific
-tables, they probably run a static site generator plugin, they probably do all
-sorts of odd things to make it work reliably. Or they are holding on for dear
-life and hoping for the best.
-
-If you can divide the domains so that developers do no database changes and
-editors cannot touch anything code-related you can make it work. But this
-means that any change to block structures and that sort of configured layout
-and any custom blocks needed must be repeated in production. You rely on human
-memory and diligence which often works but is very inconvenient. The cognitive
-burden of figuring out what steps must be taken on which environment is
-dangerous. Arbitrary pieces of UI are now no-go zones for different workers
-but the CMS won't tell you which is which and some plugins definitely straddle
-that boundary. Mistakes can cause fairly serious problems. I find this
-untenable.
-
-The most up-to-date overview of managing this issue that I found was [this
-blog post](https://deliciousbrains.com/syncing-wordpress-database-changes-
-merging/ "Syncing WordPress database changes") which basically concludes that
-there is no silver bullet, or in my eyes, no proper solution.
-
-Looking for WordPress devops I found a few breathless posts about "oh yeah, do
-this with Git and then maybe some Docker and you can use this CI and this CD
-and this service is fabulous for jiggling your kerfuffles and in part 2 I will
-handle merging multiple environments". I found multiple posts that intended to
-write a part 2 and never finished it. I can see why. This is [one of
-them](https://carlalexander.ca/introduction-automated-wordpress-deployments/
-"Introduction to Automated WordPress Deployments") that seemed promising until
-I found the comments about part 2. [This one mentions the
-issues](https://billiemead.com/introduction-to-wordpress-and-devops/
-"Introduction to WordPress and DevOps") and doesn't really mention solving
-them but the part 2 link is dead, so I don't know. Turns out proper automation
-of WordPress might be hard.
-
-If you are a developer and are the single arbiter of everything about a site
-this is not hard. But you might as well use something else in that case, an
-SSG will often serve you better. If you can stop your client from updating a
-site while you change things this is also manageable but then you might not
-have a very interesting site on your hands.
-
-I don't find this an acceptable level for software development on one of the
-most well-used and most useful pieces of open source web application software
-out there. WordPress has a great reputation among non-technical users and a
-fairly strong one among techies. You need some painful experience with it and
-some experience on the alternative ways of running software application
-deployments to reliably see the madness seeping through.
-
-I realize that when WordPress was released in 2003 the state of the art looked
-different and I applaud that they haven't broken much compatibility moving
-forward. WordPress is a big achievement. I would just never choose it today
-and I cannot recommend it today. And that concerns me. Especially as I don't
-see any strong options that can replace it. How would you run a website for
-non-technical editors today where you didn't have to sweat every deploy?
-
-I have more to say on this website topic. Expect more posts on other slices of
-this particular pie.
-
-If you do know of an option, or if I have missed the solution to this problem,
-please let me know at [lars@underjord.io](mailto:lars@underjord.io) or
-[@lawik](https://twitter.com/lawik) on Twitter. If you want more of my writing
-I have a non-tracking newsletter which usually comes with podcast
-recommendations and more in-depth thinking. Often about sustainability in
-software.
+[Zoom Technologies](https://markets.businessinsider.com/stocks/zoom-
+stock?utm_source=markets&utm_medium=ingest?utm_source=markets&utm_medium=ingest),
+ticker ZOOM, had trading temporarily suspended in March after posting outsized
+gains likely due to a name mix-up.Â
 

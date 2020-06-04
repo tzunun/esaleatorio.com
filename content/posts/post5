@@ -1,95 +1,92 @@
 ---
-title: "How I generate artwork for my small app as a solo developer" 
-date: 2020-05-18 
+title: "CDC is worried Americans aren’t following its advice" 
+date: 2020-06-04 
 draft: false 
 ---
 
 Story source:
 
-https://ospfranco.github.io/post/2020/05/18/how-to-generate-app-store-artwork-(for-tempomat)/
+https://www.cnbc.com/2020/06/04/coronavirus-cdc-is-worried-americans-arent-following-its-advice-as-us-cases-continue-to-rise.html
 
 
-So I recently had a small twitter exchange with Jamie Birch, he wanted to
-generate some artwork for Lingua Franca, I shortly explained my workflow, and
-I think it is a interesting topic to explore further, so I’m just going to
-line-out how I do it, it is by no means the perfect way, it might not be even
-a good way, but if anyone finds it useful or can show me a better way, then
-would be more than happy.
+CDC Director Robert Redfield said Thursday that he's "very concerned" the
+agency's public health message on the coronavirus isn't "resonating" with the
+public as the number of cases continues to rise across the U.S.
 
-So, [Tempomat](https://tempomat.dev) is a small macOS utility to monitor CI
-pipelines, the requirements are fairly simple:
+Testifying before the House Appropriations Committee, Redfield said he sees "a
+lot of people" not wearing masks in Washington, D.C., where he works, while
+many people do wear masks in his hometown of Baltimore. Crowds of people have
+been seen in recent weeks at protests, over the Memorial Day holiday and,
+Redfield noted, at the SpaceX launch Saturday.
 
-  * I needed to create an app icon, with all the size variations needed to publish an app to the app store (in this case macOS icons)
-  * Every once in while I need to add custom icons, I am by no means a designer, so I try to stick to simple shapes/icons I can easily replicate or sometimes use placeholder art from sites like the noun project and then replace them with my own versions.
-  * I also need to generate marketing material and app store artwork, if you constantly update your product generating this can be cumbersome at least
+Huge crowds gathered at Florida's space coast Wednesday to [watch SpaceX's
+first attempt at launching astronauts to
+space.](https://www.cnbc.com/2020/06/02/nasa-astronauts-hopelaunch-is-an-
+inspiration-during-time-of-unrest.html)
 
-I’m a big believer of the KISS principle, so I basically use 2 tools, Figma
-and a small script to generate icons, here is a screenshot of current file I
-have:
+During the hearing, House Democrats grilled Redfield on President [Donald
+Trump](https://www.cnbc.com/donald-trump/)'s push for states to reopen after
+shutting down as part of social distancing measures meant to curb the spread
+of the virus.
 
-![Tempomat Figma](https://ospfranco.github.io/assets/tempomat/1.JPG)
+All 50 states have begun easing quarantine restrictions even though Redfield
+said "not all states" have met the White House criteria for reopening
+businesses.
 
-It is pretty minimal and I already cleaned it up a bit for this article, but I
-intentionally try to keep it as simple as I can, so let’s go by parts
+"We will continue to message as well we can," said Redfield, who's on the
+White House coronavirus task force. "We're going to encourage people that have
+the ability to require to wear masks when they are in their environment to
+continue to do that."
 
-## App Icon
+The coronavirus, which emerged about five months ago, has sickened more than
+1.8 million people and killed at least 107,175 in the United States, according
+to data compiled by Johns Hopkins University. While cases have slowed in hot
+spots such as New York state, the U.S. is still seeing roughly 20,000 new
+Covid-19 cases a day.
 
-I won’t show you how many iterations I went through until I reached the
-current app icon, but Figma is great for this, it is super simple, yet
-provides you with a way to achieve almost anything you might need for an icon,
-you could do the same thing in sketch but the benefit of Figma is that it’s
-free, if you need collaboration then it is also the ultimate tool to run the
-job!
+When asked by Rep. Rosa DeLauro, D-Conn., if there was any evidence the virus
+has become less contagious, Redfield simply said, "No."
 
-![Tempomat Icon](https://ospfranco.github.io/assets/tempomat/2.JPG)
+The hearing comes as the CDC's response to the pandemic comes under scrutiny
+by former officials and infectious disease experts. A [New York Times
+report](https://www.nytimes.com/2020/06/03/us/cdc-coronavirus.html) published
+Wednesday detailed some of the CDC's early missteps, including the delay of
+coronavirus test kits. The CDC declined The New York Times' requests to
+interview top CDC officials, the Times said.
 
-I create the frame with a 1024x1024 size and just work on top of that,
-duplicating the frame as I go trying ideas and variations, once I’m happy with
-the result I right click copy as png and then paste it again so I don’t have
-to worry about funny scaling issues when resizing the icon in the artwork.
+The CDC has remained largely quiet on the pandemic. Agency officials haven't
+held a coronavirus-related briefing in more than two months. Last month, the
+agency [quietly released detailed
+guidance](https://www.cnbc.com/2020/05/20/coronavirus-cdc-quietly-releases-
+detailed-guidelines-for-reopening-us.html) for reopening schools, mass transit
+and nonessential businesses that had been shut down in an attempt to curb the
+spread of the coronavirus in the U.S.
 
-Afterwards I export the full 1024x1024 icon as a PNG and I use the [ios-icon-
-generator](https://github.com/smallmuou/ios-icon-generator) script that I
-found on github, there are many web tools that can do this for you, but they
-are all bug fest/ads mess, just point the script to the input file and where
-you want to drop the generated files and enjoy:
+Redfield also warned Thursday that protests across the U.S. and other parts of
+the world over the death of George Floyd at the hands of Minneapolis police
+[could be a "seeding event" for more coronavirus
+outbreaks.](https://www.cnbc.com/2020/06/04/cdc-warns-george-floyd-protests-
+may-be-seeding-event-for-more-coronavirus-outbreaks.html)
 
-`./ios-icon-generator.sh myIcon.png iosIcons/`
+He said he would like to see people who took part in the protests get tested
+for the virus in the next few days.
 
-## Other Icons
+"I do think there is a potential, unfortunately, for this to be a seeding
+event," he said. "And the way to minimize that is to have each individual to
+recognize it is an advantage of them to protect their loved ones, to [say]
+'hey, I was out, I need to go get tested.'"
 
-Tempomat integrates with 3rd party CI systems so I just find a svg
-representation of the company logo and drop it right into figma, sometimes I
-might do small modifications to make the icon look nice within the app, then I
-can quickly modify colors which are used for representing the status of a
-branch/repo
+Public health specialists warn [that a slow burn of infection through the
+summer](https://www.cnbc.com/2020/06/03/as-states-reopen-and-protests-rage-
+the-coronavirus-lays-the-foundation-for-a-nasty-fall.html) could lead to a
+massive resurgence this fall.
 
-![Other Icons](https://ospfranco.github.io/assets/tempomat/3.JPG)
+Redfield told lawmakers the U.S. is likely to have a "difficult time" during
+the fall and winter seasons as the coronavirus and flu circulate at the same
+time.
 
-## Artwork
-
-This one is by far the biggest time saver, for the macOS app store art, the
-resolution is not the same as the macbook (my macbook model?), so at first I
-fumbled around trying to make screenshots fit the asked resolution, until at
-some point I just gave up and realized I was just wasting my time, I just
-create a frame with the necessary resolution (in this case 2880x1800), then I
-can put the any screenshot I need in there, make it fit, put some promotional
-text or w/e.
-
-I also made a component of this small repeated pattern, so I only have to
-adjust it once to generate more artwork for social media, different platforms,
-etc. it’s pretty handy
-
-![Artwork](https://ospfranco.github.io/assets/tempomat/4.JPG)
-
-## When Prototyping the most important thing is Funtionality
-
-Form follows function, Dieter Rams said it, so I actually heavily discourage
-using Figma for prototyping ideas, I loose focus of the important things, I
-really couldn’t care less about paddings and margins, they are important in
-the final product, but I’m a strong believer of sketching rough ideas on an
-iPad or a piece of paper (a la [shape-up](https://basecamp.com/shapeup)) but
-then building a ugly but functional code prototype, I can iterate 20 times
-quicker with hard coded values and interact with real code without having to
-do some presentation with figma frames (which is possible but I don’t like it)
+In April, Redfield [first warned](https://www.cnbc.com/2020/04/22/trump-says-
+cdc-directors-coronavirus-warning-was-totally-misquoted.html) about the colder
+seasons, saying, "we're going to have to distinguish between which is flu and
+which is the coronavirus."
 

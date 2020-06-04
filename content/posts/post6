@@ -1,78 +1,200 @@
 ---
-title: "Branded QR codes might be coming to iOS 14" 
-date: 2020-05-18 
+title: "US Army’s New Drone Swarm May Be Weapon of Mass Destruction" 
+date: 2020-06-04 
 draft: false 
 ---
 
 Story source:
 
-https://www.macrumors.com/2020/05/18/ios-14-leak-apple-qr-codes/
+https://www.forbes.com/sites/davidhambling/2020/06/01/why-new-us-armys-tank-killing-drone-swarm-may-be-a-weapon-of-mass-destruction/
 
 
-A leaked version of [the iOS 14
-update](https://www.macrumors.com/roundup/ios-14/) has been circulating for a
-few months, giving us an idea of what Apple is [working
-on](https://www.macrumors.com/2020/03/09/apple-ios-14-fitness-app-guided-
-workouts/) behind the scenes for the new update.
+‘Weapon of Mass Destruction’ is a term used in arms-control circles signifying
+something capable of damage on a large scale and subject to international
+treaties. Analyst Zak Kallenborn argues in a [recent
+study](https://www.airuniversity.af.edu/Portals/10/CSDS/monographs/MONO60%20Drone%20Swarms%20as%20WMD.pdf?ver=2020-05-13-135901-057
+"https://www.airuniversity.af.edu/Portals/10/CSDS/monographs/MONO60%20Drone%20Swarms%20as%20WMD.pdf?ver=2020-05-13-135901-057")
+for the U.S. Air Force Center for Strategic Deterrence Studies that some types
+of drone swarm would count as WMD. The argument might seem like the
+theoretical arms control equivalent of angels dancing on the head of a pin —
+except that the U.S. Army is working on a lethal swarm which fits Kallenborn’s
+description.
 
-Details about
+Skeet submunitions destroy target vehicles in test
 
-[iOS 14](https://www.macrumors.com/roundup/ios-14/)
+U.S. Air Force
 
-have been
+Current drones like the [MQ-9 Reaper](https://www.af.mil/About-Us/Fact-
+Sheets/Display/Article/104470/mq-9-reaper/ "https://www.af.mil/About-Us/Fact-
+Sheets/Display/Article/104470/mq-9-reaper/") are controlled remotely, with a
+pilot flying the aircraft and a payload operator aiming and launching
+missiles. A battery of other personnel, including military lawyers and image
+analysts, [look over their shoulders](https://dronewars.net/2017/05/30/justin-
+thompson-interview/ "https://dronewars.net/2017/05/30/justin-thompson-
+interview/") and argue what is or is not a valid target. (The movie [Eye in
+the Sky](https://www.imdb.com/title/tt2057392/
+"https://www.imdb.com/title/tt2057392/") brilliantly captured the military-
+political-legal wrangling during drone operations). Future drones may have
+more autonomy, flying and fighting with much less human supervision, in
+particular when many of them work together as a swarm.
 
-[trickling out](https://www.macrumors.com/roundup/ios-14/)
+Kallenborn, an expert in unmanned systems and WMD, [describes one type of
+swarm](https://mwi.usma.edu/swarms-mass-destruction-case-declaring-armed-
+fully-autonomous-drone-swarms-wmd/ "https://mwi.usma.edu/swarms-mass-
+destruction-case-declaring-armed-fully-autonomous-drone-swarms-wmd/") that he
+calls an Armed, Fully-Autonomous Drone Swarm, or AFADS. Once unleashed an
+AFADS will locate, identify, and attack targets without human intervention.
+Kallenborn argues that an AFADS-type swarm is a genuine Weapon of Mass
+Destruction because of the amount of harm it can do and because of its
+inability to distinguish civilians from military targets. This is the type of
+swarm in the fictional 2017 viral video
+[Slaughterbots](https://www.youtube.com/watch?v=9CO6M2HsoIA
+"https://www.youtube.com/watch?v=9CO6M2HsoIA") released as a warning against
+autonomous weapons.
 
-, and today, Josh Constine (formerly of
+Like Terminators, such drones may look like science fiction. But the U.S. Army
+has been working on a [Cluster UAS Smart Munition for Missile
+Deployment](https://www.sbir.gov/sbirsearch/detail/1207935
+"https://www.sbir.gov/sbirsearch/detail/1207935") which looks like a real-
+world embodiment of AFADS.
 
-_TechCrunch_
+The Cluster Swarm project is developing a missile warhead to dispense a swarm
+of small drones that fan out to locate and destroy vehicles with explosively
+formed penetrators or EFPs. (An EFP [spits a high-speed
+slug](https://www.popularmechanics.com/military/weapons/a19053/the-army-want-
+some-silver-bullets/
+"https://www.popularmechanics.com/military/weapons/a19053/the-army-want-some-
+silver-bullets/") of armor-piercing metal some tens or hundreds of meters).
+This is similar in concept to the [existing CBU-105
+bomb](http://armamentresearch.com/us-cbu-97cbu-105-sensor-fuzed-weapon-
+cluster-munition/ "http://armamentresearch.com/us-cbu-97cbu-105-sensor-fuzed-
+weapon-cluster-munition/"), a 1000-pound munition which scatters forty ‘Skeet’
+submunitions each over the target area, each of which parachutes down,
+scanning the ground with a seeker until it finds a tank and fires an EFP at
+it; the picture above shows one test. CBU-105’s dropped by B-52 bombers
+successfully [knocked out entire Iraqi tank
+columns](https://edition.cnn.com/2003/US/08/19/hln.terror.sensor.fuzed/
+"https://edition.cnn.com/2003/US/08/19/hln.terror.sensor.fuzed/") in 2003,
+leading them to be termed ‘[Cans of whup-
+ass.’](https://www.defenseindustrydaily.com/1081m-for-13280-cans-of-
+whupass-01782/ "https://www.defenseindustrydaily.com/1081m-for-13280-cans-of-
+whupass-01782/") The Cluster Swarm would be vastly more powerful.
 
-) has shared leaked Apple QR codes, details about Apple's work on an AR app,
-and sounds for the upcoming Apple Tags in his
+The Cluster Swarm involved drones packed into the Army’s existing [GMLRS
+rockets](https://www.army-technology.com/projects/mlrs/ "https://www.army-
+technology.com/projects/mlrs/"), which carry a 180-pound payload and have a
+range of over 70 kilometers, or [ATACMS
+missiles](https://missilethreat.csis.org/missile/atacms/
+"https://missilethreat.csis.org/missile/atacms/") that carry a 350-pound
+payload over 270 kilometers. The original idea was that the missile payload
+would be quadcopter drones encased in an aerodynamic shell that would disperse
+them over the target area. However, the challenges of unfolding quadcopters
+mid-air may have been too great, as the [Phase II
+development](https://www.sbir.gov/sbirsearch/detail/1624487
+"https://www.sbir.gov/sbirsearch/detail/1624487"), recently completed, went to
+[AVID LLC](http://www.avidaerospace.com/ "http://www.avidaerospace.com/"), who
+have a slightly different approach.
 
-[Moving Product newsletter](https://constine.substack.com/p/leaked-pics-from-
-apples-ar-app-gobi)
+T-Hawk ducted-fan tactical drone
 
-.
+U.S. Navy
 
-Apple appears to be implementing a new QR code format that uses colored cones,
-with the files found in the "Gobi" AR app that Apple has been working on.
-Constine says QR codes open up [Mac
-Pro](https://www.macrumors.com/roundup/mac-pro/) and [Apple
-Watch](https://www.macrumors.com/roundup/apple-watch/) websites, the Star
-Wars: Rogue One movie in iTunes, and the Starbucks Card sign-up.
+AVID are best known for their work with Honeywell on the [T-Hawk
+drone](https://www.army-technology.com/projects/honeywell-thawk-mav-us-army/
+"https://www.army-technology.com/projects/honeywell-thawk-mav-us-army/"), a
+tactical vertical take-off craft deployed in Iraq to help find IEDs in 2007.
+Affectionately known as the ‘[flying beer
+keg](https://www.wired.com/2011/01/last-call-for-armys-flying-beer-keg-drone/
+"https://www.wired.com/2011/01/last-call-for-armys-flying-beer-keg-drone/"),’
+the T-Hawk has no external rotors but is powered by ducted fans inside the
+fuselage. AVID later produced the smaller
+[EDF-8](http://www.avidaerospace.com/avid-edf-8
+"http://www.avidaerospace.com/avid-edf-8"), an electrically-powered ducted-fan
+drone carrying a one-pound payload. The company would not provide comment on
+the drones developed for the new project.
 
-![](https://images.macrumors.com/t/PfAx3gvtaimnmcJZYf28Fx7Fc9w=/800x0/article-
-new/2020/05/appleQRcodes.jpg)  
-The code also featured references to a Gobi comparison shopping feature that
-could be in the AR app, and, in line with previous rumors about a [possible
-Starbucks partnership](https://www.macrumors.com/2020/03/10/ios-14-augmented-
-reality-app-gobi/), there were references to Starbucks discounts at specific
-locations, which suggests the Gobi app could offer promotions or content
-experiences based on location.
+The Cluster Swarm would be far more powerful than the existing CBU-105 ‘cans
+of whup-ass’ for two reasons. A CBU-105 can only hit targets in an area a few
+hundred meters across. The Cluster Swarm can go hunting for vehicles dispersed
+over many square miles.
 
-A video shared by Constine also features sounds and vibrations that will be
-used in the [Find My](https://www.macrumors.com/guide/find-my/) app to help
-people locate their lost devices. As described by Constine:
+The other advantage is efficiency. CBU-105 gives little overlap in search area
+for each warhead; many will not have a target, and where there is overlap two
+or more may attack the same tank and ignore others. A true swarm acting co-
+operatively will ‘de-conflict’ so forty drones always attack forty different
+targets.
 
-> You'll hear encouraging sounds when you face the right direction so the lost
-> gadget is "Ahead" of you, when you're "Nearby", or come within "Arms Reach",
-> while discouraging tones hint that you're headed off course.
+If Cluster Swarm drones have EFP warheads similar to existing weapons, then
+each MLRS missile would release about ten drones. Each [M270 MLRS
+vehicle](https://www.army-technology.com/projects/mlrs/ "https://www.army-
+technology.com/projects/mlrs/") fires twelve missiles in a salvo, for a
+hundred and twenty drones. So a [battery of nine launch
+vehicles](https://www.globalsecurity.org/military/library/policy/army/fm/6-60/Ch2.htm
+"https://www.globalsecurity.org/military/library/policy/army/fm/6-60/Ch2.htm")
+would deliver a thousand killer drones over the target area, enough in theory
+to stop an entire armored division in its tracks.
 
-Many other leaked features have been found in ‌iOS 14‌, such as hints of a
-[new fitness app](https://www.macrumors.com/2020/03/09/apple-ios-14-fitness-
-app-guided-workouts/), new features for
-[Messages](https://www.macrumors.com/guide/messages/) like [mentions and
-retractions](https://www.macrumors.com/2020/03/09/imessage-mentions-
-retractions-more/), new [Apple Pencil
-features](https://www.macrumors.com/2020/03/09/ios-14-ocr-apple-pencil-text-
-conversion/), [Home screen
-updates](https://www.macrumors.com/2020/04/04/ios-14-home-screen-widgets-
-wallpaper/), ‌Find My‌ changes for
-[AirTags](https://www.macrumors.com/guide/airtags/), the [CarKey
-API](https://www.macrumors.com/2020/02/19/carkey-feature-digital-keys-
-messages-app/) that will allow an
-[iPhone](https://www.macrumors.com/guide/iphone/) to be used in lieu of a
-CarKey, and tons more, with full details [available in our iOS 14
-roundup](https://www.macrumors.com/roundup/ios-14/).
+Would such a swarm constitute a WMD?
+
+“The weapon could plausibly be classified as a weapon of mass destruction,”
+Kallenborn said. “However, it would depend on the number and payload of armed
+UAVs [Unmanned Aerial Vehicles] within the swarm.”
+
+Kallenborn says that as a rough rule of thumb, a swarm with munitions
+equivalent to a thousand [M67 hand
+grenades](https://fas.org/man/dod-101/sys/land/m67.htm
+"https://fas.org/man/dod-101/sys/land/m67.htm") would likely be in the WMD
+class. If it meets this threshold, then according to his new paper the swarm
+could be [subject to international arms control
+law](https://www.airuniversity.af.edu/Portals/10/CSDS/monographs/MONO60%20Drone%20Swarms%20as%20WMD.pdf?ver=2020-05-13-135901-057
+"https://www.airuniversity.af.edu/Portals/10/CSDS/monographs/MONO60%20Drone%20Swarms%20as%20WMD.pdf?ver=2020-05-13-135901-057").
+
+“Certainly off-course drones would have potential for considerable damage if
+they identified civilian vehicles as military ones,” says Kallenborn.
+
+It is easy to see how an attack directed at a column of tanks might end up
+hitting a nearby refugee convoy with catastrophic results, destroying not just
+a few vehicles but dozens of them. This ought to be impossible, and the
+Pentagon ‘s [Policy Directive
+3000.09](https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodd/300009p.pdf
+"https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodd/300009p.pdf")
+is intended to ‘minimize the probability and consequences of failures in
+autonomous and semi-autonomous weapon systems that could lead to unintended
+engagements.’ But in war, mistakes happen.
+
+However, proving whether it is a WMD or not could be difficult. How do you
+tell whether you are facing a single WMD-level swarm or a collation of smaller
+swarms?
+
+“If swarms are WMD, verification and confidence measures might need to
+evaluate whether a set of drones are a single swarm or multiple. Evaluating
+whether the swarm is fully autonomous would also be a challenge,” says
+Kallenborn.
+
+Even if it is not deemed a WMD, any swarm with this sort of potential raises
+issues about how much autonomy is acceptable.
+
+“The weapon illustrates the need to carefully consider what risks the United
+States is willing to accept,” says Kallenborn.
+
+The Phase II development completed in March included “deployment…powered
+flight, acquisition of a representative target, and automated navigation to
+and landing on target” as well as a separate demonstration of the EFP
+warhead’s effectiveness. If the Army go ahead with Phase III and integrate the
+drones into a missile warhead, deployment could follow soon.
+
+The U.S. is not the only player in this field, and may not even be the leader.
+Turkey has already fielded [Kargu tactical kamikaze
+drones](https://www.newscientist.com/article/2217171-autonomous-killer-drones-
+set-to-be-used-by-turkey-in-syria/
+"https://www.newscientist.com/article/2217171-autonomous-killer-drones-set-to-
+be-used-by-turkey-in-syria/") in small numbers on the Syrian border. Currently
+these are piloted remotely, but the makers claim the Kargu has autonomous
+swarming capability. China and Russia are not so far behind.
+
+Unlike other WMD, drone swarms can be acquired at low cost and require
+relatively little technical skill. If there is a military advantage to be had,
+the U.S. may choose to delay discussions about whether their swarms should
+count as WMD. The situation may change if others deploy them – and if they
+start causing large numbers of casualties.
 

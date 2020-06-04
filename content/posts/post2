@@ -1,79 +1,15 @@
 ---
-title: "Avoid Choosing an Oscilloscope Based on Bandwidth Alone" 
-date: 2020-05-18 
+title: "Nuclear missile contractor hacked in Maze ransomware attack" 
+date: 2020-06-04 
 draft: false 
 ---
 
 Story source:
 
-https://blog.digilentinc.com/dont-choose-oscilloscope-based-bandwidth-alone/
+https://nakedsecurity.sophos.com/2020/06/04/nuclear-missile-contractor-hacked-in-maze-ransomware-attack/
 
 
-When choosing an oscilloscope, it is critical to make sure that you find the
-perfect balance of quality and performance. Considering the massive spectrum
-in the price of these devices, it is worth the extra time to make sure you can
-get a scope with the most relevant features in your price range.
+![](https://www.sophos.com/medialibrary/3376DF5742A64AEE93FDB9DCA7291239.ashx)
 
-One of the biggest misconceptions about choosing an oscilloscope is that you
-should choose based on bandwidth alone. While bandwidth is important, it is
-not the most important consideration, nor the only one to think about. The
-reason this is assumed actually comes from the origins of oscilloscopes
-themselves. Before there were mixed signal oscilloscopes and mixed domain
-oscilloscopes all over the market (and at inexpensive pricing) all you had
-were basic scopes as an option. So all the specs you _could_ care about were
-bandwidth, sample rate, and channel number. For clarification, most
-oscilloscopes are just analog, so they do not have digital capabilities. If
-the device can do both (like the Analog Discovery 2), it is referred to as a
-mixed signal oscilloscope.
-
-Though it is important to make sure that your oscilloscope has an adequate
-bandwidth for your application, choosing an oscilloscope based on bandwidth
-alone can result in overspending, or finding a scope with high bandwidth, but
-its other specifications may not meet the application requirements. You may
-also miss out on other functionality that can prove more useful than just an
-oscilloscope, such as a logic analyzer, spectrum analyzer, etc.
-
-In addition to being a mixed signal oscilloscope, the Analog Discovery 2 has
-16 digital inputs and outputs (including a logic analyzer, pattern generator,
-etc) which makes it more multipurpose, since most applications are not just
-digital or analog. It is also a mixed domain oscilloscope, as it includes a
-network analyzer and spectrum analyzer so one can examine signals in the
-frequency domain. This means that in addition to the traditional oscilloscope
-you also get a logic analyzer, impedance analyzer, network analyzer capable of
-plotting frequency and magnitude plots, and much more.
-
-![](https://blog.digilentinc.com/wp-
-content/uploads/2019/04/40364801005_75ff06e3c7_k-1-678x1024.jpg)
-
-  
-Other important specifications to consider include **resolution** and **sample
-rate.** Without adequate sample rate, the signals at the top of the bandwidth
-may experience aliasing and as a result, be unusable. Without a proper
-resolution, the data may not show small enough differences.
-
-Many scopes that feature high bandwidth and sample rate are only 8-bit, while
-other scopes (like the Analog Discovery 2) have a much higher resolution
-(14-bit).
-
-![](https://blog.digilentinc.com/wp-content/uploads/2019/04/aa-1024x550.png)
-
-  
-The Analog Discovery 2 is a great example of how bandwidth is an important
-feature, but should not be the only consideration. Despite having what may
-seem like limited bandwidth (up to 30MHz) when compared to other pure
-oscilloscopes, the Analog Discovery 2 is a better fit for a wide range of
-applications, especially debugging and checking the specifications of a
-design.
-
-![](https://blog.digilentinc.com/wp-
-content/uploads/2019/04/29070815018_bb44e686ac_h-1024x606.jpg)
-
-  
-Since traditional oscilloscopes are single instrument tools, the 12 different
-instruments offered on the Analog Discovery 2 make it an excellent choice as a
-Swiss Army knife for your bench. It can make a great supplement to your
-benchtop equipment or help you determine which applications will require you
-to commit to a higher-end expensive tool. You can test out your application
-with the Analog Discovery 2, and then you will know when you need to invest in
-a single instrument benchtop version of that device.
+Sophos Home protects every Mac and PC in your home
 

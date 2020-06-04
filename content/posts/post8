@@ -1,92 +1,188 @@
 ---
-title: "Spleeter – Source Separation Engine" 
-date: 2020-05-18 
+title: "Changes to how TypeScript type definitions are managed" 
+date: 2020-06-04 
 draft: false 
 ---
 
 Story source:
 
-https://deezer.io/releasing-spleeter-deezer-r-d-source-separation-engine-2b88985e797e
+https://devblogs.microsoft.com/typescript/changes-to-how-we-manage-definitelytyped/
 
 
-# Releasing Spleeter: Deezer Research source separation engine
+# Changes to How We Manage DefinitelyTyped
 
-## In a nutshell
+![Avatar](https://secure.gravatar.com/avatar/28e997da43c10d99aa99273b48efe8cf?s=58&d=mm&r=g)
 
-We are releasing [**Spleeter**](http://github.com/deezer/spleeter) to help the
-research community in Music Information Retrieval (MIR) leverage the power of
-a state-of-the-art source separation algorithm. It comes in the form of a
-Python Library based on [Tensorflow](https://www.tensorflow.org/), with
-pretrained models for 2, 4 and 5 stems separation. **Spleeter** will be
-presented and live-demoed at the 2019 [ISMIR
-conference](https://ismir2019.ewi.tudelft.nl/) in Delft.
+Orta
 
-##  **A brief overview of source separation**
+The [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped)
+repository on GitHub is now a regular fixture in GitHub’s annual [Octoverse
+report](https://octoverse.github.com) as one of the top 10 repos with the most
+contributors. If you haven’t heard of Definitely Typed, it’s a repository that
+holds type declaration files (`*.d.ts` files) for thousands of JavaScript
+projects, and it’s likely you’ve seen the results of this repo in the form of
+the npm modules `@types/something`.
 
-While not a broadly known topic, the problem of source separation has
-interested a large community of music signal researchers for a couple of
-decades now. It starts from a simple observation: music recordings are usually
-a mix of several individual instrument tracks (lead vocal, drums, bass, piano
-etc..). The task of music source separation is: given a mix can we recover
-these separate tracks (sometimes called _stems_ )? This has many potential
-applications: think remixes, upmixing, active listening, educational purposes,
-but also pre-processing for other tasks such as transcription.
+What started off as entirely community-driven effort became so critical to the
+TypeScript ecosystem that the TypeScript team committed to helping maintain
+Definitely Typed. The TypeScript team takes the responsibility of maintaining
+the Definitely Typed (DT) repo very seriously, and since [mid
+2016](https://github.com/Microsoft/TypeScript/issues/9184) the team has had a
+rotation where a member focuses on merging pull requests and repo up-keep for
+a week. We work with other Definitely Typed maintainers to handle about ~250
+pull requests a week, and until last week we handled merging over 90% of these
+pull requests.
 
-From a Mix of many instruments, a source separation engine like **Spleeter**
-outputs a set of individual tracks or stems.
+For the past year, we’ve been working on tooling to protect the stability of
+the Definitely Typed ecosystem to the point where we can offer a more
+streamlined experience when contributing to DT repo – definition owners can
+now help merge PRs to their modules!
 
-Interestingly, our brain is very good at isolating instruments. Just focus on
-one of the instrument of [this track](https://www.deezer.com/track/2124880)
-(say the lead vocal for instance) and you will be able to _hear_ it quite
-distinctively from the others. Yet that’s not really separation, you still
-hear all the other parts. In many cases, it may not be possible to exactly
-recover the individual tracks that have been mixed together. The challenge is
-thus to approximate them the best we can, that is to say as close as possible
-to the originals without creating too much distortions.
+### How did we get here?
 
-For years, a lot of strategies have been explored, by dozens of brilliant
-research teams from all over the world. If you’re interested in this
-fascinating journey you should go read [this literature
-overview,](https://sigsep.github.io/literature/) or [this
-one](http://zafarrafii.com/Publications/Rafii-Liutkus-Stoter-Mimilakis-
-FitzGerald-
-Pardo%20-%20An%20Overview%20of%20Lead%20and%20Accompaniment%20Separation%20in%20Music%20-%202018.pdf).
-The pace of progress has recently made some giant leaps, mainly due to
-advances in machine learning methods. To keep track, people have been
-comparing their algorithm in [international evaluation
-campaigns](https://sisec18.unmix.app/#/). That’s how we know that **Spleeter**
-performances match those of the best proposed algorithms.
+We have a few stability safety nets for Definitely Typed which gives the team
+more confidence in the robustness of the ecosystem
 
-Additionally, **Spleeter** is _very_ fast. If you are running the GPU version
-you can expect separating **100x faster than real-time** which makes it a good
-option to process large datasets.
+#### We run performance and integration tests on every change.
 
-## What can I do with Spleeter ?
+The performance tests check two things: whether the change increased the
+amount of memory to compile the files, and whether they would slow down editor
+operations like go-to-definition and code completion. Performance matters
+because we have seen changes in one library cause dramatic compiler time
+increases for a libraries which depend on it. By providing useful feedback
+during the pull request, maintainers can make well-informed decisions about
+whether these trade-offs are acceptable at the time.
 
-Quite a lot I’d say. If you’re a researcher working on Music Information
-Retrieval and have always considered that source separation artifacts made it
-unsuitable as a pre-processing step in your pipeline... Well, you should
-probably reconsider and try **Spleeter**. If you are a music hacker and want
-to build something awesome using **Spleeter** , then go ahead. Actually
-**Spleeter** is [MIT-Licensed](https://opensource.org/licenses/MIT) so you are
-_really_ free to use it in any way you want. It goes without saying that if
-you plan to use **Spleeter** on copyrighted songs, make sure you get proper
-authorization from right owners beforehand.
+The integration tests verify both:
 
-## How can I use Spleeter ?
+  * The shape of your exports roughly matches the shape of the exports of the JavaScript using [dts-critic](https://github.com/DefinitelyTyped/dts-critic), which gives everyone some more confidence that their types fit the JavaScript being represented.
+  * That the change doesn’t break downstream DT libraries which depend on the libraries being changed.
 
-Under the hood, **Spleeter** is a fairly complex and crafted engine but we’ve
-worked hard to make it really easy to use. The actual separation can be
-achieved with a [single command
-line](https://github.com/deezer/spleeter/wiki/2.-Getting-started#usage), and
-it should work on your laptop regardless of your Operating System. For more
-advanced users, there is a python API class called
-`[Separator](https://github.com/deezer/spleeter/wiki/4.-API-
-Reference#separator)` that you can manipulate directly into your usual
-pipeline.
+#### TypeScript Development Verification.
 
-We’ve tried hard to come up with a [thorough
-documentation](https://github.com/Deezer/spleeter/wiki). Don’t hesitate to
-give us feedback, point out issues or suggest improvement through the
-traditional github tools!
+It’s possible that improvement to the TypeScript language can break the
+definitions in DT.  
+This could be a a natural part of improving the compiler’s control flow
+analysis, or by fixing bugs which a definition accidentally relied on.
+
+The team does not want to release a new version of TypeScript and then
+discover that it breaks a significant amount of types in DT. There are two
+systems in place to protect this.
+
+The first is that we [made it easy to test all of the DT
+tests](https://github.com/microsoft/TypeScript/wiki/Triggering-TypeScript-Bot)
+against a work-in-progress pull request of the compiler.  
+If there are breaks in DT, then it is the responsibility of the author of the
+compiler pull request to send fixes to DT before the changes can be merged.
+
+The second is that we run the DT tests against the `master` branch of
+TypeScript every night.
+
+This helps the team catch issues early, and moves the responsibility of fixing
+issues to the people making language changes.
+
+#### [dtslint](https://github.com/microsoft/dtslint) powered testing on a per-
+module basis.
+
+Definitely Typed packages are always committed with “test” files. The tests
+are `.ts` or `.tsx` files which use the `.d.ts` files that eventually get
+shipped to users. We recommend that a package’s tests start out with something
+similar to example code for the library to test core scenarios, and then get
+built up as new types are added to the `d.ts` files.
+
+These tests can verify the `d.ts` accurately describes the JavaScript, and
+also that future changes don’t break older clients by accident.
+
+With these systems in place, we can more easily scale to the number of PRs
+coming in every day while avoiding long-running delays. That’s why we recently
+enabled definition owners to pull in changes themselves!
+
+### What Pull Requests Can Be Merged By Definition Owners?
+
+For any pull request to Definitely Typed there are 3 groups of interested
+parties:
+
+  * The DT maintainers who want to ensure the stability of the entire DT ecosystem
+  * The definition owners who use the library and are interested in keeping the library up-to-date and well documented
+  * People who are interested in the changes but have not requested to be a definition owner
+
+Historically, only the DT maintainers have had the ability to merge pull
+requests. Through [a new GitHub bot](https://github.com/DefinitelyTyped/dt-
+mergebot/) we’ve given access to definition owners to merge their changes.
+
+First up in deciding if a pull request can be merged by a definition owner, we
+divide the changes to DT into two major sub-groups:
+
+  * PRs which add new libraries, these will always need a DT maintainer to validate and are out of scope
+  * PRs which edit existing libraries
+
+We can bucket changes to existing DT libraries depending on their ecosystem
+impact:
+
+  * PRs which affect extremely popular libraries like Node, React, Lodash or Jest
+  * PRs which affect all the other libraries
+
+Changes to extremely popular libraries with over 5,000,000 downloads per month
+on npm cannot be merged by definition owners and still require a DT maintainer
+to validate changes. However, these changes are rare and most of the pull
+requests we receive are quick changes to smaller libraries
+
+### When Can a Pull Request Be Merged By Its Author?
+
+After determining that a pull request is one which a Definition Owner could
+merge, our bot starts to walk the author through the process. We set up four
+conditions for a pull request to be merged:
+
+  * There are no merge conflicts
+  * CI has passed tests for this library, and its dependents
+  * There are corresponding test changes for any `*.d.ts` changes
+  * The most recent commit has an approved review by either a definition owner or a DT maintainer
+
+As the pull request evolves through these different stages there is a bot
+updating a comment which describes the current state of movement towards auto-
+merging.
+
+We’ve tried to have the bot handle a lot of different states a pull request
+can be in and offer direct feedback on what to do next, providing links to the
+revised documentation for contributors.
+
+[ ![Image 1](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/1.jpg)
+](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/1.jpg)  
+[ ![Image 2](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/2.jpg)
+](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/2.jpg)  
+[ ![Image 3](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/3.png)
+](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/3.png)  
+[ ![Image 4](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/4.png)
+](https://devblogs.microsoft.com/typescript/wp-
+content/uploads/sites/11/2020/05/4.png)
+
+We’re starting to see about 20 pull requests a day [merged by the
+community](https://github.com/DefinitelyTyped/DefinitelyTyped/pulls?q=is%3Apr+label%3AMerge%3AAuto+is%3Aclosed)
+through this new system. The pull requests which are merged by definition
+owners are typically handled within a day, and aren’t blocked on the time of
+whoever is on rotation from the TypeScript team. For example, a [bug was found
+in the type
+definition](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/45032#issuecomment-635231194)
+for the module [theme-ui](https://theme-ui.com) – the [PR to fix
+it](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/45114) was
+published, reviewed by the definition owners and merged within an hour. This
+is a perfect example of why we refined the process.
+
+When thinking about how we maintain such a busy repo, it’s a combination of
+careful application of automation and a lot of human effort. Definitely Typed
+is a massive community project with over 10,000 contributors, and we’re really
+proud of how far it has come, here’s to making the life easier for the next
+10k contributors.
+
+Engineer on the TypeScript Compiler
+
+**Follow**[](https://twitter.com/orta)[](https://devblogs.microsoft.com/typescript/author/ortammicrosoft-
+com/feed/)
 

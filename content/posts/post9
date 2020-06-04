@@ -1,271 +1,377 @@
 ---
-title: "The Maji Maji Rebellion" 
-date: 2020-05-18 
+title: "Predicting the Price of Bitcoin, Intro to LSTM" 
+date: 2020-06-04 
 draft: false 
 ---
 
 Story source:
 
-https://en.wikipedia.org/wiki/Maji_Maji_Rebellion
+https://livecodestream.dev/post/2020-06-04-predicting-the-price-of-bitcoin-intro-to-lstm/
 
 
-Maji Maji Rebellion  
----  
-Part of the aftermath of the [Scramble for Africa](/wiki/Scramble_for_Africa
-"Scramble for Africa")  
-[![Maji Maji rebellion -
-de.png](//upload.wikimedia.org/wikipedia/commons/thumb/5/52/Maji_Maji_rebellion_-
-_de.png/250px-Maji_Maji_rebellion_-_de.png)](/wiki/File:Maji_Maji_rebellion_-
-_de.png)  
-Map of [German East Africa](/wiki/German_East_Africa "German East Africa")
-with the areas affected by the rebellion highlighted in red.  
-Belligerents  
-  
-[![German
-Empire](//upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flag_of_the_German_Empire.svg/23px-
-Flag_of_the_German_Empire.svg.png)](/wiki/German_Empire "German Empire")
-[Germany](/wiki/German_Empire "German Empire")
+![Feature Image](/images/post/2020-06-04-Predicting-the-Price-of-Bitcoin-
+Intro-to-LSTM/Hero.jpg)
 
-|
+Today we are going to discuss how to predict the price of Bitcoin by analyzing
+the pricing information for the last 6 years. Note that we already have
+established that our analysis will only focus on the pricing information,
+leaving aside any factor which may impact the price of Bitcoin, like for
+example, news, which can play a very important rule. For this reason, I say
+that this article and related project are only intended for educational
+purposes and should not be used in production. It is an overly simplistic
+model that will help us explain and understand time series forecasting using
+Python and Recurrent Neural Networks (RNNs), more precisely we will build an
+LSTM (Long-Short Term Memory) model.
 
-![](//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Al%C4%AB.png/15px-
-Al%C4%AB.png) [Qadiriyya Brotherhood](/wiki/Qadiriyya "Qadiriyya")
+All the code for the article can be found
+[here](https://github.com/livecodestream/bitcoin-predict).
 
-[Matumbi](/wiki/Matumbi_people "Matumbi people"), [Ngoni](/wiki/Ngoni_people
-"Ngoni people"), [Yao](/wiki/Yao_people_\(East_Africa\) "Yao people \(East
-Africa\)") tribes
+* * *
 
-other [Tanganyikans](/wiki/Tanganyika "Tanganyika")  
-Commanders and leaders  
-[![German
-Empire](//upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flag_of_the_German_Empire.svg/23px-
-Flag_of_the_German_Empire.svg.png)](/wiki/German_Empire "German Empire")
-[Gustav Adolf von Götzen](/wiki/Gustav_Adolf_von_G%C3%B6tzen "Gustav Adolf von
-Götzen")|
+## Introductory concepts
 
-[Kinjikitile Ngwale](/wiki/Kinjikitile_Ngwale "Kinjikitile Ngwale")
-[**†**](/wiki/Killed_in_action "Killed in action")
+### What is an RNN?
 
-Nasr Khalfan[1]
+A **recurrent neural network (RNN)** is a class of artificial neural networks
+where connections between the nodes form a directed graph along a temporal
+sequence. This allows it to exhibit temporal dynamic behavior and makes them
+great for time series analysis, speech recognition, grammar learning, literal
+compositions, etc.
 
-Hemedi Muhammad  
-Strength  
-c. 2,000|  ~5,000  
-Casualties and losses  
-15 Europeans and 389 Askari[2]|  75,000 warriors killed  
-125,000 - 175,000 dead by disease, hunger and repression[3]  
-250,000–300,000 total dead  
-  
-The **Maji Maji Rebellion** ([German](/wiki/German_language "German
-language"): _Maji-Maji-Aufstand_ ), sometimes called the **Maji Maji Jihad**
-or **Maji Maji War** ([Swahili](/wiki/Swahili_language "Swahili language"):
-_Vita vya Maji Maji_ , _Maji-Maji-Krieg_ ), was an armed rebellion of Islamic
-and Animist Africans against German colonial rule in [German East
-Africa](/wiki/German_East_Africa "German East Africa") (modern-day
-[Tanzania](/wiki/Tanzania "Tanzania")). The war was triggered by a German
-policy designed to force the indigenous population to grow
-[cotton](/wiki/Cotton "Cotton") for export, and it lasted from 1905 to
-1907.[4] The war resulted in 250,000–300,000 total dead, mostly civilians from
-famine.
+### What is an LSTM?
 
-After the [Scramble for Africa](/wiki/Scramble_for_Africa "Scramble for
-Africa") among the major European powers in the 1880s, Germany had reinforced
-its hold on several formal African colonies. These were German East Africa
-(now Tanzania, Rwanda, Burundi, and part of Mozambique), German Southwest
-Africa (present-day Namibia), Cameroon, and Togoland (today split between
-Ghana and Togo). The Germans had a relatively weak hold on German East Africa.
-However, they did maintain a system of forts throughout the interior of the
-territory and were able to exert some control over it. Since their hold on the
-colony was weak, they resorted to using violently repressive tactics to
-control the population.[5]
+**Long-Short Term Memory (LSTM)** is a type of RNN that allows us to process
+not only single data points (such as images) but also entire sequences of data
+(such as speech or video). They are a great choice for time series
+forecasting, and they are the type of architecture we will be using today.
 
-Germany began levying head taxes in 1898, and they relied heavily on forced
-labor to build roads and accomplish various other tasks. In 1902, [Carl
-Peters](/wiki/Carl_Peters "Carl Peters") ordered villages to grow cotton as a
-cash crop (for export). Each village was charged with producing a quota of
-cotton. The headmen of the village were left in charge of overseeing the
-production, which set them against the rest of the population.
+![LSTM Cell](/images/post/2020-06-04-Predicting-the-Price-of-Bitcoin-Intro-to-
+LSTM/The_LSTM_cell.png)
 
-The German policies were very unpopular, as they had serious effects on the
-lives of the natives. The social fabric of society was being changed rapidly.
-The social roles of men and women were being changed to face the needs of the
-communities. Since men were forced away from their homes to work, women were
-forced to assume some of the traditional male roles. Also, the fact that men
-were away strained the resources of the village and the people's ability to
-deal with their environment and remain self-sufficient. There was thus a lot
-of animosity against the government at this period. In 1905, a drought
-threatened the region. All that, as well as opposition to the government's
-agricultural and labor policies, led to open rebellion against the Germans in
-July.[6]
+LSTM Cell
 
-The insurgents turned to magic to drive out the German colonizers and used it
-as a unifying force in the rebellion. A spirit medium named [Kinjikitile
-Ngwale](/wiki/Kinjikitile_Ngwale "Kinjikitile Ngwale"), who practiced [Folk
-Islam](/wiki/Folk_Islam "Folk Islam") that incorporated [animist
-beliefs](/wiki/Animism "Animism"), claimed to be possessed by a snake spirit
-called Hongo.[7] Ngwale began calling himself Bokero and developed a belief
-that the people of German East Africa had been called upon to eliminate the
-Germans. German anthropologists recorded that he gave his followers war
-medicine that would turn German bullets into water. This "war medicine" was in
-fact water ( _maji_ in Kiswahili) mixed with [castor oil](/wiki/Castor_oil
-"Castor oil") and [millet](/wiki/Millet "Millet") seeds.[7] Empowered with
-this new liquid, Bokero's followers began what would become known as the Maji
-Maji Rebellion.
+* * *
 
-The end of the war was followed by a period of [famine](/wiki/Famine
-"Famine"), known as the Great Hunger ( _njaa_ ), caused in large part by the
-scorched-earth policy advocated by [Gustav Adolf von
-Götzen](/wiki/Gustav_Adolf_von_G%C3%B6tzen "Gustav Adolf von Götzen").
+## Data Exploration
 
-## The
-uprising[[edit](/w/index.php?title=Maji_Maji_Rebellion&action=edit&section=1
-"Edit section: The uprising")]
+Before we do anything we need to gather the data (which I already did for you)
+and we need to understand the data. Let’s first load the dataset with Python
+and take a first look:
 
-The followers of Bokero's movement were poorly armed with [spears](/wiki/Spear
-"Spear") and [arrows](/wiki/Arrow "Arrow"), sometimes poisoned.[8] However,
-they were numerous and believed that they could not be harmed because the
-Germans' bullets would turn to water.[7] They marched from their villages
-wearing [millet](/wiki/Millet "Millet") stalks around their foreheads.
-Initially, they attacked small outposts and damaged cotton plants. On 31 July
-1905, Matumbi tribesmen marched on Samanga and destroyed the cotton crop as
-well as a trading post. Kinjikitile was arrested and hanged for treason.
-Before his execution, he declared that he had spread the medicine of the
-rebellion throughout the region.[7] On 14 August 1905, Ngindo tribesmen
-attacked a small party of missionaries on a safari; all five, including Bishop
-Spiss (the [Roman Catholic](/wiki/Roman_Catholic "Roman Catholic") Bishop of
-[Dar es Salaam](/wiki/Dar_es_Salaam "Dar es Salaam")) were speared to
-death.[7]
+    
+    
+    data = pd.read_csv("data/bitcoin.csv")
+    data = data.sort_values('Date')
+    data.head()
+    
 
-  
-Soon the [Yao](/wiki/Yao_people_\(East_Africa\) "Yao people \(East Africa\)")
-tribes started participating and throughout August the rebels moved from the
-Matumbi Hills in the southern part of what is now [Tanzania](/wiki/Tanzania
-"Tanzania") and attacked German garrisons throughout the colony. The attack on
-Ifakara, on 16 August, destroyed the small German garrison and opened the way
-to the key fortification at [Mahenge](/wiki/Mahenge "Mahenge"). Though the
-southern garrison was quite small (there were but 458 European and 588 native
-soldiers in the entire area), their fortifications and modern weapons gave
-them an advantage. At Mahenge, several thousand Maji Maji warriors (led by
-another spirit medium, not Bokero) marched on the German cantonment, which was
-defended by Lieutenant [Theodor von Hassel](/wiki/Theodor_von_Hassel "Theodor
-von Hassel") with sixty native soldiers, a few hundred loyal tribesmen, and
-two [machine guns](/wiki/Machine_gun "Machine gun").[7] The two attacking
-tribes disagreed on when to attack and were unable to co-ordinate. The first
-attack was met with gunfire from 1000 m; the tribesmen stood firm for about
-fifteen minutes, then they broke and retreated. After the first attack, a
-second column of 1,200 men advanced from the east. Some of these attackers
-were able to get within three paces of the firing line before they were
-killed.[7]
+![Bitcoin Data, source: coinbase](/images/post/2020-06-04-Predicting-the-
+Price-of-Bitcoin-Intro-to-LSTM/data_table.png)
 
-The [Qadiriyya Brotherhood](/wiki/Qadiriyya "Qadiriyya") declared a
-[Jihad](/wiki/Jihad "Jihad") against the Germans,[9] with [Sufi
-Muslims](/wiki/Sufism "Sufism") now playing a major role in the rebellion.
+Bitcoin Data, source: coinbase
 
-While this was the apex of the uprising, the [Ngoni people](/wiki/Ngoni_people
-"Ngoni people") decided to join in the revolt with a force of 5,000. The
-Muslim Gwangara Ngoni were relatively recent arrivals in the region,
-descendants of a remnant of the Ndwandwe confederation defeated by the Zulus
-in 1818 (other Ngoni states were formed in Malawi, Zambia, and north-central
-Tanzania). German troops, armed with machine guns, departed from Mahenge to
-the Ngoni camp, which they attacked on 21 October. The Ngoni soldiers
-retreated, throwing away their bottles of war medicine and crying, "The maji
-is a lie!"[10] Upon the outbreak of the fighting, Count [Gustav Adolf von
-Götzen](/wiki/Gustav_Adolf_von_G%C3%B6tzen "Gustav Adolf von Götzen"),
-governor of German East Africa, had requested reinforcements from the German
-government. [Kaiser Wilhelm](/wiki/Wilhelm_II,_German_Emperor "Wilhelm II,
-German Emperor") immediately ordered two cruisers with their Marine
-complements to the troubled colony.[7] Reinforcements also arrived from as far
-away as New Guinea. When 1,000 regular soldiers from Germany arrived in
-October, Götzen felt he could go on the offensive and restore order in the
-south.[11]
+The `head()` function gives us already some valuable information about the
+columns of the dataset and what the information could look like. For our
+purposes, we are interested in the `Close` column, which contains the price of
+Bitcoin at the end of the day, for that particular date. Let’s see if we can
+build a chart that shows us the price of Bitcoin over time using our data set.
 
-Three columns moved into the rebellious South. They destroyed villages, crops,
-and other food sources used by the rebels. They made effective use of their
-firepower to break up rebel attacks. A successful ambush of a German column
-crossing the [Rufiji River](/wiki/Rufiji_River "Rufiji River") by the Bena
-kept the rebellion alive in the southwest, but the Germans were not to be
-denied for long. By April 1906, the southwest had been pacified. However,
-elsewhere the fighting was bitter. A column under Lt. [Gustav von
-Blumenthal](/wiki/Von_Blumenthal "Von Blumenthal") (1879–1913, buried at
-[Lindi](/wiki/Lindi "Lindi")) consisting of himself, one other European and 46
-Askaris fell under continuous attack as it marched in early May 1906, from
-[Songea](/wiki/Songea "Songea") to Mahenge. The Germans decided to concentrate
-at [Kitanda](/w/index.php?title=Kitanda&action=edit&redlink=1 "Kitanda \(page
-does not exist\)"), where Major Johannes, Lt. von Blumenthal and [Lt. von
-Lindeiner-Wildau](/wiki/Friedrich_Wilhelm_von_Lindeiner-Wildau "Friedrich
-Wilhelm von Lindeiner-Wildau") eventually gathered. Von Blumenthal was then
-sent along the [Luwegu
-River](/w/index.php?title=Luwegu_River&action=edit&redlink=1 "Luwegu River
-\(page does not exist\)"), partly by boat. The southeast campaign degenerated
-into a guerrilla war that brought with it a devastating famine.[7]
+    
+    
+    price = data[['Close']]
+    
+    plt.figure(figsize = (15,9))
+    plt.plot(price)
+    plt.xticks(range(0, data.shape[0],50), data['Date'].loc[::50],rotation=45)
+    plt.title("Bitcoin Price",fontsize=18, fontweight='bold')
+    plt.xlabel('Date',fontsize=18)
+    plt.ylabel('Close Price (USD)',fontsize=18)
+    plt.show()
+    
 
-The famine following the Maji Maji Rebellion was partly deliberate. Von Götzen
-was willing to pardon the common soldiers who gave up their weapons, leaders
-and witch doctors. However, he also needed to flush out the remaining rebels
-and so chose famine. In 1905, one of the leaders of German troops in the
-colony, Captain Wangenheim, wrote to von Götzen, "Only hunger and want can
-bring about a final submission. Military actions alone will remain more or
-less a drop in the ocean."[12]
+![Price of Bitcoin from Dec, 2014 to Jun
+2020](/images/post/2020-06-04-Predicting-the-Price-of-Bitcoin-Intro-to-
+LSTM/bitcoin_price.png)
 
-Not until August 1907 were the last embers of rebellion extinguished. In its
-wake, the rebellion had left 15 Europeans and 389 native soldiers and tens or
-even hundreds of thousands[13][14] of insurgents and innocent bystanders dead.
-It also broke the spirit of the people to resist, and the colony remained
-calm, partly because of a new governor, who brought a more enlightened regime,
-until the outbreak of [World War I](/wiki/World_War_I "World War I").
+Price of Bitcoin from Dec, 2014 to Jun 2020
 
-## Aftermath and
-interpretation[[edit](/w/index.php?title=Maji_Maji_Rebellion&action=edit&section=2
-"Edit section: Aftermath and interpretation")]
+Remember those days bitcoin was almost 20k? Let’s not get distracted and let’s
+see if our `Close` information contains any null values, null values are of no
+use for us and we should work them out if there’s any.
 
-The [Abushiri revolt](/wiki/Abushiri_revolt "Abushiri revolt") of 1888–1889
-and the Wahehe Rebellion of 1891–1898 are viewed by historians as precursors
-of the Maji Maji uprising. The suppression of the Maji Maji people changed the
-history of southern [Tanzania](/wiki/Tanzania "Tanzania"). Tens, perhaps
-hundreds, of thousands of people died or were displaced from their homes. In
-the wake of the war, the imperial government instituted administrative
-reforms, and by the outbreak of the First World War, Tanganyika could be said
-to be among the better-administered European colonies in Africa. The rebellion
-became a focal point in the history of the region. Later Tanzanian
-[nationalists](/wiki/Nationalist "Nationalist") used it as an example of the
-first stirrings of Tanzanian nationalism, a unifying experience that brought
-together all the different peoples of Tanzania under one leader, in an attempt
-to establish a nation free from foreign domination.
+    
+    
+    price.info()
+    <class 'pandas.core.frame.DataFrame'>
+    Int64Index: 2001 entries, 2000 to 0
+    Data columns (total 1 columns):
+     #   Column  Non-Null Count  Dtype  
+    ---  ------  --------------  -----  
+     0   Close   2001 non-null   float64
+    dtypes: float64(1)
+    memory usage: 31.3 KB
+    
 
-Later historians have challenged that view and claimed that the rebellion
-cannot be seen as a unified movement but rather a series of revolts conducted
-for a wide range of reasons, including religion. The Muslim Ngoni chiefs were
-offered Christian baptism before execution. Many people in the area itself saw
-the revolt as one part of a longer series of wars continuing since long before
-the arrival of Germans in the region. They cite the alliance of some groups
-with the Germans to further their own agendas.
+A simple .info() over our dataframe gives us some useful information, like the
+number of entries, and the number of Non-Null entries, which in our case are
+the same, so nothing else to do here.
 
-## See
-also[[edit](/w/index.php?title=Maji_Maji_Rebellion&action=edit&section=3 "Edit
-section: See also")]
+* * *
 
-##
-References[[edit](/w/index.php?title=Maji_Maji_Rebellion&action=edit&section=4
-"Edit section: References")]
+## Data Preparation
 
-  1. **^** “Islam in Africa” p.221 
-  2. **^** [Genocidios Coloniales de Alemania ( 1904 a 1907 )](http://remilitari.com/guias/victimario3.htm)
-  3. **^** [Genocidios Coloniales de Alemania ( 1904 a 1907 )](http://remilitari.com/guias/victimario3.htm)
-  4. **^** The Organization of the Maji Maji Rebellion John Iliffe, The Journal of African History, Vol. 8, No. 3 (1967), pp. 495–512. p. 495.
-  5. **^** Natermann, Diana Miryong (2018). _Pursuing whiteness in the colonies : private memories from the Congo Free State and German East Africa (1884-1914)_. Münster: Waxmann Verlag. p. 59. [ISBN](/wiki/ISBN_\(identifier\) "ISBN \(identifier\)") [978-3-8309-3690-9](/wiki/Special:BookSources/978-3-8309-3690-9 "Special:BookSources/978-3-8309-3690-9"). [OCLC](/wiki/OCLC_\(identifier\) "OCLC \(identifier\)") [1037008514](//www.worldcat.org/oclc/1037008514).
-  6. **^** Seel, Sarah-Jane (2014). _The history and traditions of the Pimbwe_. Mgawe, Peter,, Mulder, Monique Borgerhoff,, Pinda, Mizengo K. P. Dar Es Salaam, Tanzania: Mkuki na Nyota Publishers. p. 35. [ISBN](/wiki/ISBN_\(identifier\) "ISBN \(identifier\)") [978-9987-08-286-5](/wiki/Special:BookSources/978-9987-08-286-5 "Special:BookSources/978-9987-08-286-5"). [OCLC](/wiki/OCLC_\(identifier\) "OCLC \(identifier\)") [903052545](//www.worldcat.org/oclc/903052545).
-  7. ^ _**a**_ _**b**_ _**c**_ _**d**_ _**e**_ _**f**_ _**g**_ _**h**_ _**i**_ Pakenham, Thomas (1992). [_The Scramble for Africa: White Man's Conquest of the Dark Continent from 1876 to 1912_](https://books.google.com/books?id=VeZIcTKTydAC). HarperCollins. pp. 616–621. [ISBN](/wiki/ISBN_\(identifier\) "ISBN \(identifier\)") [0380719991](/wiki/Special:BookSources/0380719991 "Special:BookSources/0380719991").
-  8. **^** Petraitis, Richard (August 1998). ["Bullets into Water: The Sorcerers of Africa"](http://www.reall.org/newsletter/v06/n06/bullets-into-water.html). Retrieved 2008-11-30.
-  9. **^** "Christian-Muslim relations in Eastern Africa" p. 45
-  10. **^** ["Maji Maji revolt | the Polynational War Memorial"](https://www.war-memorial.net/Maji-Maji-revolt-3.12). _www.war-memorial.net_. Retrieved 2019-12-13.
-  11. **^** ["The Maji Maji Rebellion | Violence in Twentieth Century Africa"](https://scholarblogs.emory.edu/violenceinafrica/sample-page/the-maji-maji-rebellion-2/). _Scholar Blogs_. Retrieved 2019-12-14.
-  12. **^** Pakenham, 622 quoting from Götzen, Gustav Adolf (1909). _Deutsch Ostafrika im Aufstand 1905–6_. Berlin. p. 149.
-  13. **^** Gellately, Robert; Ben Kiernan (2003). [_The Specter of Genocide: Mass Murder in Historical Perspective_](https://archive.org/details/specterofgenocid00robe). Published by Cambridge University Press. p. [161](https://archive.org/details/specterofgenocid00robe/page/161). [ISBN](/wiki/ISBN_\(identifier\) "ISBN \(identifier\)") [0-521-52750-3](/wiki/Special:BookSources/0-521-52750-3 "Special:BookSources/0-521-52750-3").
-  14. **^** [Hull](/wiki/Isabel_Hull "Isabel Hull"), [Isabel V.](/wiki/Isabel_Hull "Isabel Hull") (2004). _Absolute Destruction: Military Culture and the Practices of War in Imperial Germany_. Ithaca, NY: Cornell University Press. p. 157.
+### Normalization
 
-## External
-links[[edit](/w/index.php?title=Maji_Maji_Rebellion&action=edit&section=5
-"Edit section: External links")]
+The first step we will take to our data is to normalize its values. The goal
+of normalization is to change the values of numeric columns in the data set to
+a common scale, without distorting differences in the ranges of values.
 
-  *[c.]: circa
+For our purposes, we will use `MinMaxScaler` from the `sklearn` library
+
+    
+    
+    from sklearn.preprocessing import MinMaxScaler
+    min_max_scaler = MinMaxScaler()
+    
+    norm_data = min_max_scaler.fit_transform(price.values)
+    
+
+Let’s try to compare our values before and after normalizing:
+
+    
+    
+    Real: [370.], Normalized: [0.01280082]
+    Real: [426.1], Normalized: [0.01567332]
+    Real: [8259.99], Normalized: [0.41679416]
+    
+
+### Data Split
+
+During this step we are going to actually tackle 2 problems, the first is that
+we need to split our data set into training data and test data. Training data
+we will use to teach our model while the test data we will use as a baseline
+for comparison for our predictions. This is very important, as we want to make
+sure our predictions make sense, but we can’t test on the same data we train
+our network as we can run into the risk of overfitting.
+
+In addition here we will also prepare our data for the LSTM network. This
+particular type of network requires us to send the time series in chunks of
+data, separating the “history” data we will use for training and our “target”
+which tell how far in the future does the model needs to learn to predict.
+
+The responsible for this second part will be our `univariate_data` function:
+
+    
+    
+    def univariate_data(dataset, start_index, end_index, history_size, target_size):
+      data = []
+      labels = []
+    
+      start_index = start_index + history_size
+      if end_index is None:
+        end_index = len(dataset) - target_size
+    
+      for i in range(start_index, end_index):
+        indices = range(i-history_size, i)
+        # Reshape data from (history_size,) to (history_size, 1)
+        data.append(np.reshape(dataset[indices], (history_size, 1)))
+        labels.append(dataset[i+target_size])
+      return np.array(data), np.array(labels)
+    
+
+And the split will happen here:
+
+    
+    
+    past_history = 5
+    future_target = 0
+    
+    TRAIN_SPLIT = int(len(norm_data) * 0.8)
+    
+    
+    x_train, y_train = univariate_data(norm_data,
+                                       0,
+                                       TRAIN_SPLIT,
+                                       past_history,
+                                       future_target)
+    
+    x_test, y_test = univariate_data(norm_data,
+                                     TRAIN_SPLIT,
+                                     None,
+                                     past_history,
+                                     future_target)
+    
+
+By using `past_history`, we call tell our network that we need to use 5 days
+of data to learn to predict the next point in the time series `future_target`.
+
+* * *
+
+## Build the model
+
+The next step is to build our model architecture. Finding the right model is
+an art, and it will take several tries plus experience to find the right
+layers and hyper-parameters for each one of them.
+
+We won’t go into the details on each layer, there’s enough complexity to write
+a post for each. But I’ll highlight that the model we built here is fairly
+simple and pretty standard for this kind of problems, at least in the type of
+layers used.
+
+    
+    
+    from keras.models import Sequential
+    from keras.optimizers import Adam
+    from keras.layers import Dense, LSTM, LeakyReLU, Dropout
+    
+    num_units = 64
+    learning_rate = 0.0001
+    activation_function = 'sigmoid'
+    adam = Adam(lr=learning_rate)
+    loss_function = 'mse'
+    batch_size = 5
+    num_epochs = 50
+    
+    # Initialize the RNN
+    model = Sequential()
+    model.add(LSTM(units = num_units, activation=activation_function, input_shape=(None, 1)))
+    model.add(LeakyReLU(alpha=0.5))
+    model.add(Dropout(0.1))
+    model.add(Dense(units = 1))
+    
+    # Compiling the RNN
+    model.compile(optimizer=adam, loss=loss_function)
+    
+
+Let’s see how our architecture looks like:
+
+    
+    
+    Model: "sequential_13"
+    _______________________________________________________________
+    Layer (type)                 Output Shape              Param #   
+    ===============================================================
+    lstm_6 (LSTM)                (None, 64)                16896     
+    _______________________________________________________________
+    leaky_re_lu_4 (LeakyReLU)    (None, 64)                0         
+    _______________________________________________________________
+    dropout_4 (Dropout)          (None, 64)                0         
+    _______________________________________________________________
+    dense_6 (Dense)              (None, 1)                 65        
+    ===============================================================
+    Total params: 16,961
+    Trainable params: 16,961
+    Non-trainable params: 0
+    _______________________________________________________________
+    
+
+* * *
+
+## Train the model
+
+Now that we have our data ready, and our model compiled, we can start
+training, and with Keras is as simple as one line of code:
+
+    
+    
+    # Using the training set to train the model
+    history = model.fit(
+        x_train,
+        y_train,
+        validation_split=0.1,
+        batch_size=batch_size,
+        epochs=num_epochs,
+        shuffle=False
+    )
+    
+
+Finding the right hyper-parameters here is also part of the art, however, it
+is very important that the parameter `shuffle` is set to `False`. Our analysis
+depends completely on the order of the information, if we change the order our
+results will make no sense at all.
+
+Training for this model is something you can do, even without GPU, the amount
+of data is very low, and the network architecture is very simple. On more
+advanced models, and with more granular information, these models can take
+hours or days to train.
+
+After you finish training, it’s important that we evaluate the result of our
+training, did we do good? what’s our training loss and validation loss
+function look like? If something doesn’t look right, then you probably need to
+go back to the previous steps and play with you hyper-parameters, or maybe
+even revise your model architecture.
+
+Here is a nice chart you can use to compare both functions:
+
+    
+    
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
+    
+    epochs = range(len(loss))
+    
+    plt.figure()
+    
+    plt.plot(epochs, loss, 'b', label='Training loss')
+    plt.plot(epochs, val_loss, 'r', label='Validation loss')
+    plt.title("Training and Validation Loss")
+    plt.legend()
+    
+    plt.show()
+    
+
+![Training and Validation Loss](/images/post/2020-06-04-Predicting-the-Price-
+of-Bitcoin-Intro-to-LSTM/loss.png)
+
+Training and Validation Loss
+
+My results may not be ideal, but they are enough for our purposes. There’s an
+interesting article which explains some issues you can visually see in this
+chart, I recommend that you take a look at it:
+<https://machinelearningmastery.com/diagnose-overfitting-underfitting-lstm-
+models/>
+
+* * *
+
+## Prediction
+
+With our model now trained, we can start making some predictions and
+evaluating those predictions to our test data to see how well our model is
+doing:
+
+    
+    
+    original = pd.DataFrame(min_max_scaler.inverse_transform(y_test))
+    predictions = pd.DataFrame(min_max_scaler.inverse_transform(model.predict(x_test)))
+    
+    ax = sns.lineplot(x=original.index, y=original[0], label="Test Data", color='royalblue')
+    ax = sns.lineplot(x=predictions.index, y=predictions[0], label="Prediction", color='tomato')
+    ax.set_title('Bitcoin price', size = 14, fontweight='bold')
+    ax.set_xlabel("Days", size = 14)
+    ax.set_ylabel("Cost (USD)", size = 14)
+    ax.set_xticklabels('', size=10)
+    
+
+![Predicted vs Actual Bitcoin price](/images/post/2020-06-04-Predicting-the-
+Price-of-Bitcoin-Intro-to-LSTM/prediction.png)
+
+Predicted vs Actual Bitcoin price
+
+That chart looks pretty good to me, very happy with the results, what do you
+think?
+
+* * *
+
+## Conclusion
+
+RNNs and LSTM are great architectures we can use to analyze and predict time-
+series information. In this post, we focused more on the story than the
+technical details of the implementation, but if you are interested in the
+topic, do your research, check out the
+[code](https://github.com/livecodestream/bitcoin-predict), play with it,
+change the layers, the hyper-parameters, try different things, use different
+columns, or normalization methods, read more detailed articles, and papers on
+the subject.
+
+Thanks for reading!
 
