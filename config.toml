@@ -21,12 +21,12 @@ paginate = 5
 [languages]
   [languages.en]
     title = "esaleatorio.com"
-    subtitle = "De interes para algunos Hackers"
+    subtitle = "Lo que algunas personas inteligentes leen y comparten."
     keywords = ""
     copyright = ""
-    menuMore = "Ver mas"
-    readMore = "Leer mas"
-    readOtherPosts = "Otras publicaciones"
+    menuMore = "Show more"
+    readMore = "Read more"
+    readOtherPosts = "Read other posts"
  
     [languages.en.params.logo]
       logoText = "es aleatorio"
@@ -35,10 +35,10 @@ paginate = 5
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "about"
-        name = "Acerca de Nosotros"
+        name = "About"
         url = "/about"
       [[languages.en.menu.main]]
         identifier = "showcase"
         name = "Showcase"
-        url = "/showcase"
+        url = "/"
 
