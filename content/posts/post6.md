@@ -1,147 +1,331 @@
 ---
-title: "Spotify's Podcasting Strategy" 
+title: "SciML Ecosystem Update: Auto-Parallelism and Component-Based Modeling" 
 date: 2020-06-05 
 draft: false 
 ---
 
 Story source:
 
-https://medium.com/swlh/spotifys-podcasting-strategy-ee09dd74926e
+https://sciml.ai/2020/06/01/ModelingToolkit.html
 
 
-## GRAND PLAN
+Another month and another set of SciML updates! This month we have been
+focusing a lot on simplifying our interfaces and cleaning our tutorials. We
+can demonstrate that _no user-intervention is required for adjoints_. Also,
+the ModelingToolkit.jl symbolic modeling language has really come into
+fruition, allowing component-based models and automated parallelism. Indeed,
+let’s jump right into an example.
 
-# Spotify’s Podcasting Strategy
+[ModelingToolkit.jl](https://github.com/SciML/ModelingToolkit.jl) has added
+the ability to build differential-algebraic equations through acausal
+component-based models. As an example, let’s say we built two Lorenz
+equations:
 
-## Becoming Google for audio.
+    
+    
+    using ModelingToolkit, OrdinaryDiffEq
+    
+    @parameters t σ ρ β
+    @variables x(t) y(t) z(t)
+    @derivatives D'~t
+    
+    eqs = [D(x) ~ σ*(y-x),
+           D(y) ~ x*(ρ-z)-y,
+           D(z) ~ x*y - β*z]
+    
+    lorenz1 = ODESystem(eqs,name=:lorenz1)
+    lorenz2 = ODESystem(eqs,name=:lorenz2)
+    
 
-The podcasting industry is finally reaching escape velocity. New technologies
-like AirPods, smart speakers and connected cars have seen substantial growth
-in the last 3 years making it easy for consumers to consume content and
-incentivizing creators to create high-quality content.
+We can then define an implicit equation that couples the two equations
+together and solve the system:
 
-The number of podcast listeners has been growing steadily over the past few
-years. As of 2019, **_a quarter of Americans_** have been listening to
-podcasts **_weekly_**.
+    
+    
+    @variables a
+    @parameters γ
+    connections = [0 ~ lorenz1.x + lorenz2.y + a*γ]
+    connected = ODESystem(connections,t,[a],[γ],systems=[lorenz1,lorenz2])
+    
+    u0 = [lorenz1.x => 1.0,
+          lorenz1.y => 0.0,
+          lorenz1.z => 0.0,
+          lorenz2.x => 0.0,
+          lorenz2.y => 1.0,
+          lorenz2.z => 0.0,
+          a => 2.0]
+    
+    p  = [lorenz1.σ => 10.0,
+          lorenz1.ρ => 28.0,
+          lorenz1.β => 8/3,
+          lorenz2.σ => 10.0,
+          lorenz2.ρ => 28.0,
+          lorenz2.β => 8/3,
+          γ => 2.0]
+    
+    tspan = (0.0,100.0)
+    prob = ODEProblem(connected,u0,tspan,p)
+    sol = solve(prob,Rodas5())
+    
+    using Plots; plot(sol,vars=(a,lorenz1.x,lorenz2.z))
+    
 
- **The average weekly listener is spending 6+ hours listening to podcasts
-weekly**
+![](https://user-
+images.githubusercontent.com/1814174/79229194-9e71a780-7e30-11ea-9f93-bfa762eb8dfb.png)
 
-Apple played an important role in the development of the podcasting industry
-and their app remains the most prominent app for listening to podcasts however
-their share fell from over 80% to just over 60% in the last few years. The
-reduction in market share can be explained by two factors. The first being
-that iOS was the predominant platform for listening to podcasts however that
-changed when Google launched its own podcasting app in June 2018 and a long
-tail of other well-funded companies providing a seamless cross-platform
-experience. The second being Spotify and their big push into podcasting in the
-last two years.
+Because of this, one can build up independent components and start tying them
+together to make large complex models. We plan to start building a
+comprehensive model library to help users easily generate large-scale models.
 
- **Spotify has gained 10% market share in 4 years**
+We have added the ability to specify compiler targets from ModelingToolkit. If
+you have a model specified in its symbolic language, it can generate code for
+C, Stan, and MATLAB. For example, take the Lotka-Volterra equations:
 
-Spotify CEO Daniel Ek wrote a blog post in 2019, highlighting the company’s
-transition from music first to audio first. He states that he expects 20% of
-all Spotify listening will be non-music content. He expects podcasts to play
-an important role in increasing user engagement, reducing churn and improving
-the bottom line. You can read the post
-[here](https://newsroom.spotify.com/2019-02-06/audio-first/).
+    
+    
+    using ModelingToolkit, Test
+    @parameters t a
+    @variables x(t) y(t)
+    @derivatives D'~t
+    eqs = [D(x) ~ a*x - x*y,
+           D(y) ~ -3y + x*y]
+    
 
-Source: Spotify Blog
+Let’s say we now need to deploy this onto an embedded system which only has a
+C compiler. We can have ModelingToolkit.jl generate the required C code:
 
-Spotify made a huge push in the podcasting space in 2019 by acquiring [Gimlet
-Media](https://gimletmedia.com/) which is a podcast network with shows like
-_Reply All_ and _Startup,_ and [Anchor](https://anchor.fm/), a podcast
-creation app, for a combined $340 million according to their
-[SEC](https://www.sec.gov/Archives/edgar/data/1639920/000156459019002688/ck0001639920-20f_20181231.htm#ITEM_3_KEY_INFORMATION)
-filing. They ended their shopping spree in 2019 by acquiring
-[Parcast](https://www.parcast.com/), a podcast network that specializes in
-true crime, mystery and science-fiction shows for an undisclosed amount. The
-company did not stop there. They acquired [The
-Ringer](https://www.theringer.com/) in 2020 reportedly for around $196
-million, a media company known both for its culture website and massive
-podcast operation headlined by _The Bill Simmons Podcast_. The latest
-acquisition is The Joe Rogan Experience.
+    
+    
+    ModelingToolkit.build_function(eqs,[x,y],[a],t,target = ModelingToolkit.CTarget()) ==
+    
 
-On May 19, Joe Rogan announced that he signed an exclusive deal to bring his
-podcast to Spotify. The exact terms aren’t public, but the consensus seems to
-be that Spotify will pay Rogan well over $100 million to license the back
-catalog and future episodes of his podcast, [The Joe Rogan
-Experience](https://en.wikipedia.org/wiki/The_Joe_Rogan_Experience). Joe Rogan
-is considered the most successful podcaster in the world topping almost every
-podcast popularity chart except Spotify’s because the show had been absent
-from the platform and now by the end of the year it will be exclusively
-available on Spotify.
+which gives:
 
-> “We can’t rest on our laurels. We believe the market we’re going after is
-> audio. That adds up to 2–3 billion people around the world who want to
-> consume some sort of audio content on a daily or weekly basis. If we’re
-> going to win that market, we’d have to be at least a third of it. We have
-> somewhere between 10–15x of where we are now of opportunity left. We’re
-> still in the early days of our journey.”
->
-> \- Spotify CEO Daniel Ek on [Invest Like the
-> Best](https://open.spotify.com/episode/3eGF6pKazFiCe9n5C0wd4i?si=3zF5zJHvSjuiTESZrddcOA)
+    
+    
+    void diffeqf(double* internal_var___du, double* internal_var___u, double* internal_var___p, t) {
+      internal_var___du[1] = internal_var___p[1] * internal_var___u[1] - internal_var___u[1] * internal_var___u[2];
+      internal_var___du[2] = -3 * internal_var___u[2] + internal_var___u[1] * internal_var___u[2];
+    }
+    
 
-Spotify grew their monthly active users (MAU) by 31%, premium subscribers by
-31% and ad-supported MAUs by 32% in the first quarter of 2020 according to
-their [financial report](https://investors.spotify.com/financials/press-
-release-details/2020/Spotify-Technology-SA-Announces-Financial-Results-for-
-First-Quarter-2020/default.aspx). Their quarterly results have become easy to
-anticipate over the last few quarters.
+Now let’s say we needed to use Stan for some probabilistic programming. That’s
+as simple as:
 
-Growth in MAU over the last 3 years
+    
+    
+    ModelingToolkit.build_function(eqs,convert.(Variable,[x,y]),convert.(Variable,[a]),t,target = ModelingToolkit.StanTarget()) ==
+    
 
-Strong user growth and retention trend if offset by non-existent profits and
-slim margins. For every dollar that the company brings in, only 25 cents is
-left to cover the costs of running the business after accounting for music
-rights and other costs. After considering the cost of R&D and marketing
-required to stay competitive in this market, their path to profitability
-looked bleak at best. They are not in a powerful position to negotiate with
-record labels because Apple Music provides a perfectly good alternative in the
-paid music streaming space.
+which gives:
 
-Spotify realizes that podcasts can help them solve a lot of issues that exist
-with their current business model however, the **bigger opportunity for them
-is to become podcast aggregators**. The current podcasting landscape is
-similar to the early days of the web. Google and Facebook realized that the
-best way to advertise was to aggregate users and deliver targeted ads. Spotify
-is well pushing to become the aggregator for podcasts and capitalize on their
-286 million MAU’s by providing targeted ads which they have refrained from
-doing so far. A very small percent of Spotify’s revenue is generated by
-advertising.
+    
+    
+    real[] diffeqf(real t,real[] internal_var___u,real[] internal_var___p,real[] x_r,int[] x_i) {
+      real internal_var___du[2];
+      internal_var___du[1] = internal_var___p[1] * internal_var___u[1] - internal_var___u[1] * internal_var___u[2];
+      internal_var___du[2] = -3 * internal_var___u[2] + internal_var___u[1] * internal_var___u[2];
+      return internal_var___du;
+    }
+    
 
-Spotify Revenue || Source: Statista
+When you mix this with the fact that code can automatically be converted to
+ModelingToolkit, this gives a way to transpile mathematical model code from
+Julia to other languages, making it easy to develop and test models in Julia
+and finally transpile and recompile the final model for embedded platforms.
+However, this automatic transformation can be used in another way…
 
-There’s never been a single podcasting company that sells ads, makes shows,
-has an already-popular podcast player, and offers the tools to make new
-series. Spotify now has all of that, and they will use it to provide superior
-user experience, use data to target ads and provide superior tools for
-advertisers.
+ModelingToolkit now has automatic parallelism on the generated model code. As
+an example, let’s automatically translate a discretized partial differential
+equation solver code into ModelingToolkit form:
 
-Two of the main issues with the open podcasting ecosystem is difficult to
-discover new podcasts and to gain insights about the listeners. Spotify has a
-solution for both these problems thanks to their data science and analytics
-investments over the years. The company has created algorithmically generated
-[podcast playlists](https://newsroom.spotify.com/2019-11-19/your-daily-
-podcasts-playlist-makes-finding-your-next-favorite-show-easier-than-ever/) and
-launched its own advertising tool called [Streaming Ad
-Insertion](https://www.spotifyforbrands.com/en-US/news/sai-announcement).
-Spotify could become the go-to for audio advertising just like google and
-Facebook have become the go-to destinations for advertising on the web.
+    
+    
+    using ModelingToolkit, LinearAlgebra, SparseArrays
+    
+    # Define the constants for the PDE
+    const α₂ = 1.0
+    const α₃ = 1.0
+    const β₁ = 1.0
+    const β₂ = 1.0
+    const β₃ = 1.0
+    const r₁ = 1.0
+    const r₂ = 1.0
+    const _DD = 100.0
+    const γ₁ = 0.1
+    const γ₂ = 0.1
+    const γ₃ = 0.1
+    const N = 8
+    const X = reshape([i for i in 1:N for j in 1:N],N,N)
+    const Y = reshape([j for i in 1:N for j in 1:N],N,N)
+    const α₁ = 1.0.*(X.>=4*N/5)
+    
+    const Mx = Tridiagonal([1.0 for i in 1:N-1],[-2.0 for i in 1:N],[1.0 for i in 1:N-1])
+    const My = copy(Mx)
+    Mx[2,1] = 2.0
+    Mx[end-1,end] = 2.0
+    My[1,2] = 2.0
+    My[end,end-1] = 2.0
+    
+    # Define the discretized PDE as an ODE function
+    function f!(du,u,p,t)
+       A = @view  u[:,:,1]
+       B = @view  u[:,:,2]
+       C = @view  u[:,:,3]
+      dA = @view du[:,:,1]
+      dB = @view du[:,:,2]
+      dC = @view du[:,:,3]
+      mul!(MyA,My,A)
+      mul!(AMx,A,Mx)
+      @. DA = _DD*(MyA + AMx)
+      @. dA = DA + α₁ - β₁*A - r₁*A*B + r₂*C
+      @. dB = α₂ - β₂*B - r₁*A*B + r₂*C
+      @. dC = α₃ - β₃*C + r₁*A*B - r₂*C
+    end
+    
 
-Source: Spotify
+Now let’s symbolically calculate the sparse Jacobian of the function `f!`. We
+can do so by tracing with the ModelingToolkit variables:
 
-The US newspaper industry generated $37.8 billion in [advertising
-revenue](https://www.journalism.org/fact-sheet/newspapers/) in 2008 and Google
-generated $21.13 billion. In 2019, Google generated $134.81 billion dollars in
-[advertising alone](https://www.statista.com/statistics/266249/advertising-
-revenue-of-google/) while the entire newspaper industry generated 14.8
-billion.
+    
+    
+    @variables du[1:N,1:N,1:3] u[1:N,1:N,1:3] MyA[1:N,1:N] AMx[1:N,1:N] DA[1:N,1:N]
+    f!(du,u,nothing,0.0)
+    jac = sparse(ModelingToolkit.jacobian(vec(du),vec(u),simplify=false))
+    
 
-The global radio [advertising
-industry](https://www.statista.com/statistics/272947/global-radio-advertising-
-expenditure/) is worth $35.23 billion dollars in 2020. Spotify generated $7.5
-billion dollars in 2019 out of which only $753 million dollars came from
-advertising. Spotify is well-positioned to become the Google for audio and the
-upside in doing so is substantial.
+Now that we’ve automatically translated this into the symbolic system and
+calculated the sparse Jacobian, we can tell it to generate an automatically
+multithreaded Julia code:
+
+    
+    
+    multithreadedjac = eval(ModelingToolkit.build_function(vec(jac),u,multithread=true)[2])
+    
+
+The output is omitted since it is quite large, but the massive speedup over
+the original form since **the sparsity pattern has been automatically computed
+and an optimal sparse multithreaded Jacobian function has been generated for
+use with DifferentialEquations.jl, NLsolve.jl, and whatever other mathematical
+library you wish to use it with**.
+
+Indeed, this gives about a 4x speedup on a computer with 4 threads, exactly as
+you’d expect.
+
+## Highlight: sir-julia Model Simulation and Inference Repository
+
+Simon Frost, Principal Data Scientist at Microsoft Health, published an
+[epidemic modeling recipes library, sir-
+julia](https://github.com/epirecipes/sir-julia) which heavily features SciML
+and its tooling. There are many aspects to note, including integration with
+probabilistic programming for Bayesian inference. Indeed, the use of
+DifferentialEquations.jl inside of a Turing.jl macro is simply to use `solve`
+inside of the Turing library: no special tricks or techniques required. For
+example, this looks like:
+
+    
+    
+    @model bayes_sir(y) = begin
+      # Calculate number of timepoints
+      l = length(y)
+      i₀  ~ Uniform(0.0,1.0)
+      β ~ Uniform(0.0,1.0)
+      I = i₀*1000.0
+      u0=[1000.0-I,I,0.0,0.0]
+      p=[β,10.0,0.25]
+      tspan = (0.0,float(l))
+      prob = ODEProblem(sir_ode!,
+              u0,
+              tspan,
+              p)
+      sol = solve(prob,
+                  Tsit5(),
+                  saveat = 1.0)
+      sol_C = Array(sol)[4,:] # Cumulative cases
+      sol_X = sol_C[2:end] - sol_C[1:(end-1)]
+      l = length(y)
+      for i in 1:l
+        y[i] ~ Poisson(sol_X[i])
+      end
+    end;
+    
+
+For more examples, please consult the repository which is chock full of
+training examples. However, this demonstration leads us to your next major
+release note:
+
+## The End of `concrete_solve`
+
+It’s finally here: `concrete_solve` has been deprecated for, you guessed it,
+`solve`. If you want to solve an ODE with `Tsit5()`, how do you write it?
+
+If you want to differentiate the solution to an ODE with `Tsit5()`, how do you
+write it?
+
+If you want to use Bayesian inference on `Tsit5()` solutions, how do you write
+it?
+
+That is correct: for both forward and reverse mode automatic differentiation,
+there is no modification that is required. When forward-mode automatic
+differentiation libraries are used, type handling will automatically promote
+to ensure the solution is differentiated properly. When reverse-mode automatic
+differentiation is used, the backpropogation will automatically be replaced
+with [adjoint sensitivity
+methods](https://docs.sciml.ai/latest/analysis/sensitivity/#solve-
+Differentiation-Examples-1) which can be controlled through the `sensealg`
+keyword argument. **The result is full performance and flexibility, but no
+code changes required**.
+
+This is a step up from where we were. In the first version of DiffEqFlux.jl,
+we required the use of special functions like `diffeq_adjoint` to use the
+adjoint methods. Then we better integrated by having `concrete_solve`, which
+was a neutered version of `solve` but would work perfectly in the AD contexts.
+Now, `solve` does it all, and so there is no other function to use.
+
+### Demonstration: Stiff Neural ODE with Nested Forward, Reverse, and Adjoint
+AD
+
+As a quick demonstration, here’s the use of checkpointed interpolating
+adjoints over a stiff ODE solver.
+
+    
+    
+    using OrdinaryDiffEq, Flux, DiffEqSensitivity
+    model = Chain(Dense(2, 50, tanh), Dense(50, 2))
+    p, re = Flux.destructure(model)
+    dudt!(u, p, t) = re(p)(u)
+    u0 = rand(2)
+    odedata = rand(2,11)
+    function loss()
+      prob = ODEProblem(dudt!, u0, (0.0,1.0), p)
+      my_neural_ode_prob = solve(prob, RadauIIA5(), saveat=0.1)
+      sum(abs2,my_neural_ode_prob .- odedata)
+    end
+    loss()
+    Flux.gradient(loss,Flux.params(u0,p))
+    
+
+Note that it’s nesting 3 modes of differentiation all in the optimal ways:
+forward-mode for the Jacobians in the stiff ODE solver, an adjoint mode for
+the derivative of `solve`, and reverse-mode for the vector-Jacobian-product
+(vjp) calculation of the neural network. This means that the DiffEqFlux.jl
+library is pretty much at its endgame where nothing about your code needs to
+be changed to utilize its tools!
+
+# Next Directions: Google Summer of Code
+
+The next directions are going to be highly tied to the directions that we are
+going with the latest Google Summer of Code, so here are a few things to look
+forward to:
+
+  * Adjoints of stochastic differential equations. Just like with ODEs, adjoint sensitivity methods for SDEs are being integrated into the library and are being setup to be automatically used when performing reverse mode automatic differentiation over `solve`. Actually, one of these methods is already completed, but we will be rounding out the offering a bit before documenting and formally releasing it. Be on the lookout for some pretty major neural SDE improvements.
+  * Some tooling for automated training of physics-informed neural networks (PINNs) from ModelingToolkit symbolic descriptions of the PDE.
+  * Efficiency enhancements to native Julia BDF methods.
+  * More Lie Group integrator methods.
+  * Higher efficiency low-storage Runge-Kutta methods with a demonstration of optimality in a large-scale climate model (!!!).
+  * More high weak order methods for SDEs
+  * Causal components in ModelingToolkit
+
+And many many more. There will be enough that I don’t think we will wait a
+whole month for the next update, so see you soon!
 

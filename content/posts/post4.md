@@ -1,92 +1,308 @@
 ---
-title: "Lancet retracts paper that halted hydroxychloroquine trials" 
+title: "Show HN: Generate HL Microservice Architecture diagrams using simple YAML syntax" 
 date: 2020-06-05 
 draft: false 
 ---
 
 Story source:
 
-https://www.theguardian.com/world/2020/jun/04/covid-19-lancet-retracts-paper-that-halted-hydroxychloroquine-trials
+https://github.com/lucasepe/draft
 
 
-The Lancet paper that halted global trials of hydroxychloroquine for Covid-19
-because of fears of increased deaths has been retracted after a Guardian
-investigation found inconsistencies in the data.
+# Draft
 
-The lead author, Prof Mandeep Mehra, from the Brigham and Women’s hospital in
-Boston, Massachusetts decided to ask the Lancet for the retraction because he
-could no longer vouch for the data’s accuracy.
+A commandline tool that generate **H** igh **L** evel microservice &
+serverless **A** rchitecture diagrams using a declarative syntax defined in a
+YAML file.
 
-The journal’s editor, Richard Horton, said he was appalled by developments.
-“This is a shocking example of research misconduct in the middle of a global
-health emergency,” he told the Guardian.
+  * Works on Linux, Mac OSX, Windows
+  * Just a single portable binary file
+  * It Does One Thing Well
+  * Input data in flat YAML text files
+  * Usable with shell scripts
+  * Can take input from pipes `cat`
 
-A Guardian investigation had revealed errors in the data that was provided for
-the research by US company Surgisphere. These were later explained by the
-company as some patients being wrongly allocated to Australia instead of Asia.
-But more anomalies were then picked up. A further Guardian investigation found
-that there were [serious questions to be
-asked](https://www.theguardian.com/world/2020/jun/03/covid-19-surgisphere-who-
-world-health-organization-hydroxychloroquine) about the company itself.
+## How `draft` works?
 
-An independent audit company was asked to examine a database provided by
-Surgisphere to ensure it had the data from more than 96,000 Covid-19 patients
-in 671 hospitals worldwide, that it was obtained properly and was accurate.
+`draft` takes in input a declarative YAML file and generates a
+[`dot`](https://en.wikipedia.org/wiki/DOT_\(graph_description_language\))
+script for [Graphviz](https://www.graphviz.org/)
 
-Surgisphere’s CEO, Sapan Desai, had said he would cooperate with the
-independent audit, but it is understood he refused to give the investigators
-access to all the data they asked for.
+    
+    
+    draft backend-for-frontend.yml | dot -Tpng -Gdpi=200 > backend-for-frontend.png 
 
-In a statement on Thursday, Mehra said: “Our independent peer reviewers
-informed us that Surgisphere would not transfer the full dataset, client
-contracts, and the full ISO audit report to their servers for analysis as such
-transfer would violate client agreements and confidentiality requirements. As
-such, our reviewers were not able to conduct an independent and private peer
-review and therefore notified us of their withdrawal from the peer-review
-process.”
+Piping the `draft` output to
+[GraphViz](http://www.graphviz.org/doc/info/output.html/) `dot` you can
+generate the following output formats:
 
-The Lancet study had a dramatic impact on attempts to find out whether the
-antimalarial drug hydroxychloroquine, and its older version, chloroquine,
-could help treat patients with Covid-19. The US president, Donald Trump was
-among those who backed the drug before any high-quality trial evidence had
-been published.
+format | command  
+---|---  
+GIF | `draft input.yml | dot -Tgif > output.gif`  
+JPEG | `draft input.yml | dot -Tjpg > output.jpg`  
+PostScript | `draft input.yml | dot -Tps > output.ps`  
+PSD | `draft input.yml | dot -Tpsd > output.psd`  
+SVG | `draft input.yml | dot -Tsvg > output.svg`  
+WebP | `draft input.yml | dot -Twebp > output.webp`  
+  
+To install GraphViz to your favorite OS, please, follow this link
+<https://graphviz.gitlab.io/download/>.
 
-The World Health Organization and several countries suspended randomised
-controlled trials that were set up to find an answer. Those trials have now
-been restarted. Many scientists were angry that they had been stopped on the
-basis of a trial that was observational and not a “gold standard” RCT.
+## Components
 
-Mehra had commissioned an independent audit of the data after scientists
-questioned it.
+### A picture is worth a thousand words
 
-In its investigation, the Guardian [put a detailed list of concerns to Desai
-about the database, the study findings and his
-background](https://www.theguardian.com/world/2020/jun/03/covid-19-surgisphere-
-who-world-health-organization-hydroxychloroquine). He responded: “There
-continues to be a fundamental misunderstanding about what our system is and
-how it works.
+... and this is particularly true in regard to complex IT architectures.
 
-“There are also a number of inaccuracies and unrelated connections that you
-are trying to make with a clear bias toward attempting to discredit who we are
-and what we do,” he said. “We do not agree with your premise or the nature of
-what you have put together, and I am sad to see that what should have been a
-scientific discussion has been denigrated into this sort of discussion.”
+The basic unit of each _draft_ design is the `component`:
 
-Shortly after the Lancet retracted its study, the [New England Journal of
-Medicine retracted a paper based on the Surgisphere
-database](https://www.nejm.org/doi/full/10.1056/NEJMc2021225), also co-
-authored by Mehra and Desai. The study purported to include data from Covid-19
-patients from 169 hospitals in 11 countries in Asia, Europe and North America.
-It found common drugs given for heart disease were not associated with a
-higher risk of death in Covid-19 patients.
+    
+    
+    type Component struct {
+    	ID        string `yaml:"id,omitempty"`        // optional - autogenerated if omitted (read more for details...)
+    	Kind      string `yaml:"kind"`                // required (one of: service, gateway, queue, broker, function, storage, database)
+    	Label     string `yaml:"label,omitempty"`     // optional - the component description (or scope)  
+    	Provider  string `yaml:"provider,omitempty"`  // optional - you can use this to specify the implementation
+    	FillColor string `yaml:"fillColor,omitempty"` // optional - the hex code for the background color 
+    	FontColor string `yaml:"fontColor,omitempty"` // optional - the hex code for the foreground color
+    	Rounded   bool   `yaml:"rounded,omitempty"`   // optional - set to true if you wants rounded shapes
+    }
 
-In a statement, published by the journal, the authors said: “Because all the
-authors were not granted access to the raw data and the raw data could not be
-made available to a third-party auditor, we are unable to validate the primary
-data sources underlying our article, ‘Cardiovascular Disease, Drug Therapy,
-and Mortality in Covid-19’. We therefore request that the article be
-retracted.
+Draft uses a set of symbols independent from the different providers (AWS,
+Microsoft Azure, GCP).
 
-“We apologise to the editors and to readers of the Journal for the
-difficulties that this has caused.”
+  * you can eventually describe the implementation using the `provider` attribute.
+
+Below is a list of all the components currently implemented.
+
+Component | Kind | YAML | Output  
+---|---|---|---  
+**Client** | `client` |
+[![](/lucasepe/draft/raw/master/examples/cl.jpg)](/lucasepe/draft/blob/master/examples/cl.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/client.png)](/lucasepe/draft/blob/master/examples/client.png)  
+**Microservice** | `service` |
+[![](/lucasepe/draft/raw/master/examples/ms.jpg)](/lucasepe/draft/blob/master/examples/ms.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/service.png)](/lucasepe/draft/blob/master/examples/service.png)  
+**Gateway** | `gateway` |
+[![](/lucasepe/draft/raw/master/examples/gt.jpg)](/lucasepe/draft/blob/master/examples/gt.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/gateway.png)](/lucasepe/draft/blob/master/examples/gateway.png)  
+**Message Broker** | `broker` |
+[![](/lucasepe/draft/raw/master/examples/br.jpg)](/lucasepe/draft/blob/master/examples/br.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/broker.png)](/lucasepe/draft/blob/master/examples/broker.png)  
+**Queue Service** | `queue` |
+[![](/lucasepe/draft/raw/master/examples/qs.jpg)](/lucasepe/draft/blob/master/examples/qs.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/queue.png)](/lucasepe/draft/blob/master/examples/queue.png)  
+**Object Storage** | `storage` |
+[![](/lucasepe/draft/raw/master/examples/st.jpg)](/lucasepe/draft/blob/master/examples/st.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/storage.png)](/lucasepe/draft/blob/master/examples/storage.png)  
+**Function** | `function` |
+[![](/lucasepe/draft/raw/master/examples/fn.jpg)](/lucasepe/draft/blob/master/examples/fn.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/function.png)](/lucasepe/draft/blob/master/examples/function.png)  
+**Database** | `database` |
+[![](/lucasepe/draft/raw/master/examples/db.jpg)](/lucasepe/draft/blob/master/examples/db.jpg)
+|
+[![](/lucasepe/draft/raw/master/examples/database.png)](/lucasepe/draft/blob/master/examples/database.png)  
+  
+## Connections
+
+You can connect each component by arrows.
+
+To be able to connect an _origin component_ with one or more _target
+component_ you need to specify each `componentId`.
+
+  * you can define your component `id` explicitly
+  * you can omit the component `id` attribute and it will be autogenerated
+
+### Autogenerated `id`
+
+An autogenerated `id` has a prefix and a sequential number
+
+  * the prefix is related to the component `kind`
+
+Aautogenerated `id` prefix mapping.
+
+a kind of... | will generate an `id` prefix with... | examples  
+---|---|---  
+`client` | `cl` | `cl1, cl2,...`  
+`service` | `ms` | `ms1, ms2,...`  
+`gateway` | `gt` | `gt1, gt2,...`  
+`broker` | `br` | `br1, br2,...`  
+`queue` | `qs` | `qs1, qs2,...`  
+`storage` | `st` | `st1, st2,...`  
+`function` | `fn` | `fn1, fn2,...`  
+`database` | `db` | `db1, db2,...`  
+  
+A `connection` has the following properties:
+
+    
+    
+    type Connection struct {
+    	Origin struct {
+    		ComponentID string `yaml:"componentId"`
+    	} `yaml:"origin"`
+    	Targets []struct {
+    		ComponentID string `yaml:"componentId"`
+    		Label       string `yaml:"label,omitempty"`
+    		Color       string `yaml:"color,omitempty"`
+    		Dashed      bool   `yaml:"dashed,omitempty"`
+        Dir         string `yaml:"dir,omitempty"`
+        Highlight   bool   `yaml:"highlight,omitempty"`
+    	} `yaml:"targets"`
+    }
+
+## Example 1 - Message Bus Pattern
+
+Create the `draft` architecture descriptor YAML with your favorite editor:
+
+    
+    
+    title: message bus pattern 
+    backgroundColor: '#ffffff'
+    components:
+      - 
+        kind: service
+        label: Producer
+        provider: AWS EC2
+      -
+        kind: broker
+        label: "Notification\nService"
+        provider: AWS SNS
+      -
+        kind: queue
+        label: "event queue @ topic 1"
+        provider: AWS SQS
+      -
+        kind: queue
+        label: "event queue @ topic 2"
+        provider: AWS SQS
+      -
+        kind: service
+        label: "Consumer\n@ topic 1"
+        provider: AWS EC2
+      -
+        kind: service
+        label: "Consumer\n@ topic 2"
+        provider: AWS EC2
+    connections:
+      -
+        origin: 
+          componentId: ms1
+        targets:
+          -
+            componentId: br1
+      -
+        origin:
+          componentId: br1
+        targets:
+          -
+            componentId: qs1
+            dashed: true
+          -
+            componentId: qs2
+            dashed: true
+      -
+        origin:
+          componentId: qs1
+        targets:
+          -
+            componentId: ms2
+            dir: back
+      -
+        origin: 
+          componentId: qs2
+        targets:
+          -
+            componentId: ms3
+            dir: back
+
+Then run `draft`:
+
+    
+    
+    draft message-bus-pattern.yml | dot -Tpng > message-bus-pattern.png
+
+Here the generated output:
+
+[![](/lucasepe/draft/raw/master/examples/message-bus-
+pattern.png)](/lucasepe/draft/blob/master/examples/message-bus-pattern.png)
+
+## Example 2 - AWS Cognito Custom Authentication Flow
+
+Create the draft architecture descriptor YAML with your favorite editor:
+
+    
+    
+    title: Amazon Cognito Custom Authentication Flow with external database
+    backgroundColor: '#ffffff'
+    components:
+      -
+        kind: client
+        label: "Web App"
+      -
+        kind: client
+        label: "Mobile App"
+      -
+        kind: service
+        label: "Cognito"
+        provider: "AWS Cognito"
+        fillColor: '#991919'
+        fontColor: '#fafafa'
+      -
+        kind: function
+        label: "Define\nAuthChallange"
+        provider: "AWS Lambda"
+      -
+        kind: function
+        label: "Create\nAuthChallange"
+        provider: "AWS Lambda"
+      -
+        kind: function
+        label: "Verify\nAuthChallange"
+        provider: "AWS Lambda"
+      -
+        kind: database
+        label: "Users\nRepository"
+        provider: "AWS RDS"
+    connections:
+      -
+        origin:
+          componentId: cl1
+        targets:
+          -
+            componentId: ms1
+      -
+        origin:
+          componentId: cl2
+        targets:
+          -
+            componentId: ms1
+      -
+        origin:
+          componentId: ms1
+        targets:
+          -
+            componentId: fn1
+          -
+            componentId: fn2
+          -
+            componentId: fn3
+      -
+        origin:
+          componentId: fn2
+        targets:
+          -
+            componentId: db1
+
+Here the generated output:
+
+[![](/lucasepe/draft/raw/master/examples/aws-cognito-custom-auth-
+flow.png)](/lucasepe/draft/blob/master/examples/aws-cognito-custom-auth-
+flow.png)
 

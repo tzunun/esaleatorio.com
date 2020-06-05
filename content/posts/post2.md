@@ -1,49 +1,80 @@
 ---
-title: "A Cloud-Native Identity Aware Proxy Managed by a Cloud Console" 
+title: "Show HN: Tiny Static Blog Generator" 
 date: 2020-06-05 
 draft: false 
 ---
 
 Story source:
 
-https://docs.datawiza.com/
+https://github.com/john-bokma/tumblelog
 
 
-#  Overview
+# tumblelog: a static microblog generator
 
-##  What is Datawiza Access Broker?
+`tumblelog` is a static microblog generator. There are two versions available,
+one written in Perl and one written in Python. Which version you use is up to
+you; I make an effort to keep the output of both versions identical.
 
-Datawiza Access Broker is a distributed, lightweight, container-based Identity
-Aware proxy deployed close to your application via the sidecar or standalone
-mode. It provides a unified authentication and authorization layer, decoupled
-from application itself. As a container, it can be deployed on-premise and in
-the cloud as long as the environment support Docker containers.
+The input is a single "Markdown" file divided into pages by starting a line
+with a date followed by a title. Each date page can further be split up into
+multiple articles using a single % on a line by itself.
 
-##  What can I do with Datawiza Access Broker?
+Parameters to control the blog are given via command line arguments. The
+program creates the blog HTML5 pages and both a JSON and RSS feed.
 
-  * Enable SSO (Single Sign On) with Cloud IdP (e.g. Azure AD, Okta) automatically.
-  * Enable a fine-grained URL-level access control based on user's attributes and context.
-  * Enable remote work with or without a VPN (Virtual Private Network).
-  * Manage the access control policy and other configurations via a centralized cloud manage console.
-  * Retire legacy IAM (Identity and Access Management) gateways or WAM (Web Access Management) solutions.
+## Python Version Quick Start
 
-##  What are the benefits of Datawiza Access Broker?
+Install sass and pip3 for Linux:
 
-  * **Reduce engineering costs**. Developers don't need to 1) write SSO integration code, and 2) implement disparate per-application access control.
-  * **Simplify operation and management**. DevOps and admins don't have to manage the access control policies scattered in hybrid, multi-cloud environments, but via a unified console.
-  * **Harden application security posture**. Datawiza Access Broker easily puts authentication/authorization in front of all your applications to enable a Zero Trust architecture.
+    
+    
+    sudo apt install -y git sass python3-pip
 
-##  How Datawiza Access Broker is different from legacy IAM gateways or WAM
-solutions?
+For macOS:
 
-  * Legacy IAM gateways or WAM solutions are usually managed by a local Web UI. With the trend of adopting multi-cloud, you have applications on premise, in AWS, GCP, and Azure, then you have to manage/operate your authentication/authorization in each of sub-networks of these environments separately.
-  * Legacy IAM gateways or WAM solutions are usually Virtual-Machine (VM) or hard-ware appliance based. They are very difficult to be automated and auto-scaled. With enterprises moving to DevOps, Datawiza's cloud-native container-based solution is much more friendly.
+    
+    
+    brew install sass
+    brew install pip3
 
-##  Summary
+Then:
 
-To summarize, Datawiza Access Broker provides a scalable way to enable a Zero
-Trust architecture for applications by putting authentication and
-authorization in front of apps. It's a solution supporting you both today and
-in the future no matter you are working with legacy applications or developing
-new micro-services or APIs on premise or in the cloud.
+    
+    
+    git clone https://github.com/john-bokma/tumblelog.git
+    cd tumblelog
+    python3 -m venv venv
+    pip3 install commonmark
+    source venv/bin/activate
+    mkdir htdocs
+    sass --sourcemap=none -t compressed styles/steel.scss htdocs/steel.css
+    python3 tumblelog.py --template-filename tumblelog.html --output-dir htdocs/ \
+            --author 'Test' --name 'Test Blog' --description 'This is a test'    \
+            --blog-url 'http://example.com/' --css steel.css tumblelog.md
+
+To view the generated site at <http://localhost:8000/> enter:
+
+    
+    
+    cd htdocs
+    python3 -m http.server
+    
+
+## Documentation
+
+## Style Examples
+
+[![A screenshot of the four styles that come with
+tumblelog](https://repository-
+images.githubusercontent.com/178557390/30c42f00-e7ae-11e9-839d-d6bd6faa6e48)](https://repository-
+images.githubusercontent.com/178557390/30c42f00-e7ae-11e9-839d-d6bd6faa6e48)
+
+A screenshot of four of the twelve styles that come with `tumblelog`.
+
+The `screenshots` directory has 1:1 examples of themes that come with
+`tumblelog`.
+
+## Blogs
+
+If you want your tumblelog generated site listed, please let me know.
 
